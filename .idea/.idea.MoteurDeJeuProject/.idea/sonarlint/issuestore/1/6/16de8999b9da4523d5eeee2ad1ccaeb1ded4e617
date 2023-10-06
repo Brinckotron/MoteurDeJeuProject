@@ -1,6 +1,5 @@
 
 ^csharpsquid:S3903"5Move 'PlayerAnimationControl' into a named namespace.(ñ¼è™şÿÿÿÿ8ÉÀÁã¯1
-¢csharpsquid:S1186"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(é¼”²şÿÿÿÿ8­óÀã¯1
 mcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(÷èˆûÿÿÿÿ8­óÀã¯1
 mcsharpsquid:S1104
 "DMake this field 'private' and encapsulate it in a 'public' property.(ĞøİÏúÿÿÿÿ8­óÀã¯1

@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float maxSpeed = 3.4f, jumpHeight = 6.5f, gravityScale = 1.5f;
+    public float maxSpeed, jumpHeight, gravityScale, attackDelay;
     public Camera mainCamera;
 
-    private bool _facingRight = true, _resetJumpNeeded;
-    private float _moveDirection = 0;
-    private string _anim = " ", _knightSkin = "0";
+    private bool _facingRight = true, _resetJumpNeeded, _isJumpPressed = false;
+    private float _moveDirection = 0, _attackLength = 0.3f, _attackDelayTimer;
+    private string _knightSkin = "0";
     private Vector3 _cameraPos;
     private Rigidbody2D _rb2D;
     private CapsuleCollider2D _collider;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
         Jump,
         JumpAttack,
         Crouch,
+        Crouched,
         CrouchAttack,
         CrouchBlock,
         Roll,
@@ -59,23 +60,32 @@ public class PlayerController : MonoBehaviour
 
         Facing();
 
-        Jumping();
-
-        CameraFollow();
-
-        AnimationControl();
+        Attacking();
         
-        StateControl();
+        Blocking();
+        
+        Jumping();
+        
+        CameraFollow();
+        
     }
 
     private void FixedUpdate()
     {
         ApplyMovement();
+        
+        AnimationControl();
+        
+        StateControl();
     }
 
     private void ApplyMovement()
     {
-        _rb2D.velocity = new Vector2((_moveDirection) * maxSpeed, _rb2D.velocity.y);
+        if (_currentPlayerState is PlayerState.Idle or PlayerState.Run or PlayerState.Jump or PlayerState.JumpAttack)
+            _rb2D.velocity = new Vector2((_moveDirection) * maxSpeed, _rb2D.velocity.y);
+        else if (_currentPlayerState is PlayerState.Attack or PlayerState.CrouchAttack or PlayerState.Attack2
+                 or PlayerState.Dead or PlayerState.Block or PlayerState.CrouchBlock
+                 or PlayerState.Crouch or PlayerState.Crouched) _rb2D.velocity = Vector2.zero;
     }
 
     private void Moving()
@@ -89,12 +99,42 @@ public class PlayerController : MonoBehaviour
 
     private void Jumping()
     {
-        // Jumping
-        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
+        if (_isJumpPressed && !IsGrounded()) _isJumpPressed = false;
+        if (Input.GetKey(KeyCode.W) && IsGrounded() &&
+            _currentPlayerState is PlayerState.Idle or PlayerState.Run)
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, jumpHeight);
+            _isJumpPressed = true;
             ResetJump();
         }
+    }
+
+    private void Attacking()
+    {
+        if (_attackDelayTimer > 0)
+        {
+            _attackDelayTimer -= Time.deltaTime;
+            if (IsGrounded())
+            {
+                ChangePlayerState(_currentPlayerState is PlayerState.Crouch or PlayerState.Crouched or PlayerState.CrouchAttack
+                    ? PlayerState.CrouchAttack
+                    : PlayerState.Attack);
+            }
+            else
+            {
+                ChangePlayerState(PlayerState.JumpAttack);
+            }
+        }
+
+        if (Input.GetButtonDown("Fire1") && _attackDelayTimer <= 0f)
+        {
+            _attackDelayTimer = _attackLength;
+        }
+    }
+
+    private void Blocking()
+    {
+        if (Input.GetButton("Fire2") && _currentPlayerState is PlayerState.Crouch or PlayerState.Crouched or PlayerState.Idle or PlayerState.Run) ChangePlayerState(_currentPlayerState is PlayerState.Crouch or PlayerState.Crouched ? PlayerState.CrouchBlock : PlayerState.Block);
     }
 
     private void Facing()
@@ -117,7 +157,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        var hitInfo = Physics2D.Raycast(transform.position, Vector2.down, 0.4f, 1 << 7);
+        var hitInfo = Physics2D.Raycast(transform.position, Vector2.down, 0.35f, 1 << 7);
         return hitInfo.collider != null && !_resetJumpNeeded;
     }
 
@@ -130,7 +170,6 @@ public class PlayerController : MonoBehaviour
 
     private void CameraFollow()
     {
-        // Camera follow
         if (mainCamera)
         {
             mainCamera.transform.position = new Vector3(_t.position.x, _t.position.y, _cameraPos.z);
@@ -142,15 +181,20 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded())
         {
             if (_moveDirection == 0 && !_resetJumpNeeded) ChangePlayerState(PlayerState.Idle);
-            if (_moveDirection != 0  && !_resetJumpNeeded) ChangePlayerState(PlayerState.Run);
-            if (Input.GetKey(KeyCode.S) && !_resetJumpNeeded) ChangePlayerState(PlayerState.Run);
+            if (_moveDirection != 0 && !_resetJumpNeeded) ChangePlayerState(PlayerState.Run);
+            if (_isJumpPressed) ChangePlayerState(PlayerState.Jump);
+            if (Input.GetKey(KeyCode.S) && !_resetJumpNeeded)
+            {
+                ChangePlayerState(
+                    (Input.GetKey(KeyCode.S) && _currentPlayerState != PlayerState.Attack)
+                        ? PlayerState.Crouched
+                        : PlayerState.Crouch);
+            }
+            
         }
         else
         {
-            ChangePlayerState(PlayerState.Jump);
         }
-        
-
     }
 
     private void ChangePlayerState(PlayerState newState)
@@ -160,9 +204,11 @@ public class PlayerController : MonoBehaviour
             _currentPlayerState = newState;
         }
     }
+
     private void AnimationControl()
     {
-        _anim = _currentPlayerState switch
+        var anim = " ";
+        anim = _currentPlayerState switch
         {
             PlayerState.Idle => "Idle",
             PlayerState.Run => "Run",
@@ -172,6 +218,7 @@ public class PlayerController : MonoBehaviour
             PlayerState.Block => "Block",
             PlayerState.JumpAttack => "Jump_Attack",
             PlayerState.Crouch => "Crouch",
+            PlayerState.Crouched => "Crouched",
             PlayerState.CrouchAttack => "Crouched_Attack",
             PlayerState.CrouchBlock => "Crouched_Block",
             PlayerState.Roll => "Roll",
@@ -182,7 +229,7 @@ public class PlayerController : MonoBehaviour
             PlayerState.Dead => "Dead",
             _ => "Idle"
         };
-        var animState = $"Knight_{_knightSkin}_{_anim}";
+        var animState = $"Knight_{_knightSkin}_{anim}";
         PlayerAnimationControl.instance.ChangeAnimationState(animState);
     }
 }

@@ -18,13 +18,6 @@ public class PlayerAnimationControl : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
-    
     public void ChangeAnimationState(string newState)
     {
         if (currentState == newState) return;
