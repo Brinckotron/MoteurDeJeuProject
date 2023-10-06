@@ -1,0 +1,8 @@
+
+Qcsharpsquid:S3903"/Move 'PlayerController' into a named namespace.(â „¦øÿÿÿÿ
+Gcsharpsquid:S2933"Make '_knightSkin' 'readonly'.(˜‡ïŞúÿÿÿÿ8…¨Ş‰°1
+mcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Ö†÷ıÿÿÿÿ8Ş£à×¯1
+hcsharpsquid:S1104	"DMake this field 'private' and encapsulate it in a 'public' property.(‚•Î¡8Ş£à×¯1
+}csharpsquid:S1450"TRemove the field '_anim' and declare it as a local variable in the relevant methods.(˜‡ïŞúÿÿÿÿ8¯×Ä°1
+Ecsharpsquid:S3440" Remove this useless conditional.(”íÒà8›§ù’°1
+scsharpsquid:S3241|"JChange return type to 'void'; not a single caller uses the returned value.(á‘öıÿÿÿÿ8‡¡•‘°1
