@@ -1,10 +1,9 @@
 
-|csharpsquid:S3776³"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(¦‚ö½ûÿÿÿÿ8ÒÚ’¸°1
+|csharpsquid:S3776Ö"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(¦‚ö½ûÿÿÿÿ8ÒÚ’¸°1
 Qcsharpsquid:S3903"/Move 'PlayerController' into a named namespace.(â „¦øÿÿÿÿ
-Rcsharpsquid:S108Ä")Either remove or fill this block of code.(ÒÌâ–øÿÿÿÿ8ÒÚ’¸°1
-Dcsharpsquid:S2933" Make '_attackLength' 'readonly'.(¶ùÄ·8ŞşÄ­°1
+Icsharpsquid:S2933" Make '_attackLength' 'readonly'.(˜…®”ûÿÿÿÿ8ŞşÄ­°1
+Gcsharpsquid:S2933"Make '_rollLength' 'readonly'.(˜…®”ûÿÿÿÿ8…İÑÚ°1
 Gcsharpsquid:S2933"Make '_knightSkin' 'readonly'.(º·…îúÿÿÿÿ8…¨Ş‰°1
-mcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(Û°‹Œøÿÿÿÿ8Ş£à×¯1
+mcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¬«Áİùÿÿÿÿ8Ş£à×¯1
 hcsharpsquid:S1104	"DMake this field 'private' and encapsulate it in a 'public' property.(‚•Î¡8Ş£à×¯1
-Ecsharpsquid:S3440Ê" Remove this useless conditional.(”íÒà8ÓÚ’¸°1
-tcsharpsquid:S3241¤"JChange return type to 'void'; not a single caller uses the returned value.(á‘öıÿÿÿÿ8ÓÚ’¸°1
+Ecsharpsquid:S3440ï" Remove this useless conditional.(”íÒà8ùèŒŞ°1

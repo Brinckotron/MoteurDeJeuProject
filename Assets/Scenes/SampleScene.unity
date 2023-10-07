@@ -3742,7 +3742,9 @@ MonoBehaviour:
   maxSpeed: 3.4
   jumpHeight: 5
   gravityScale: 1.5
-  attackDelay: 0.8
+  rollSpeed: 4
+  rollStaminaCost: 0
+  blockStaminaCost: 0
   mainCamera: {fileID: 519420031}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
