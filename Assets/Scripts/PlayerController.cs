@@ -7,15 +7,24 @@ public class PlayerController : MonoBehaviour
 {
     public float maxSpeed, jumpHeight, gravityScale, rollSpeed, rollStaminaCost, blockStaminaCost;
     public Camera mainCamera;
-
+    public bool crouchOverride = false;
+    
     private bool _facingRight = true,
         _resetJumpNeeded,
         _isJumpPressed = false,
         _isRollPressed = false,
         _isAttackPressed = false,
-        _isBlockPressed = false;
+        _isBlockPressed = false,
+        _isSecondaryAttackPressed = false;
 
-    private float _moveDirection = 0, _attackLength = 0.3f, _attackDelayTimer, _rollLength = 0.35f, _rollDelayTimer;
+    private float _moveDirection = 0,
+        _attackLength = 0.3f,
+        _attackDelayTimer,
+        _secondaryAttackDelayTimer,
+        _secondaryAttackLength = 0.44f,
+        _rollLength = 0.35f,
+        _rollDelayTimer;
+
     private string _knightSkin = "0", _debugState = " ", _newDebugState = " ";
     private Vector3 _cameraPos;
     private Rigidbody2D _rb2D;
@@ -67,6 +76,8 @@ public class PlayerController : MonoBehaviour
 
         Attacking();
 
+        Attack2();
+
         Facing();
 
         Blocking();
@@ -76,6 +87,8 @@ public class PlayerController : MonoBehaviour
         Rolling();
 
         CameraFollow();
+        
+        CrouchDebug();
     }
 
     private void FixedUpdate()
@@ -144,9 +157,24 @@ public class PlayerController : MonoBehaviour
             _isAttackPressed = true;
         }
 
-        if (Input.GetButtonDown("Fire1") && _attackDelayTimer <= 0f)
+        if (!Input.GetKey(KeyCode.LeftShift) && Input.GetButtonDown("Fire1") && _attackDelayTimer <= 0f)
         {
             _attackDelayTimer = _attackLength;
+        }
+    }
+
+    private void Attack2()
+    {
+        if (_secondaryAttackDelayTimer > 0)
+        {
+            _secondaryAttackDelayTimer -= Time.deltaTime;
+            _isSecondaryAttackPressed = true;
+        }
+
+        if (IsGrounded() && Input.GetKey(KeyCode.LeftShift) && Input.GetButtonDown("Fire1") &&
+            _secondaryAttackDelayTimer <= 0f)
+        {
+            _secondaryAttackDelayTimer = _secondaryAttackLength;
         }
     }
 
@@ -200,9 +228,10 @@ public class PlayerController : MonoBehaviour
     {
         if (IsGrounded())
         {
-            if (_rb2D.velocity.x == 0f && !_resetJumpNeeded && _attackDelayTimer <= 0 && _rollDelayTimer <= 0)
+            if (_moveDirection == 0 && !_resetJumpNeeded && _attackDelayTimer <= 0 && _rollDelayTimer <= 0 &&
+                _secondaryAttackDelayTimer <= 0)
             {
-                if (Input.GetKey(KeyCode.S))
+                if (Input.GetKey(KeyCode.S) || crouchOverride)
                 {
                     ChangePlayerState(_currentPlayerState is (PlayerState.Crouched or PlayerState.CrouchAttack
                         or PlayerState.CrouchBlock or PlayerState.Roll)
@@ -212,8 +241,8 @@ public class PlayerController : MonoBehaviour
                 else ChangePlayerState(PlayerState.Idle);
             }
 
-            
-            if (_isBlockPressed && _attackDelayTimer <= 0 && _rollDelayTimer <= 0 &&
+
+            if (_isBlockPressed && _attackDelayTimer <= 0 && _rollDelayTimer <= 0 && _secondaryAttackDelayTimer <= 0 &&
                 _currentPlayerState is PlayerState.Crouch or PlayerState.Crouched or PlayerState.Idle or PlayerState.Run
                     or PlayerState.Attack or PlayerState.Attack2 or PlayerState.Roll or PlayerState.CrouchAttack
                     or PlayerState.Falling)
@@ -224,7 +253,9 @@ public class PlayerController : MonoBehaviour
                         ? PlayerState.CrouchBlock
                         : PlayerState.Block);
             }
-            if (_moveDirection != 0 && !_resetJumpNeeded && !_isBlockPressed && !_isAttackPressed) ChangePlayerState(PlayerState.Run);
+
+            if (_moveDirection != 0 && !_resetJumpNeeded && !_isBlockPressed && !_isAttackPressed &&
+                !_isSecondaryAttackPressed && !crouchOverride) ChangePlayerState(PlayerState.Run);
             if (_isAttackPressed)
             {
                 if (_attackDelayTimer <= 0) _isAttackPressed = false;
@@ -239,6 +270,12 @@ public class PlayerController : MonoBehaviour
                             ? PlayerState.CrouchAttack
                             : PlayerState.Attack);
                 }
+            }
+
+            if (_isSecondaryAttackPressed)
+            {
+                if (_secondaryAttackDelayTimer <= 0) _isSecondaryAttackPressed = false;
+                ChangePlayerState(PlayerState.Attack2);
             }
 
             if (_isRollPressed)
@@ -269,14 +306,15 @@ public class PlayerController : MonoBehaviour
         if (_currentPlayerState != newState)
         {
             _currentPlayerState = newState;
-            /*debug*/_newDebugState = _currentPlayerState.ToString();
+            /*debug*/
+            _newDebugState = _currentPlayerState.ToString();
         }
-        
+
         //debug
         if (_debugState != _newDebugState)
         {
             _debugState = _newDebugState;
-            if (Input.GetKey(KeyCode.LeftShift)) Debug.Log(_debugState);
+            if (Input.GetKey(KeyCode.LeftControl)) Debug.Log(_debugState);
         }
     }
 
@@ -307,5 +345,10 @@ public class PlayerController : MonoBehaviour
         };
         var animState = $"Knight_{_knightSkin}_{anim}";
         PlayerAnimationControl.instance.ChangeAnimationState(animState);
+    }
+
+    private void CrouchDebug()
+    {
+        if (Input.GetKeyDown(KeyCode.B)) Debug.Log("crouchOverride: " + crouchOverride);
     }
 }
