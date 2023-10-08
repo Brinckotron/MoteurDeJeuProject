@@ -1,9 +1,8 @@
 
-|csharpsquid:S3776Ö"RRefactor this method to reduce its Cognitive Complexity from 24 to the 15 allowed.(¦‚ö½ûÿÿÿÿ8ÒÚ’¸°1
+|csharpsquid:S3776Ç"RRefactor this method to reduce its Cognitive Complexity from 58 to the 15 allowed.(¦‚ö½ûÿÿÿÿ8ÏÒâì°1
 Qcsharpsquid:S3903"/Move 'PlayerController' into a named namespace.(â „¦øÿÿÿÿ
-Icsharpsquid:S2933" Make '_attackLength' 'readonly'.(˜…®”ûÿÿÿÿ8ÞþÄ­°1
-Gcsharpsquid:S2933"Make '_rollLength' 'readonly'.(˜…®”ûÿÿÿÿ8…ÝÑÚ°1
-Gcsharpsquid:S2933"Make '_knightSkin' 'readonly'.(º·…îúÿÿÿÿ8…¨Þ‰°1
+Icsharpsquid:S2933" Make '_attackLength' 'readonly'.(˜…®”ûÿÿÿÿ8…ÝÑÚ°1
+Gcsharpsquid:S2933"Make '_rollLength' 'readonly'.(˜…®”ûÿÿÿÿ8Î¢âì°1
+Bcsharpsquid:S2933"Make '_knightSkin' 'readonly'.(•ÿÔ¡8…¨Þ‰°1
 mcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¬«ÁÝùÿÿÿÿ8Þ£à×¯1
 hcsharpsquid:S1104	"DMake this field 'private' and encapsulate it in a 'public' property.(‚•Î¡8Þ£à×¯1
-Ecsharpsquid:S3440ï" Remove this useless conditional.(”íÒà8ùèŒÞ°1
