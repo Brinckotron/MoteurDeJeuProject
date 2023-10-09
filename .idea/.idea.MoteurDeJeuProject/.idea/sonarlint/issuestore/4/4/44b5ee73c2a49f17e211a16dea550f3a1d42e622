@@ -1,10 +1,11 @@
 
-|csharpsquid:S3776ã"RRefactor this method to reduce its Cognitive Complexity from 64 to the 15 allowed.(¦‚ö½ûÿÿÿÿ8ÏÒâì°1
+|csharpsquid:S3776ô"RRefactor this method to reduce its Cognitive Complexity from 72 to the 15 allowed.(¦‚ö½ûÿÿÿÿ8œ²“±1
 Qcsharpsquid:S3903"/Move 'PlayerController' into a named namespace.(â „¦øÿÿÿÿ
-Dcsharpsquid:S2933" Make '_attackLength' 'readonly'.(ŠÁĞ8…İÑÚ°1
-Mcsharpsquid:S2933")Make '_secondaryAttackLength' 'readonly'.(™õØˆ8£ã§€±1
-Gcsharpsquid:S2933"Make '_rollLength' 'readonly'.(ñÉ¬èûÿÿÿÿ8Î¢âì°1
-Bcsharpsquid:S2933"Make '_knightSkin' 'readonly'.(•ÿÔ¡8…¨Ş‰°1
+Dcsharpsquid:S2933" Make '_attackLength' 'readonly'.(ŠÁĞ8…İÑÚ°1
+Mcsharpsquid:S2933")Make '_secondaryAttackLength' 'readonly'.(™õØˆ8£ã§€±1
+Gcsharpsquid:S2933"Make '_rollLength' 'readonly'.(ñÉ¬èûÿÿÿÿ8Î¢âì°1
+Gcsharpsquid:S2933"#Make '_rollCancelDelay' 'readonly'.(·ç•ã8§Ø“±1
+Bcsharpsquid:S2933"Make '_knightSkin' 'readonly'.(•ÿÔ¡8…¨Ş‰°1
 mcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(¬«Áİùÿÿÿÿ8Ş£à×¯1
 hcsharpsquid:S1104	"DMake this field 'private' and encapsulate it in a 'public' property.(‚•Î¡8Ş£à×¯1
 mcsharpsquid:S1104
