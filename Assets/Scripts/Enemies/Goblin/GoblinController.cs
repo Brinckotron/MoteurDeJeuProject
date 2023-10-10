@@ -7,7 +7,7 @@ public class GoblinController : EnemyBehaviour
     
     void Start()
     {
-        
+        Player = GameObject.FindWithTag("Player");
     }
 
     
@@ -15,4 +15,6 @@ public class GoblinController : EnemyBehaviour
     {
         
     }
+
+    
 }
