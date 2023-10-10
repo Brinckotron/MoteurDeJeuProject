@@ -4555,6 +4555,7 @@ MonoBehaviour:
   rollSpeed: 4
   rollStaminaCost: 0
   blockStaminaCost: 0
+  coyoteTimeDelay: 1
   mainCamera: {fileID: 519420031}
   crouchOverride: 0
 --- !u!1001 &7870994091611212882

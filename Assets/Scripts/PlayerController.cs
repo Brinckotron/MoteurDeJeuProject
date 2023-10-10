@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float maxSpeed, jumpHeight, gravityScale, rollSpeed, rollStaminaCost, blockStaminaCost;
+    public float maxSpeed, jumpHeight, gravityScale, rollSpeed, rollStaminaCost, blockStaminaCost, coyoteTimeDelay;
     public Camera mainCamera;
     public bool crouchOverride = false;
     
@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
         _rollLength = 0.35f,
         _rollDelayTimer,
         _rollCancelDelay = 0.2f,
-        _rollCancelTimer;
+        _rollCancelTimer,
+        _coyoteTime = 0f;
 
     private string _knightSkin = "0", _debugState = " ", _newDebugState = " ";
     private Vector3 _cameraPos;
@@ -130,9 +131,17 @@ public class PlayerController : MonoBehaviour
 
     private void Jumping()
     {
+        if (IsGrounded())
+        {
+            if (_coyoteTime <= 0) _coyoteTime = coyoteTimeDelay;
+        }
+        else
+        {
+            if (_coyoteTime > 0) _coyoteTime -= Time.deltaTime;
+        }
+
         if (_isJumpPressed && !IsGrounded()) _isJumpPressed = false;
-        if (Input.GetKey(KeyCode.W) && IsGrounded() &&
-            _currentPlayerState is PlayerState.Idle or PlayerState.Run)
+        if (Input.GetKeyDown(KeyCode.W) && CanJump())
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, jumpHeight);
             _isJumpPressed = true;
@@ -226,6 +235,11 @@ public class PlayerController : MonoBehaviour
         return hitInfo.collider != null && !_resetJumpNeeded;
     }
 
+    private bool CanJump()
+    {
+        return ((IsGrounded() || _coyoteTime > 0) && _currentPlayerState is PlayerState.Idle or PlayerState.Run or PlayerState.Falling);
+    }
+
     private IEnumerator ResetJump()
     {
         _resetJumpNeeded = true;
@@ -247,6 +261,12 @@ public class PlayerController : MonoBehaviour
         {
             ChangePlayerState(PlayerState.Dead);
             return;
+        }
+        
+        if (_isJumpPressed)
+        {
+            ChangePlayerState(PlayerState.Jump);
+            StartCoroutine(ResetJump());
         }
         
         if (IsGrounded())
@@ -313,12 +333,6 @@ public class PlayerController : MonoBehaviour
             {
                 if (_rollDelayTimer <= 0) _isRollPressed = false;
                 ChangePlayerState(PlayerState.Roll);
-            }
-
-            if (_isJumpPressed)
-            {
-                ChangePlayerState(PlayerState.Jump);
-                StartCoroutine(ResetJump());
             }
         }
         else
