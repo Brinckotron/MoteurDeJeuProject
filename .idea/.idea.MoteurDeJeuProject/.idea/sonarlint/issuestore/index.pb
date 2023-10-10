@@ -5,3 +5,7 @@ X
 (Assets/Scripts/PlayerAnimationControl.cs,1\6\16de8999b9da4523d5eeee2ad1ccaeb1ded4e617
 P
  Assets/Scripts/SqueezeTrigger.cs,9\5\95823b28e07ab5af38c47e3131ec3a6ea94e0557
+a
+1Assets/Scripts/Enemies/Goblin/GoblinController.cs,c\a\ca9027e44c7e45e5539f1b9f13211785df57f7fb
+X
+(Assets/Scripts/Enemies/EnemyBehaviour.cs,1\4\1436803f49653f26a7f034cd4df083be4eb77078

@@ -5,12 +5,13 @@ using UnityEngine;
 public abstract class EnemyBehaviour : MonoBehaviour
 {
 
+    [SerializeField]protected float speed, health, xpValue;
+
     void Start()
     {
         
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         
