@@ -40,7 +40,7 @@ public class GoblinController : LandEnemy
             else Stop();
         }
 
-        Attack();
+        if (Player.GetComponent<PlayerController>().Instance.CurrentPlayerState != "Dead") Attack();
     }
 
     private bool IsInRangeForAttack1()

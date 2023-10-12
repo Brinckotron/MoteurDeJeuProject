@@ -1,13 +1,15 @@
 
-ucsharpsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 71 to the 15 allowed.(¦‚ö½ûÿÿÿÿ
+|csharpsquid:S3776š"RRefactor this method to reduce its Cognitive Complexity from 80 to the 15 allowed.(¦‚ö½ûÿÿÿÿ8ÚĞ²¦²1
 Qcsharpsquid:S3903"/Move 'PlayerController' into a named namespace.(â „¦øÿÿÿÿ
-=csharpsquid:S2933" Make '_attackLength' 'readonly'.(ŠÁĞ
-Fcsharpsquid:S2933")Make '_secondaryAttackLength' 'readonly'.(™õØˆ
-@csharpsquid:S2933"Make '_rollLength' 'readonly'.(ñÉ¬èûÿÿÿÿ
-@csharpsquid:S2933"#Make '_rollCancelDelay' 'readonly'.(·ç•ã
-;csharpsquid:S2933#"Make '_knightSkin' 'readonly'.(•ÿÔ¡
-acsharpsquid:S1104	"DMake this field 'private' and encapsulate it in a 'public' property.(†Ë¶ˆ
-acsharpsquid:S1104
-"DMake this field 'private' and encapsulate it in a 'public' property.(‚•Î¡
-fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ŠùóÂıÿÿÿÿ
-acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ôËàĞ
+£csharpsquid:S1186´"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(Î©ÏŠüÿÿÿÿ8¯®¦²1
+=csharpsquid:S2933" Make '_attackLength' 'readonly'.(ŠÁĞ
+Fcsharpsquid:S2933 ")Make '_secondaryAttackLength' 'readonly'.(™õØˆ
+@csharpsquid:S2933!"Make '_rollLength' 'readonly'.(ñÉ¬èûÿÿÿÿ
+@csharpsquid:S2933#"#Make '_rollCancelDelay' 'readonly'.(·ç•ã
+Icsharpsquid:S2933&" Make '_hurtDuration' 'readonly'.(“ƒÂıÿÿÿÿ8ˆÁœ¦²1
+;csharpsquid:S2933)"Make '_knightSkin' 'readonly'.(•ÿÔ¡
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(†Ë¶ˆ
+hcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ÎÔ¨Â8õ‹º¤²1
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(‚•Î¡
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ŠùóÂıÿÿÿÿ
+acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ôËàĞ

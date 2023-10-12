@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private PlayerController _instance;
+    public PlayerController Instance => _instance;
     public float maxSpeed, jumpHeight, gravityScale, rollSpeed, rollStaminaCost, blockStaminaCost, coyoteTimeDelay;
+    public int armor;
     public Camera mainCamera;
     public bool crouchOverride = false;
     public TMP_Text stateDebugText;
@@ -19,6 +22,7 @@ public class PlayerController : MonoBehaviour
         _isBlockPressed = false,
         _isSecondaryAttackPressed = false,
         _isDead = false,
+        _isHurt = false,
         _isDebugToggled = false;
 
     private float _moveDirection = 0,
@@ -30,7 +34,9 @@ public class PlayerController : MonoBehaviour
         _rollDelayTimer,
         _rollCancelDelay = 0.2f,
         _rollCancelTimer,
-        _coyoteTime = 0f;
+        _coyoteTime = 0f,
+        _hurtDuration = 0.3f,
+        _hurtTimer;
 
     private string _knightSkin = "0", _debugState = " ", _newDebugState = " ";
     private Vector3 _cameraPos;
@@ -60,8 +66,13 @@ public class PlayerController : MonoBehaviour
         Dead
     }
 
-    private PlayerState _currentPlayerState = PlayerState.Idle;
+    private PlayerState _currentPlayerState;
+    public string CurrentPlayerState => _currentPlayerState.ToString();
 
+    private void Awake()
+    {
+        _instance = this;
+    }
 
     private void Start()
     {
@@ -70,6 +81,7 @@ public class PlayerController : MonoBehaviour
         _collider = GetComponentInChildren<CapsuleCollider2D>();
         _rb2D.gravityScale = gravityScale;
         _facingRight = _t.localScale.x > 0;
+        _currentPlayerState = PlayerState.Idle;
 
         if (mainCamera)
         {
@@ -94,8 +106,6 @@ public class PlayerController : MonoBehaviour
         Rolling();
 
         CancelRoll();
-
-        Death();
 
         CameraFollow();
 
@@ -277,6 +287,24 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if (_isHurt)
+        {
+            if (_hurtTimer > 0)
+            {
+                ChangePlayerState(PlayerState.Hurt);
+                _hurtTimer -= Time.deltaTime;
+                if (_hurtTimer <= 0)
+                {
+                    _isHurt = false;
+                }
+            }
+            if (_hurtTimer <= 0 && _isHurt)
+            {
+                _hurtTimer = _hurtDuration;
+            }
+            
+        }
+
         if (_isJumpPressed)
         {
             ChangePlayerState(PlayerState.Jump);
@@ -405,6 +433,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void BlockAttack(GameObject source)
+    {
+        
+    }
+
+    public void TakeDamage(int dmg, GameObject source)
+    {
+        if (_isHurt) return;
+        var modifiedDamage = dmg - armor;
+        var knockBackDirection = new Vector2(source.transform.position.x - _rb2D.transform.position.x, source.transform.position.y - _rb2D.transform.position.y).normalized;
+        _isHurt = true;
+        _rb2D.AddForce(knockBackDirection);
+        GameManager.Instance.LooseHealth(modifiedDamage);
+    }
+
     private void AnimationControl()
     {
         var anim = " ";
@@ -434,8 +477,8 @@ public class PlayerController : MonoBehaviour
         PlayerAnimationControl.instance.ChangeAnimationState(animState);
     }
 
-    private void Death()
+    public void Death()
     {
-        if (Input.GetKeyDown(KeyCode.K)) _isDead = true;
+        _isDead = true;
     }
 }

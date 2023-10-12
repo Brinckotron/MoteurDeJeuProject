@@ -30,5 +30,35 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
-    
+
+    public int MaxHealth;
+    public int CurrentHealth;
+    public PlayerController Player;
+
+    public void Start()
+    {
+        Player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        CurrentHealth = MaxHealth;
+    }
+
+    public void LooseHealth(int dmg)
+    {
+        if (CurrentHealth == 0) return;
+        if (CurrentHealth <= dmg)
+        {
+            Death();
+            Player.Instance.Death();
+            CurrentHealth = 0;
+        }
+        else
+        {
+            CurrentHealth -= dmg;
+        }
+        
+    }
+
+    public void Death()
+    {
+    }
+
 }

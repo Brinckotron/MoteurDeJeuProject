@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1821678740093110228}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -119,8 +119,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0029443502, y: -0.06294435}
-  m_Size: {x: 0.27090222, y: 0.3003459}
+  m_Offset: {x: 0.0027252436, y: -0.094675094}
+  m_Size: {x: 0.23688436, y: 0.23688442}
   m_Direction: 0
 --- !u!95 &5905027810104997127
 Animator:
@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 3294878399901478543}
   - component: {fileID: 6447638576020820892}
   - component: {fileID: 5772064164691278108}
+  - component: {fileID: 5942298694979032598}
   m_Layer: 12
   m_Name: GoblinAttackCollider
   m_TagString: Untagged
@@ -264,6 +265,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.33543837, y: -0.08214851}
   m_Size: {x: 0.36563596, y: 0.21503364}
   m_Direction: 1
+--- !u!114 &5942298694979032598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3827500808882095738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04052f02487eb3f449a3c8bdb53e3f99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6168607572509185712
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +302,7 @@ Transform:
   m_GameObject: {fileID: 6168607572509185712}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: -0.2, z: 0}
+  m_LocalPosition: {x: 0.1, y: -0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -342,7 +355,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 500
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -369,10 +382,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 843e0e2cbfe2e9145be58cd859cb9a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 1.5
   maxHealth: 0
   xpValue: 0
   sightRange: 5
+  atkDelay: 1
+  atkDamage: 10
   deathEffect: {fileID: 0}
-  castPos: {fileID: 0}
-  anim: {fileID: 0}
+  castPos: {fileID: 6835263757965986450}
+  anim: {fileID: 5905027810104997127}
+  isSqueezed: 0
+  atk1Range: 0.3
+  atk2Range: 0.2

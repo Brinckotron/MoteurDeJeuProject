@@ -6,7 +6,8 @@ using UnityEngine;
 public abstract class EnemyBehaviour : MonoBehaviour
 {
 
-    [SerializeField]protected float speed, maxHealth, xpValue, sightRange, atkDamage, atkDelay;
+    [SerializeField]protected float speed, maxHealth, xpValue, sightRange, atkDelay;
+    [SerializeField] public float atkDamage;
     protected float CurrentHealth, AtkDelayTimer;
     [SerializeField] protected GameObject deathEffect;
     protected GameObject Player;
