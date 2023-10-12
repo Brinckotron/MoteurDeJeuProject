@@ -9,17 +9,17 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Enemies
+  - 
   - Water
   - UI
   - 
+  - 
+  - Background
+  - Player
   - MainTileLayer
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - OneWayPlatforms
+  - Enemies
+  - Drops
   - 
   - 
   - 

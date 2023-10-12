@@ -109,6 +109,8 @@ public class PlayerController : MonoBehaviour
         AnimationControl();
 
         StateControl();
+
+        RollIgnoreEnemyCollision();
     }
 
     private void ApplyMovement()
@@ -179,6 +181,11 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S) && _rollCancelTimer <= 0) _rollCancelTimer = _rollCancelDelay;
     }
+    
+    private void RollIgnoreEnemyCollision()
+    {
+        Physics2D.IgnoreLayerCollision(9, 12, _currentPlayerState == PlayerState.Roll);
+    }
 
     private void Attacking()
     {
@@ -237,7 +244,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        var hitInfo = Physics2D.Raycast(transform.position, Vector2.down, 0.35f, 1 << 7);
+        var hitInfo = Physics2D.Raycast(transform.position, Vector2.down, 0.35f, 1 << 10);
         return hitInfo.collider != null && !_resetJumpNeeded;
     }
 
@@ -363,7 +370,7 @@ public class PlayerController : MonoBehaviour
         if (_currentPlayerState != newState)
         {
             _currentPlayerState = newState;
-            /*debug*/
+            //debug
             _newDebugState = _currentPlayerState.ToString();
         }
 

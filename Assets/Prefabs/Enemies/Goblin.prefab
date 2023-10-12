@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 776690951094695397}
   - component: {fileID: 3560871732215012047}
   - component: {fileID: 5905027810104997127}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GoblinSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 3294878399901478543}
   - component: {fileID: 6447638576020820892}
   - component: {fileID: 5772064164691278108}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GoblinAttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,6 +264,37 @@ CapsuleCollider2D:
   m_Offset: {x: 0.33543837, y: -0.08214851}
   m_Size: {x: 0.36563596, y: 0.21503364}
   m_Direction: 1
+--- !u!1 &6168607572509185712
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6835263757965986450}
+  m_Layer: 12
+  m_Name: CastPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6835263757965986450
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6168607572509185712}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1, y: -0.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3892600118967179060}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9086827649745329052
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,9 +306,9 @@ GameObject:
   - component: {fileID: 3892600118967179060}
   - component: {fileID: 482326538155160159}
   - component: {fileID: 5240808758798921432}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Goblin
-  m_TagString: Untagged
+  m_TagString: Goblin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -296,6 +327,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 447236987538085979}
+  - {fileID: 6835263757965986450}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &482326538155160159
@@ -337,6 +369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 843e0e2cbfe2e9145be58cd859cb9a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  health: 0
+  speed: 1
+  maxHealth: 0
   xpValue: 0
+  sightRange: 5
+  deathEffect: {fileID: 0}
+  castPos: {fileID: 0}
+  anim: {fileID: 0}
