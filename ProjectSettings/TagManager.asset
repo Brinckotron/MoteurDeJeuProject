@@ -19,8 +19,8 @@ TagManager:
   - MainTileLayer
   - OneWayPlatforms
   - Enemies
+  - EnemyAttacks
   - Drops
-  - 
   - 
   - 
   - 

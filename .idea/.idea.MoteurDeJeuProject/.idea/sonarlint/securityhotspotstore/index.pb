@@ -15,3 +15,7 @@ S
 ,Assets/Scripts/Environment/SqueezeTrigger.cs,c\b\cb1a8d44e6a9a4fc0395331ac9dfc0c1ed36b452
 ]
 -Assets/Scripts/Enemies/Goblin/GoblinAttack.cs,6\3\6317b180c9f810f544bdd5ddad2c32c1d4b3ba8b
+U
+%Assets/Scripts/Player/PlayerAttack.cs,4\2\42a615a90a33d7d0f2036cfb4c05268f38c88544
+_
+/Assets/Scripts/Player/PlayerAnimationControl.cs,6\9\690e3e9e32d5b1926b7ed3c27ba3d76f3b025bc6

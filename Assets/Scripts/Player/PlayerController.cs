@@ -198,6 +198,7 @@ public class PlayerController : MonoBehaviour
     private void RollIgnoreEnemyCollision()
     {
         Physics2D.IgnoreLayerCollision(9, 12, _currentPlayerState == PlayerState.Roll);
+        Physics2D.IgnoreLayerCollision(9, 13, _currentPlayerState == PlayerState.Roll);
     }
 
     private void Attacking()

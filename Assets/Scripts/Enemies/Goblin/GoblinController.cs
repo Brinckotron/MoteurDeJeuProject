@@ -6,10 +6,10 @@ using UnityEngine;
 public class GoblinController : LandEnemy
 {
     public bool isSqueezed;
-    private bool _isJumpingBack;
+    private bool _isJumpingBack, _justGotHurt;
     [SerializeField] private float atk1Range, atk2Range;
-    private readonly float _atk1Duration = 0.533f, _atk2Duration = 0.917f;
-    private float _atk1DurationTimer, _atk2DurationTimer;
+    private readonly float _atk1Duration = 0.533f, _atk2Duration = 0.917f, _justGotHurtDuration = 1f;
+    private float _atk1DurationTimer, _atk2DurationTimer, _justGotHurtTimer;
     private int _isAttacking1, _isAttacking2, _isRunning, _isDead, _isHit, _isJumping;
     private int[] idle;
 
@@ -22,7 +22,7 @@ public class GoblinController : LandEnemy
         _isHit = Animator.StringToHash("isHit");
         _isJumping = Animator.StringToHash("isJumping");
         idle = new int[] { _isAttacking1, _isAttacking2, _isRunning, _isDead, _isHit, _isJumping };
-        HurtDuration = 0.333f;
+        HurtDuration = 0.25f;
     }
 
     void Start()
@@ -34,28 +34,41 @@ public class GoblinController : LandEnemy
         CurrentHealth = maxHealth;
     }
 
+    private void Update()
+    {
+        if (_justGotHurtTimer > 0)
+        {
+            _justGotHurtTimer -= Time.deltaTime;
+            if (_justGotHurtTimer <= 0) _justGotHurt = false;
+        }
+    }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!IsDead)
         {
-            if (_atk1DurationTimer <= 0 && _atk2DurationTimer <= 0) FacePlayer();
+            KeepPlayerPositionMemorized();
+            if (_atk1DurationTimer <= 0 && _atk2DurationTimer <= 0 && HurtTimer <= 0) FacePlayer();
             if (!_isJumpingBack)
             {
-                if (!IsInRangeForAttack1() && _atk1DurationTimer <= 0 && _atk2DurationTimer <= 0 && !IsHurt) MoveTowardsPlayer();
-                else Stop();
-            }
-
-            if (Player.GetComponent<PlayerController>().Instance.CurrentPlayerState != PlayerController.PlayerState.Dead && !IsHurt) Attack();
-            else
-            {
-                foreach (var i in idle)
+                if (!IsInRangeForAttack1() && _atk1DurationTimer <= 0 && _atk2DurationTimer <= 0 && !IsHurt)
                 {
-                    anim.SetBool(i, false);
+                    MoveTowardsPlayer();
+                    if (Rb2D.velocity.x != 0) SetAnimBool(_isRunning);
+                    if (!CanSeePlayer() && MemorizedPlayerPosition == null) SetAnimIdle();
+                }
+                else if (_atk1DurationTimer <= 0 && _atk2DurationTimer <= 0)
+                {
+                    Stop();
+                    SetAnimIdle();
                 }
             }
+            
+            Attack();
+            
             Hurt();
         }
+
         Death();
     }
 
@@ -64,30 +77,25 @@ public class GoblinController : LandEnemy
         if (!IsHurt) return;
         if (HurtTimer > 0)
         {
-            anim.SetBool(_isHit, true);
+            SetAnimBool(_isHit);
             HurtTimer -= Time.deltaTime;
             if (HurtTimer <= 0)
             {
                 IsHurt = false;
-                anim.SetBool(_isHit, false);
+                SetAnimIdle();
+                _justGotHurt = true;
+                _justGotHurtTimer = _justGotHurtDuration;
             }
         }
 
-        if (HurtTimer <= 0 && IsHurt)
-        {
-            HurtTimer = HurtDuration;
-        }
+        if (HurtTimer <= 0 && IsHurt) HurtTimer = HurtDuration;
     }
 
     private void Death()
     {
         if (IsDead)
         {
-            foreach (var i in idle)
-            {
-                anim.SetBool(i, false);
-            }
-            anim.SetBool(_isDead, true);
+            SetAnimBool(_isDead);
         }
     }
 
@@ -107,24 +115,40 @@ public class GoblinController : LandEnemy
 
     public override void Attack()
     {
-        if (_atk1DurationTimer <= 0) anim.SetBool(_isAttacking1, false);
-        else _atk1DurationTimer -= Time.deltaTime;
-        if (_atk2DurationTimer <= 0) anim.SetBool(_isAttacking2, false);
-        else _atk2DurationTimer -= Time.deltaTime;
-        if (AtkDelayTimer > 0) AtkDelayTimer -= Time.deltaTime;
-        if (IsInRangeForAttack1() && !IsInRangeForAttack2() && AtkDelayTimer <= 0)
+        if (_atk1DurationTimer > 0)
         {
-            AtkDelayTimer = (_atk1Duration + atkDelay);
-            _atk1DurationTimer = _atk1Duration;
-            anim.SetBool(_isAttacking1, true);
+            _atk1DurationTimer -= Time.deltaTime;
+            if (_atk1DurationTimer <= 0) anim.SetBool(_isAttacking1, false);
         }
 
-        if (IsInRangeForAttack2() && AtkDelayTimer <= 0 && !isSqueezed)
+        if (_atk2DurationTimer > 0)
         {
-            AtkDelayTimer = (_atk2Duration + atkDelay);
-            _atk2DurationTimer = _atk2Duration;
-            anim.SetBool(_isAttacking2, true);
-            StartCoroutine(Jumpback());
+            _atk2DurationTimer -= Time.deltaTime;
+            if (_atk2DurationTimer <= 0) anim.SetBool(_isAttacking2, false);
+        }
+
+        if (AtkDelayTimer > 0) AtkDelayTimer -= Time.deltaTime;
+
+        if (Player.GetComponent<PlayerController>().Instance.CurrentPlayerState != PlayerController.PlayerState.Dead &&
+            !IsHurt)
+        {
+            if ((IsInRangeForAttack2() || _justGotHurt) && AtkDelayTimer <= 0 && !isSqueezed)
+            {
+                if (_justGotHurt)AtkDelayTimer = (_atk2Duration);
+                else AtkDelayTimer = (_atk2Duration + (atkDelay / 2));
+                _justGotHurt = false;
+                _atk2DurationTimer = _atk2Duration;
+                SetAnimBool(_isAttacking2);
+                StartCoroutine(Jumpback());
+            }
+
+            if (IsInRangeForAttack1() && !IsInRangeForAttack2() && AtkDelayTimer <= 0)
+            {
+                _justGotHurt = false;
+                AtkDelayTimer = (_atk1Duration + atkDelay);
+                _atk1DurationTimer = _atk1Duration;
+                SetAnimBool(_isAttacking1);
+            }
         }
     }
 
@@ -132,7 +156,7 @@ public class GoblinController : LandEnemy
     {
         _isJumpingBack = true;
         yield return new WaitForSeconds(0.1f);
-        Rb2D.velocity = (Player.transform.position.x > transform.position.x ? Vector2.left : Vector2.right) * 0.7f;
+        Rb2D.velocity = (Player.transform.position.x > transform.position.x ? Vector2.left : Vector2.right) * 0.4f;
         yield return new WaitForSeconds(0.5f);
         Stop();
         _isJumpingBack = false;
@@ -149,6 +173,23 @@ public class GoblinController : LandEnemy
             IsHurt = true;
             AtkDelayTimer = 0;
         }
+    }
 
+    private void SetAnimBool(int boolToSet)
+    {
+        foreach (var i in idle)
+        {
+            if (i != boolToSet) anim.SetBool(i, false);
+        }
+
+        anim.SetBool(boolToSet, true);
+    }
+
+    private void SetAnimIdle()
+    {
+        foreach (var i in idle)
+        {
+            anim.SetBool(i, false);
+        }
     }
 }

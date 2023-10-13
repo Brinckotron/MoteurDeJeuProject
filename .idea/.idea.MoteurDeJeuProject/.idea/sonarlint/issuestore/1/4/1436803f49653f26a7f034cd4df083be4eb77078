@@ -1,5 +1,4 @@
 
 Ocsharpsquid:S3903"-Move 'EnemyBehaviour' into a named namespace.(“¿ÿîøÿÿÿÿ
-hcsharpsquid:S1104
-"DMake this field 'private' and encapsulate it in a 'public' property.(©Ñ³¬8âîì¥²1
-Mcsharpsquid:S1481+")Remove the unused local variable 'scale'.(ÃõŒ˜8Ö€Ûÿ±1
+Mcsharpsquid:S14815")Remove the unused local variable 'scale'.(ÃõŒ˜8Ö€Ûÿ±1
+Bcsharpsquid:S125)"Remove this commented out code.(·¢çò8ä”Ø°²1

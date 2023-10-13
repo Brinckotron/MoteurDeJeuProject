@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 6447638576020820892}
   - component: {fileID: 5772064164691278108}
   - component: {fileID: 5942298694979032598}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: GoblinAttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -386,7 +386,7 @@ MonoBehaviour:
   maxHealth: 100
   xpValue: 0
   sightRange: 5
-  atkDelay: 1
+  atkDelay: 0.8
   atkDamage: 10
   deathEffect: {fileID: 0}
   castPos: {fileID: 6835263757965986450}

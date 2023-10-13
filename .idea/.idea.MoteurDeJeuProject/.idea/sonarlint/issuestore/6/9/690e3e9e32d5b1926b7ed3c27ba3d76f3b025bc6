@@ -1,0 +1,7 @@
+
+Wcsharpsquid:S3903"5Move 'PlayerAnimationControl' into a named namespace.(ñ¼è™şÿÿÿÿ
+fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(÷èˆûÿÿÿÿ
+fcsharpsquid:S1104
+"DMake this field 'private' and encapsulate it in a 'public' property.(ĞøİÏúÿÿÿÿ
+gcsharpsquid:S2223"EChange the visibility of 'instance' or make it 'const' or 'readonly'.(÷èˆûÿÿÿÿ
+wcsharpsquid:S2696"UMake the enclosing instance method 'static' or remove this set on the 'static' field.(ñõîÙşÿÿÿÿ

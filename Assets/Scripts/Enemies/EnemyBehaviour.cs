@@ -6,17 +6,18 @@ using UnityEngine;
 public abstract class EnemyBehaviour : MonoBehaviour
 {
 
-    [SerializeField]protected float speed, maxHealth, xpValue, sightRange, atkDelay, atkDamage;
+    [SerializeField]protected float speed, maxHealth, xpValue, sightRange, atkDelay, atkDamage, memorizePlayerPosDuration = 3f;
     public float AtkDamage
     {
         get { return atkDamage; }
         set { atkDamage = value; }
     }
-    protected float CurrentHealth, AtkDelayTimer, HurtTimer, HurtDuration;
+    protected float CurrentHealth, AtkDelayTimer, HurtTimer, HurtDuration, MemorizePlayerPosTimer;
     protected bool IsHurt, IsDead;
     [SerializeField] protected GameObject deathEffect;
     protected GameObject Player;
     protected Collider2D PlayerCollider, MainCollider;
+    protected Vector2? MemorizedPlayerPosition;
     protected Rigidbody2D Rb2D;
     [SerializeField]protected Transform castPos;
     [SerializeField]protected Animator anim;
@@ -59,6 +60,24 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     public virtual void MoveTowardsPlayer()
     {
+    }
+
+    public virtual void KeepPlayerPositionMemorized()
+    {
+
+        if (CanSeePlayer())
+        {
+            MemorizedPlayerPosition = Player.transform.position;
+            MemorizePlayerPosTimer = memorizePlayerPosDuration;
+        }
+        else
+        {
+            if (MemorizePlayerPosTimer > 0)
+            {
+                MemorizePlayerPosTimer -= Time.deltaTime;
+                if (MemorizePlayerPosTimer <= 0) MemorizedPlayerPosition = null;
+            }
+        }
     }
 
     public virtual void Stop()

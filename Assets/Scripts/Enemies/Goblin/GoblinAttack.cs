@@ -18,7 +18,6 @@ public class GoblinAttack : MonoBehaviour
     {
         if (other.gameObject.layer == 9)
         {
-            Debug.Log("Hit!");
             other.gameObject.GetComponentInParent<PlayerController>().Instance.TakeDamage(damage, Goblin.gameObject);
         }
     }
