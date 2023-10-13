@@ -34,11 +34,18 @@ public class GameManager : MonoBehaviour
     public int MaxHealth;
     public int CurrentHealth;
     public PlayerController Player;
+    [SerializeField] private GameObject goblin;
+    [SerializeField] private Transform spawner;
 
     public void Start()
     {
         Player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         CurrentHealth = MaxHealth;
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))  Instantiate(goblin, spawner);
     }
 
     public void LooseHealth(int dmg)
@@ -60,5 +67,4 @@ public class GameManager : MonoBehaviour
     public void Death()
     {
     }
-
 }

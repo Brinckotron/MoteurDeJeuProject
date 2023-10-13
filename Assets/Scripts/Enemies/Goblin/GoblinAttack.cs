@@ -11,7 +11,7 @@ public class GoblinAttack : MonoBehaviour
     private void Awake()
     {
         Goblin = gameObject.GetComponentInParent<GoblinController>();
-        damage = (int)Goblin.atkDamage;
+        damage = (int)Goblin.AtkDamage;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1.5
-  maxHealth: 0
+  maxHealth: 100
   xpValue: 0
   sightRange: 5
   atkDelay: 1

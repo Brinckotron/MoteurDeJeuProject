@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerController _instance;
     public PlayerController Instance => _instance;
     public float maxSpeed, jumpHeight, gravityScale, rollSpeed, rollStaminaCost, blockStaminaCost, coyoteTimeDelay;
-    public int armor;
+    public int armor, atkDamage;
     public Camera mainCamera;
     public bool crouchOverride = false;
     public TMP_Text stateDebugText;
@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
         _isSecondaryAttackPressed = false,
         _isDead = false,
         _isHurt = false,
-        _isDebugToggled = false;
+        _isDebugToggled = false,
+        _isHitCrouched = false;
 
     private float _moveDirection = 0,
         _attackLength = 0.3f,
@@ -35,7 +36,7 @@ public class PlayerController : MonoBehaviour
         _rollCancelDelay = 0.2f,
         _rollCancelTimer,
         _coyoteTime = 0f,
-        _hurtDuration = 0.3f,
+        _hurtDuration = 0.4f,
         _hurtTimer;
 
     private string _knightSkin = "0", _debugState = " ", _newDebugState = " ";
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider2D _collider;
     private Transform _t;
 
-    private enum PlayerState
+    public enum PlayerState
     {
         Idle,
         Run,
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
         Crouched,
         CrouchAttack,
         CrouchBlock,
+        CrouchHurt,
         Roll,
         FaceWall,
         Ladder,
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private PlayerState _currentPlayerState;
-    public string CurrentPlayerState => _currentPlayerState.ToString();
+    public PlayerState CurrentPlayerState => _currentPlayerState;
 
     private void Awake()
     {
@@ -129,7 +131,8 @@ public class PlayerController : MonoBehaviour
             _rb2D.velocity = new Vector2((_moveDirection) * maxSpeed, _rb2D.velocity.y);
         else if (_currentPlayerState is PlayerState.Attack or PlayerState.CrouchAttack or PlayerState.Attack2
                  or PlayerState.Dead or PlayerState.Block or PlayerState.CrouchBlock
-                 or PlayerState.Crouch or PlayerState.Crouched) _rb2D.velocity = Vector2.zero;
+                 or PlayerState.Crouch or PlayerState.Crouched or PlayerState.Hurt
+                 or PlayerState.CrouchHurt) _rb2D.velocity = new Vector2(0, _rb2D.velocity.y);
         else if (_currentPlayerState == PlayerState.Roll)
         {
             if (_facingRight) _rb2D.velocity = new Vector2(rollSpeed, _rb2D.velocity.y);
@@ -191,7 +194,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S) && _rollCancelTimer <= 0) _rollCancelTimer = _rollCancelDelay;
     }
-    
+
     private void RollIgnoreEnemyCollision()
     {
         Physics2D.IgnoreLayerCollision(9, 12, _currentPlayerState == PlayerState.Roll);
@@ -206,7 +209,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (!Input.GetKey(KeyCode.LeftShift) && Input.GetButtonDown("Fire1") && _attackDelayTimer <= 0f &&
-            _rollDelayTimer <= 0.1f)
+            _rollDelayTimer <= 0.1f && _hurtTimer <= 0)
         {
             _attackDelayTimer = _attackLength;
         }
@@ -221,7 +224,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (IsGrounded() && Input.GetKey(KeyCode.LeftShift) && Input.GetButtonDown("Fire1") &&
-            _secondaryAttackDelayTimer <= 0f && !crouchOverride)
+            _secondaryAttackDelayTimer <= 0f && !crouchOverride && _hurtTimer <= 0)
         {
             _secondaryAttackDelayTimer = _secondaryAttackLength;
         }
@@ -291,18 +294,21 @@ public class PlayerController : MonoBehaviour
         {
             if (_hurtTimer > 0)
             {
-                ChangePlayerState(PlayerState.Hurt);
+                if (crouchOverride || _isHitCrouched) ChangePlayerState(PlayerState.CrouchHurt);
+                else ChangePlayerState(PlayerState.Hurt);
                 _hurtTimer -= Time.deltaTime;
                 if (_hurtTimer <= 0)
                 {
                     _isHurt = false;
+                    _isHitCrouched = false;
                 }
             }
+
             if (_hurtTimer <= 0 && _isHurt)
             {
                 _hurtTimer = _hurtDuration;
+                if (Input.GetKey(KeyCode.S)) _isHitCrouched = true;
             }
-            
         }
 
         if (_isJumpPressed)
@@ -311,87 +317,94 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ResetJump());
         }
 
-        if (IsGrounded())
+        if (!_isHurt)
         {
-            if (crouchOverride && _attackDelayTimer <= 0 && _rollDelayTimer <= 0 &&
-                _secondaryAttackDelayTimer <= 0)
+            if (IsGrounded())
             {
-                ChangePlayerState(_currentPlayerState is (PlayerState.Crouched or PlayerState.CrouchAttack
-                    or PlayerState.CrouchBlock or PlayerState.Roll)
-                    ? PlayerState.Crouched
-                    : PlayerState.Crouch);
-            }
-
-            if (_moveDirection == 0 && !_resetJumpNeeded && _attackDelayTimer <= 0 && _rollDelayTimer <= 0 &&
-                _secondaryAttackDelayTimer <= 0)
-            {
-                if (Input.GetKey(KeyCode.S) || crouchOverride)
+                if (crouchOverride && _attackDelayTimer <= 0 && _rollDelayTimer <= 0 &&
+                    _secondaryAttackDelayTimer <= 0)
                 {
                     ChangePlayerState(_currentPlayerState is (PlayerState.Crouched or PlayerState.CrouchAttack
-                        or PlayerState.CrouchBlock or PlayerState.Roll)
+                        or PlayerState.CrouchBlock or PlayerState.Roll or PlayerState.CrouchHurt)
                         ? PlayerState.Crouched
                         : PlayerState.Crouch);
                 }
-                else ChangePlayerState(PlayerState.Idle);
-            }
+
+                if (_moveDirection == 0 && !_resetJumpNeeded && _attackDelayTimer <= 0 && _rollDelayTimer <= 0 &&
+                    _secondaryAttackDelayTimer <= 0)
+                {
+                    if (Input.GetKey(KeyCode.S) || crouchOverride)
+                    {
+                        ChangePlayerState(_currentPlayerState is (PlayerState.Crouched or PlayerState.CrouchAttack
+                            or PlayerState.CrouchBlock or PlayerState.Roll or PlayerState.CrouchHurt)
+                            ? PlayerState.Crouched
+                            : PlayerState.Crouch);
+                    }
+                    else ChangePlayerState(PlayerState.Idle);
+                }
 
 
-            if (_isBlockPressed && _attackDelayTimer <= 0 && _rollDelayTimer <= 0 && _secondaryAttackDelayTimer <= 0 &&
-                _currentPlayerState is PlayerState.Crouch or PlayerState.Crouched or PlayerState.Idle or PlayerState.Run
-                    or PlayerState.Attack or PlayerState.Attack2 or PlayerState.Roll or PlayerState.CrouchAttack
-                    or PlayerState.Falling)
-            {
-                ChangePlayerState(
-                    _currentPlayerState is PlayerState.Crouch or PlayerState.Crouched or PlayerState.CrouchAttack
-                        or PlayerState.CrouchBlock
-                        ? PlayerState.CrouchBlock
-                        : PlayerState.Block);
-            }
-
-            if (_moveDirection != 0 && !_isBlockPressed && !_isAttackPressed &&
-                !_isSecondaryAttackPressed && !crouchOverride) ChangePlayerState(PlayerState.Run);
-            if (_isAttackPressed)
-            {
-                if (_attackDelayTimer <= 0) _isAttackPressed = false;
-                if (_currentPlayerState == PlayerState.JumpAttack && _attackDelayTimer < (_attackLength - 0.05f))
-                    _attackDelayTimer = 0;
-
-                else
+                if (_isBlockPressed && _attackDelayTimer <= 0 && _rollDelayTimer <= 0 &&
+                    _secondaryAttackDelayTimer <= 0 &&
+                    _currentPlayerState is PlayerState.Crouch or PlayerState.Crouched or PlayerState.Idle
+                        or PlayerState.Run
+                        or PlayerState.Attack or PlayerState.Attack2 or PlayerState.Roll or PlayerState.CrouchAttack
+                        or PlayerState.Falling)
                 {
                     ChangePlayerState(
                         _currentPlayerState is PlayerState.Crouch or PlayerState.Crouched or PlayerState.CrouchAttack
-                            or PlayerState.CrouchBlock or PlayerState.Roll
-                            ? PlayerState.CrouchAttack
-                            : PlayerState.Attack);
+                            or PlayerState.CrouchBlock or PlayerState.CrouchHurt
+                            ? PlayerState.CrouchBlock
+                            : PlayerState.Block);
+                }
+
+                if (_moveDirection != 0 && !_isBlockPressed && !_isAttackPressed &&
+                    !_isSecondaryAttackPressed && !crouchOverride) ChangePlayerState(PlayerState.Run);
+                if (_isAttackPressed)
+                {
+                    if (_attackDelayTimer <= 0) _isAttackPressed = false;
+                    if (_currentPlayerState == PlayerState.JumpAttack && _attackDelayTimer < (_attackLength - 0.05f))
+                        _attackDelayTimer = 0;
+
+                    else
+                    {
+                        ChangePlayerState(
+                            _currentPlayerState is PlayerState.Crouch or PlayerState.Crouched
+                                or PlayerState.CrouchAttack
+                                or PlayerState.CrouchBlock or PlayerState.Roll or PlayerState.CrouchHurt
+                                ? PlayerState.CrouchAttack
+                                : PlayerState.Attack);
+                    }
+                }
+
+                if (_isSecondaryAttackPressed)
+                {
+                    if (_secondaryAttackDelayTimer <= 0) _isSecondaryAttackPressed = false;
+                    ChangePlayerState(PlayerState.Attack2);
+                }
+
+                if (_isRollPressed)
+                {
+                    if (_rollDelayTimer <= 0) _isRollPressed = false;
+                    ChangePlayerState(PlayerState.Roll);
                 }
             }
-
-            if (_isSecondaryAttackPressed)
+            else
             {
-                if (_secondaryAttackDelayTimer <= 0) _isSecondaryAttackPressed = false;
-                ChangePlayerState(PlayerState.Attack2);
-            }
+                if (_isAttackPressed)
+                {
+                    if (_attackDelayTimer <= 0) _isAttackPressed = false;
+                    ChangePlayerState(PlayerState.JumpAttack);
+                }
 
-            if (_isRollPressed)
-            {
-                if (_rollDelayTimer <= 0) _isRollPressed = false;
-                ChangePlayerState(PlayerState.Roll);
+                if (_currentPlayerState == PlayerState.JumpAttack && _attackDelayTimer <= 0)
+                    ChangePlayerState(PlayerState.Falling);
+                if (_rb2D.velocity.y < 0 && _currentPlayerState != PlayerState.JumpAttack && _rollDelayTimer <= 0)
+                    ChangePlayerState(PlayerState.Falling);
             }
-        }
-        else
-        {
-            if (_isAttackPressed)
-            {
-                if (_attackDelayTimer <= 0) _isAttackPressed = false;
-                ChangePlayerState(PlayerState.JumpAttack);
-            }
-
-            if (_currentPlayerState == PlayerState.JumpAttack && _attackDelayTimer <= 0)
-                ChangePlayerState(PlayerState.Falling);
-            if (_rb2D.velocity.y < 0 && _currentPlayerState != PlayerState.JumpAttack && _rollDelayTimer <= 0)
-                ChangePlayerState(PlayerState.Falling);
         }
     }
+
 
     private void ChangePlayerState(PlayerState newState)
     {
@@ -435,14 +448,14 @@ public class PlayerController : MonoBehaviour
 
     public void BlockAttack(GameObject source)
     {
-        
     }
 
     public void TakeDamage(int dmg, GameObject source)
     {
         if (_isHurt) return;
         var modifiedDamage = dmg - armor;
-        var knockBackDirection = new Vector2(source.transform.position.x - _rb2D.transform.position.x, source.transform.position.y - _rb2D.transform.position.y).normalized;
+        var knockBackDirection = new Vector2(source.transform.position.x - _rb2D.transform.position.x,
+            source.transform.position.y - _rb2D.transform.position.y).normalized;
         _isHurt = true;
         _rb2D.AddForce(knockBackDirection);
         GameManager.Instance.LooseHealth(modifiedDamage);
@@ -465,6 +478,7 @@ public class PlayerController : MonoBehaviour
             PlayerState.Crouched => "Crouched",
             PlayerState.CrouchAttack => "Crouched_Attack",
             PlayerState.CrouchBlock => "Crouched_Block",
+            PlayerState.CrouchHurt => "Crouched_Hurt",
             PlayerState.Roll => "Roll",
             PlayerState.FaceWall => "Face_Wall",
             PlayerState.Ladder => "Ladder",

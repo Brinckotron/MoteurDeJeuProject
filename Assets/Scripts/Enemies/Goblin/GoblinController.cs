@@ -11,6 +11,7 @@ public class GoblinController : LandEnemy
     private readonly float _atk1Duration = 0.533f, _atk2Duration = 0.917f;
     private float _atk1DurationTimer, _atk2DurationTimer;
     private int _isAttacking1, _isAttacking2, _isRunning, _isDead, _isHit, _isJumping;
+    private int[] idle;
 
     private void Awake()
     {
@@ -20,6 +21,8 @@ public class GoblinController : LandEnemy
         _isDead = Animator.StringToHash("isDead");
         _isHit = Animator.StringToHash("isHit");
         _isJumping = Animator.StringToHash("isJumping");
+        idle = new int[] { _isAttacking1, _isAttacking2, _isRunning, _isDead, _isHit, _isJumping };
+        HurtDuration = 0.333f;
     }
 
     void Start()
@@ -28,19 +31,64 @@ public class GoblinController : LandEnemy
         PlayerCollider = Player.GetComponentInChildren<CapsuleCollider2D>();
         Rb2D = GetComponent<Rigidbody2D>();
         MainCollider = GetComponentInChildren<CapsuleCollider2D>();
+        CurrentHealth = maxHealth;
     }
 
 
     void FixedUpdate()
     {
-        if (_atk1DurationTimer <= 0 && _atk2DurationTimer <= 0) FacePlayer();
-        if (!_isJumpingBack)
+        if (!IsDead)
         {
-            if (!IsInRangeForAttack1() && _atk1DurationTimer <= 0 && _atk2DurationTimer <= 0) MoveTowardsPlayer();
-            else Stop();
+            if (_atk1DurationTimer <= 0 && _atk2DurationTimer <= 0) FacePlayer();
+            if (!_isJumpingBack)
+            {
+                if (!IsInRangeForAttack1() && _atk1DurationTimer <= 0 && _atk2DurationTimer <= 0 && !IsHurt) MoveTowardsPlayer();
+                else Stop();
+            }
+
+            if (Player.GetComponent<PlayerController>().Instance.CurrentPlayerState != PlayerController.PlayerState.Dead && !IsHurt) Attack();
+            else
+            {
+                foreach (var i in idle)
+                {
+                    anim.SetBool(i, false);
+                }
+            }
+            Hurt();
+        }
+        Death();
+    }
+
+    private void Hurt()
+    {
+        if (!IsHurt) return;
+        if (HurtTimer > 0)
+        {
+            anim.SetBool(_isHit, true);
+            HurtTimer -= Time.deltaTime;
+            if (HurtTimer <= 0)
+            {
+                IsHurt = false;
+                anim.SetBool(_isHit, false);
+            }
         }
 
-        if (Player.GetComponent<PlayerController>().Instance.CurrentPlayerState != "Dead") Attack();
+        if (HurtTimer <= 0 && IsHurt)
+        {
+            HurtTimer = HurtDuration;
+        }
+    }
+
+    private void Death()
+    {
+        if (IsDead)
+        {
+            foreach (var i in idle)
+            {
+                anim.SetBool(i, false);
+            }
+            anim.SetBool(_isDead, true);
+        }
     }
 
     private bool IsInRangeForAttack1()
@@ -93,7 +141,14 @@ public class GoblinController : LandEnemy
     public override void TakeDamage(int dmg)
     {
         if (_isJumpingBack) return;
+        if (IsHurt) return;
         CurrentHealth -= dmg;
-        if (CurrentHealth <= 0) Die();
+        if (CurrentHealth <= 0) StartCoroutine(Die());
+        else
+        {
+            IsHurt = true;
+            AtkDelayTimer = 0;
+        }
+
     }
 }

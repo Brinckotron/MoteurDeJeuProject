@@ -6,9 +6,14 @@ using UnityEngine;
 public abstract class EnemyBehaviour : MonoBehaviour
 {
 
-    [SerializeField]protected float speed, maxHealth, xpValue, sightRange, atkDelay;
-    [SerializeField] public float atkDamage;
-    protected float CurrentHealth, AtkDelayTimer;
+    [SerializeField]protected float speed, maxHealth, xpValue, sightRange, atkDelay, atkDamage;
+    public float AtkDamage
+    {
+        get { return atkDamage; }
+        set { atkDamage = value; }
+    }
+    protected float CurrentHealth, AtkDelayTimer, HurtTimer, HurtDuration;
+    protected bool IsHurt, IsDead;
     [SerializeField] protected GameObject deathEffect;
     protected GameObject Player;
     protected Collider2D PlayerCollider, MainCollider;
@@ -22,13 +27,17 @@ public abstract class EnemyBehaviour : MonoBehaviour
     {
         CurrentHealth -= dmg;
         if (CurrentHealth <= 0) Die();
+        else IsHurt = true;
     }
 
     public virtual IEnumerator Die()
     {
         speed = 0;
+        IsDead = true;
+        Destroy(Rb2D);
+        Destroy(MainCollider);
         yield return new WaitForSeconds(3f);
-        Instantiate(deathEffect, transform.position, transform.rotation);
+        //Instantiate(deathEffect, transform.position, transform.rotation);
         DeathDrop();
         Destroy(gameObject);
     }
