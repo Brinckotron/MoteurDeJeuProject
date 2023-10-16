@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public PlayerController Instance => _instance;
     public float maxSpeed, jumpHeight, gravityScale, rollSpeed, rollStaminaCost, blockStaminaCost, coyoteTimeDelay, staminaRegenDelay, staminaRegenPerSecond;
     public int armor, atkDamage;
+    //Me semble que tu peux swap ça pour une var privée et utiliser mainCamera.main. Check la doc chu vraiment pu sûr
     public Camera mainCamera;
     public bool crouchOverride = false;
     public TMP_Text stateDebugText;
@@ -48,6 +49,15 @@ public class PlayerController : MonoBehaviour
     private CapsuleCollider2D _collider;
     private Transform _t;
 
+    /*
+    Pour les players state l'idéal est probablement d'utiliser une state machine. Cependant c'est un concept relativement avancé qui
+    dépasse peut-être le scope du cours. Je te suggère de t'y intéresser mais pas nécessairement d'en utiliser dans le contexte actuel.
+    Il y a cependant des améliroations qui peuvent être fait sans utiliser une sm:
+    - Tu pourrais découper en plusieurs Enum (movement, combat, posture) et encapsuler dans une struct ou une class.
+    - Ou tu peux utiliser des bitwise enums:
+    [Flags] enum PlayerState {None = 0, Run = 1 << 0, Roll = 1 << 1, Idle = 1 << 2, Attack = 1 << 3}
+    comme ça tu peux combiner genre: MovementState = PlayerState.Run | PlayerState.Roll
+    */
     public enum PlayerState
     {
         Idle,
@@ -79,6 +89,9 @@ public class PlayerController : MonoBehaviour
         _instance = this;
     }
 
+    //Notre rule of thumb c'est que tout ce qui est local est dans Awake et ce qui dépend d'autres objets est dans Start.
+    //Si c'est respecté ça t'assure que tous les scripts sont initialisé avant que la game loop run les Starts.
+    //Donc tout pourrait aller dans Awake
     private void Start()
     {
         _t = transform;
@@ -94,6 +107,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /*
+    Je te suggère de regarder le "nouveau" input system de Unity. C'est vraiment robuste
+    et simple à utiliser après le setup initial. https://docs.unity3d.com/Packages/com.unity.inputsystem@1.7/manual/index.html
+    */
     private void Update()
     {
         Moving();
@@ -140,6 +157,10 @@ public class PlayerController : MonoBehaviour
                  or PlayerState.CrouchHurt) _rb2D.velocity = new Vector2(0, _rb2D.velocity.y);
         else if (_currentPlayerState == PlayerState.Roll)
         {
+            //Tu peux utiliser un ternary ici _rb2D.velocity = new Vector2(_facingRight ? rollSpeed : -rollSpeed, _rb2D.velocity.y);
+            //Pour readadbility tu peux exploser un peu:
+            //directionalRollSpeed = _facingRight ? rollSpeed : -rollSpeed;
+            //_rb2D.velocity = new Vector2(directionalRollSpeed, _rb2D.velocity.y);
             if (_facingRight) _rb2D.velocity = new Vector2(rollSpeed, _rb2D.velocity.y);
             else _rb2D.velocity = new Vector2(-rollSpeed, _rb2D.velocity.y);
         }
@@ -288,6 +309,9 @@ public class PlayerController : MonoBehaviour
 
     private void CameraFollow()
     {
+        //Tu ne veux peut-être pas faire ce check: si tu n'as pas de main cam, c'est mieux que ça explose loud and clear
+        //plutôt que ça fail silently.
+        //Si tu veux utiliser une cool feature de Unity tu peux essayer Cinemachine. https://docs.unity3d.com/Packages/com.unity.cinemachine@2.9/manual/index.html
         if (mainCamera)
         {
             mainCamera.transform.position = new Vector3(_t.position.x, _t.position.y, _cameraPos.z);

@@ -5,10 +5,71 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
+
+/*
+Game manager semble être utilisé un peu trop comme un fourre tout.
+Imo, le game manager doit être utiliser pour contrôller des éléments high level du jeu:
+- Le state du jeu (paused, running, etc.)
+- Gérer le loading/déloading des scènes (un scene manager pourrait être utilisé si il y a des transitions complexes)
+- Gérer des settings de préférence ou global
+Tout le reste devrait être dans des systèmes, manager ou entités.
+Exemples:
+- Les datas de health/stamina/level/xp pourraient être attaché directement au player
+- Le UI pourrait avoir son propre manager et listen a des events sur le player (healthchanged, levelchanged, staminachanged, etc)
+- Un spawn manager pour gérer les spawns
+De cette façon ton gamemanager pourrais par exemple se limiter a listen a un event sur ton player qui signale la mort de celui-ci et transitionner vers un nouveau state
+*/
 public class GameManager : MonoBehaviour
 {
     #region Singleton
+    /*
+    Pour te faciliter la vie tu peux utiliser une base class pour tes singletons
+    Exemple:
+    ----------
+    #GameManager.cs
+    public class GameManager : Singleton<GameManager> 
+    ----------
+    #Singleton.cs    
+    using UnityEngine;
 
+    public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+    {
+        private static T _instance;
+        private static bool _applicationIsQuitting = false;
+        private static readonly object Lock = new object();
+
+        public static T Instance
+        {
+            get
+            {
+                if (_instance != null)
+                    return _instance;
+                
+                _instance = FindAnyObjectByType<T>();
+
+                if (!_instance && !_applicationIsQuitting)
+                {
+                    lock (Lock)
+                    {
+                        GameObject singletonObject = new GameObject();
+                        _instance = singletonObject.AddComponent<T>();
+                        singletonObject.name = typeof(T).ToString();
+
+                        DontDestroyOnLoad(singletonObject);
+                    }
+                }
+                return _instance;
+            }
+        }
+
+        private void OnApplicationQuit()
+        {
+            _instance = null;
+            Destroy(gameObject);
+            _applicationIsQuitting = true;
+        }
+    }
+    */
     private static GameManager _instance;
 
     public static GameManager Instance
@@ -41,6 +102,9 @@ public class GameManager : MonoBehaviour
     public PlayerController Player;
     [SerializeField] private GameObject goblin;
     [SerializeField] private Transform spawner;
+    
+    //Dépendamment de la taille du projet ça peut être intéressant d'avoir un scriptable object avec ton theme ou
+    //une constant class pour éviter de devoir changer des variables un peu partout
     private static readonly Color ColorGold = new Color(0.9803922f, 0.7960784f, 0.345098f);
 
     public void Start()
@@ -56,6 +120,30 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P)) Instantiate(goblin, spawner);
     }
 
+    
+    /*
+    Dans la vie, c'est un atout d'être paresseux quand tu es prog :P
+    Si tu peux éviter de réécrire des lignes de code pour une logique similaire, do it.
+    Exemple:
+    LooseHealth et GainHealth pourraient êtres une seule fonction puisque'elles sont très similaire:
+    public void ModifyHealth(int value)
+    {
+        if ((currentHealth == 0 && value < 0) || (currentHealth == maxHealth && value > 0)) return;
+
+        currentHealth += value;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        if (currentHealth == 0)
+        {
+            Death();
+            Player.Instance.Death();
+        }
+
+        UI.Health.Update();
+        Color flashColor = (value < 0) ? Color.red : Color.green;
+        StartCoroutine(UI.Health.Flash(flashColor));
+    }
+    */
     public void LooseHealth(int dmg)
     {
         if (currentHealth == 0) return;
@@ -161,6 +249,8 @@ public class GameManager : MonoBehaviour
 
         public static class Health
         {
+            //Je te suggère d'éviter des mots réservés même si le contexte est différent. Je ne sais pas ce que les
+            //meilleurs pratiques disent à ce sujet mais c'est ma pref en tout cas
             public static void Update()
             {
                 Instance.healthBar.fillAmount = (Instance.currentHealth / Instance.maxHealth);
