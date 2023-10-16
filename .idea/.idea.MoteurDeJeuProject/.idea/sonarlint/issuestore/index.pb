@@ -25,3 +25,9 @@ Q
 !Assets/Scripts/Items/XpCrystal.cs,2\c\2cecfdc0a688cda3728ccf355f25f5e5336bcbfa
 U
 %Assets/Scripts/Items/HealthCrystal.cs,f\c\fc8d55050607b686591831318968da6c23ce6efc
+Q
+!Assets/UI Package/Script/Slide.cs,b\2\b2ae347603d17fa65c0b5e344c8cf642e6335768
+X
+(Assets/UI Package/Script/Togglescript.cs,c\1\c1d42228b822ad8a037f15ff4d3a796d6de26f1d
+J
+Assets/Scripts/MainMenu.cs,0\0\00be338ff5b861e87ad4608d74b1358c856e0403

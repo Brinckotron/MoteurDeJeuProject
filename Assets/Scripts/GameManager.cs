@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
@@ -45,10 +46,15 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        /*if(GameObject.FindWithTag("Player").GetComponent<PlayerController>() != null) Player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        
+    }
+
+    public void Initialize()
+    {
+        if(GameObject.FindWithTag("Player").GetComponent<PlayerController>() != null) Player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         currentHealth = maxHealth;
         currentStamina = maxStamina;
-        UI.UpdateAllBars();*/
+        UI.UpdateAllBars();
     }
 
     public void Update()
