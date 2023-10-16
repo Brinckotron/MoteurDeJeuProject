@@ -33,23 +33,10 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
-    public float maxHealth;
-    public float currentHealth;
-    public float maxStamina;
-    public float currentStamina;
-    public int coins;
-    public int level;
-    public int xp;
-    public int xpToNextLevel;
-    [SerializeField] private Image healthBar;
-    [SerializeField] private Image staminaBar;
-    [SerializeField] private Image xpBar;
-    [SerializeField] private Image healthFrame;
-    [SerializeField] private Image staminaFrame;
-    [SerializeField] private Image xpFrame;
-    [SerializeField] private Image coinsFrame;
-    [SerializeField] private Text coinsText;
-    [SerializeField] private Text lvlText;
+    public float maxHealth, currentHealth, maxStamina, currentStamina;
+    public int coins, level, xp, xpToNextLevel;
+    [SerializeField] private Image healthBar, staminaBar, xpBar, healthFrame, staminaFrame, xpFrame, coinsFrame;
+    [SerializeField] private Text coinsText, lvlText;
 
     public PlayerController Player;
     [SerializeField] private GameObject goblin;
@@ -85,6 +72,22 @@ public class GameManager : MonoBehaviour
 
         UI.Health.Update();
         StartCoroutine(UI.Health.Flash(Color.red));
+    }
+    
+    public void GainHealth(int healthValue)
+    {
+        if (currentHealth == maxHealth) return;
+        if (maxHealth - currentHealth <= healthValue)
+        {
+            currentHealth = maxHealth;
+        }
+        else
+        {
+            currentHealth += healthValue;
+        }
+
+        UI.Health.Update();
+        StartCoroutine(UI.Health.Flash(Color.green));
     }
 
     public void UseStamina(int stamCost)
@@ -129,6 +132,7 @@ public class GameManager : MonoBehaviour
     public void LvlUp()
     {
         level++;
+        
         UI.Xp.UpdateLvl();
     }
 

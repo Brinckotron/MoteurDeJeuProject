@@ -14,7 +14,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
     protected float CurrentHealth, AtkDelayTimer, HurtTimer, HurtDuration, MemorizePlayerPosTimer;
     protected bool IsHurt, IsDead;
-    [SerializeField] protected GameObject deathEffect;
+    [SerializeField] protected GameObject deathEffect, xpCrystal5, xpCrystal10, xpCrystal20, goldCoin, goldPouch, healthCrystal, staminaCrystal;
     protected GameObject Player;
     protected Collider2D PlayerCollider, MainCollider;
     protected Vector2? MemorizedPlayerPosition;
@@ -38,7 +38,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         Destroy(Rb2D);
         Destroy(MainCollider);
         yield return new WaitForSeconds(3f);
-        //Instantiate(deathEffect, transform.position, transform.rotation);
+        Instantiate(deathEffect, transform.position, transform.rotation);
         DeathDrop();
         Destroy(gameObject);
     }

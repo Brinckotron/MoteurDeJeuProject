@@ -23,3 +23,5 @@ P
  Assets/Scripts/Items/Pickable.cs,b\c\bcfd35d8b7f14e83fbdb3053e64907ae986bbc21
 Q
 !Assets/Scripts/Items/XpCrystal.cs,2\c\2cecfdc0a688cda3728ccf355f25f5e5336bcbfa
+U
+%Assets/Scripts/Items/HealthCrystal.cs,f\c\fc8d55050607b686591831318968da6c23ce6efc

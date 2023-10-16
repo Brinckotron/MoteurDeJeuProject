@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GoblinController : LandEnemy
 {
@@ -64,9 +65,9 @@ public class GoblinController : LandEnemy
                     SetAnimIdle();
                 }
             }
-            
+
             Attack();
-            
+
             Hurt();
         }
 
@@ -98,6 +99,30 @@ public class GoblinController : LandEnemy
         {
             SetAnimBool(_isDead);
         }
+    }
+
+    public override void DeathDrop()
+    {
+        var randoXp = Random.Range(0, 2);
+        switch (randoXp)
+        {
+            case 0:
+                Instantiate(xpCrystal10, RandomDropPoint(), transform.rotation);
+                break;
+            case 1:
+                Instantiate(xpCrystal5, RandomDropPoint(), transform.rotation);
+                Instantiate(xpCrystal5, RandomDropPoint(), transform.rotation);
+                break;
+        }
+        if (Random.Range(1, 6) <= 1) Instantiate(healthCrystal,RandomDropPoint(), transform.rotation);
+        
+    }
+
+    private Vector3 RandomDropPoint()
+    {
+        var point = transform.position + (Vector3)(Random.insideUnitCircle * 0.2f);
+        if (point.y < transform.position.y) point.y = transform.position.y;
+        return point;
     }
 
     private bool IsInRangeForAttack1()
@@ -135,7 +160,7 @@ public class GoblinController : LandEnemy
         {
             if ((IsInRangeForAttack2() || _justGotHurt) && AtkDelayTimer <= 0 && !isSqueezed)
             {
-                if (_justGotHurt)AtkDelayTimer = (_atk2Duration);
+                if (_justGotHurt) AtkDelayTimer = (_atk2Duration);
                 else AtkDelayTimer = (_atk2Duration + (atkDelay / 2));
                 _justGotHurt = false;
                 _atk2DurationTimer = _atk2Duration;
@@ -143,7 +168,8 @@ public class GoblinController : LandEnemy
                 StartCoroutine(Jumpback());
             }
 
-            if (((IsInRangeForAttack1() && !IsInRangeForAttack2()) || (IsInRangeForAttack1() && isSqueezed)) && AtkDelayTimer <= 0)
+            if (((IsInRangeForAttack1() && !IsInRangeForAttack2()) || (IsInRangeForAttack1() && isSqueezed)) &&
+                AtkDelayTimer <= 0)
             {
                 _justGotHurt = false;
                 AtkDelayTimer = (_atk1Duration + atkDelay);
