@@ -1,14 +1,14 @@
 
-}csharpsquid:S3776ž"SRefactor this method to reduce its Cognitive Complexity from 110 to the 15 allowed.(¦‚ö½ûÿÿÿÿ8ÝÚÛ«²1
+}csharpsquid:S3776¨"SRefactor this method to reduce its Cognitive Complexity from 110 to the 15 allowed.(¦‚ö½ûÿÿÿÿ8ÝÚÛ«²1
 Qcsharpsquid:S3903"/Move 'PlayerController' into a named namespace.(â „¦øÿÿÿÿ
-£csharpsquid:S1186Â"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(Î©ÏŠüÿÿÿÿ8ÞÚÛ«²1
-=csharpsquid:S2933" Make '_attackLength' 'readonly'.(ŠÁÐž
-Fcsharpsquid:S2933!")Make '_secondaryAttackLength' 'readonly'.(™õØˆ
-@csharpsquid:S2933""Make '_rollLength' 'readonly'.(ñÉ¬èûÿÿÿÿ
-@csharpsquid:S2933$"#Make '_rollCancelDelay' 'readonly'.(·ç•ã
-Dcsharpsquid:S2933'" Make '_hurtDuration' 'readonly'.(÷à¤Ÿ8ˆÁœ¦²1
-;csharpsquid:S2933*"Make '_knightSkin' 'readonly'.(•ÿÔ¡
-acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(†Ë¶ˆ
+£csharpsquid:S1186Ì"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(Î©ÏŠüÿÿÿÿ8ÞÚÛ«²1
+=csharpsquid:S2933" Make '_attackLength' 'readonly'.(ŠÁÐž
+Fcsharpsquid:S2933"")Make '_secondaryAttackLength' 'readonly'.(™õØˆ
+@csharpsquid:S2933#"Make '_rollLength' 'readonly'.(ñÉ¬èûÿÿÿÿ
+@csharpsquid:S2933%"#Make '_rollCancelDelay' 'readonly'.(·ç•ã
+Dcsharpsquid:S2933(" Make '_hurtDuration' 'readonly'.(÷à¤Ÿ8ˆÁœ¦²1
+;csharpsquid:S2933,"Make '_knightSkin' 'readonly'.(•ÿÔ¡
+`csharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(›˜Ú^
 hcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(í¯ã™8õ‹º¤²1
 acsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(‚•Î¡
 fcsharpsquid:S1104"DMake this field 'private' and encapsulate it in a 'public' property.(ŠùóÂýÿÿÿÿ

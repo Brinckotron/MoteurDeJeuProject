@@ -19,3 +19,7 @@ U
 %Assets/Scripts/Player/PlayerAttack.cs,4\2\42a615a90a33d7d0f2036cfb4c05268f38c88544
 _
 /Assets/Scripts/Player/PlayerAnimationControl.cs,6\9\690e3e9e32d5b1926b7ed3c27ba3d76f3b025bc6
+Q
+!Assets/Scripts/Items/XpCrystal.cs,2\c\2cecfdc0a688cda3728ccf355f25f5e5336bcbfa
+P
+ Assets/Scripts/Items/Pickable.cs,b\c\bcfd35d8b7f14e83fbdb3053e64907ae986bbc21

@@ -12,6 +12,7 @@ public class GoblinController : LandEnemy
     private float _atk1DurationTimer, _atk2DurationTimer, _justGotHurtTimer;
     private int _isAttacking1, _isAttacking2, _isRunning, _isDead, _isHit, _isJumping;
     private int[] idle;
+    [SerializeField] private GameObject bloodSplatter;
 
     private void Awake()
     {
@@ -142,7 +143,7 @@ public class GoblinController : LandEnemy
                 StartCoroutine(Jumpback());
             }
 
-            if (IsInRangeForAttack1() && !IsInRangeForAttack2() && AtkDelayTimer <= 0)
+            if (((IsInRangeForAttack1() && !IsInRangeForAttack2()) || (IsInRangeForAttack1() && isSqueezed)) && AtkDelayTimer <= 0)
             {
                 _justGotHurt = false;
                 AtkDelayTimer = (_atk1Duration + atkDelay);
@@ -167,6 +168,7 @@ public class GoblinController : LandEnemy
         if (_isJumpingBack) return;
         if (IsHurt) return;
         CurrentHealth -= dmg;
+        Instantiate(bloodSplatter, transform.position, transform.rotation);
         if (CurrentHealth <= 0) StartCoroutine(Die());
         else
         {

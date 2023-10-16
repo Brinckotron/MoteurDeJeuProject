@@ -8,12 +8,13 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerController _instance;
     public PlayerController Instance => _instance;
-    public float maxSpeed, jumpHeight, gravityScale, rollSpeed, rollStaminaCost, blockStaminaCost, coyoteTimeDelay;
+    public float maxSpeed, jumpHeight, gravityScale, rollSpeed, rollStaminaCost, blockStaminaCost, coyoteTimeDelay, staminaRegenDelay, staminaRegenPerSecond;
     public int armor, atkDamage;
     public Camera mainCamera;
     public bool crouchOverride = false;
     public TMP_Text stateDebugText;
-
+    [SerializeField] private GameObject bloodPrefab;
+    
     private bool _facingRight = true,
         _resetJumpNeeded,
         _isJumpPressed = false,
@@ -24,7 +25,8 @@ public class PlayerController : MonoBehaviour
         _isDead = false,
         _isHurt = false,
         _isDebugToggled = false,
-        _isHitCrouched = false;
+        _isHitCrouched = false,
+        _isStaminaRegenerating = false;
 
     private float _moveDirection = 0,
         _attackLength = 0.3f,
@@ -37,7 +39,8 @@ public class PlayerController : MonoBehaviour
         _rollCancelTimer,
         _coyoteTime = 0f,
         _hurtDuration = 0.4f,
-        _hurtTimer;
+        _hurtTimer,
+        _staminaRegenTimer;
 
     private string _knightSkin = "0", _debugState = " ", _newDebugState = " ";
     private Vector3 _cameraPos;
@@ -109,6 +112,8 @@ public class PlayerController : MonoBehaviour
 
         CancelRoll();
 
+        StaminaRegen();
+
         CameraFollow();
 
         StateDebug();
@@ -177,9 +182,15 @@ public class PlayerController : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && _rollDelayTimer <= 0f && IsGrounded() &&
-            _currentPlayerState is not (PlayerState.Attack or PlayerState.Attack2 or PlayerState.CrouchAttack))
+            _currentPlayerState is not (PlayerState.Attack or PlayerState.Attack2 or PlayerState.CrouchAttack or PlayerState.Hurt))
         {
-            _rollDelayTimer = _rollLength;
+            if (GameManager.Instance.currentStamina >= rollStaminaCost)
+            {
+                _rollDelayTimer = _rollLength;
+                _staminaRegenTimer = staminaRegenDelay;
+                _isStaminaRegenerating = false;
+            }
+            GameManager.Instance.UseStamina((int)rollStaminaCost);
         }
     }
 
@@ -458,8 +469,23 @@ public class PlayerController : MonoBehaviour
         var knockBackDirection = new Vector2(source.transform.position.x - _rb2D.transform.position.x,
             source.transform.position.y - _rb2D.transform.position.y).normalized;
         _isHurt = true;
-        _rb2D.AddForce(knockBackDirection);
         GameManager.Instance.LooseHealth(modifiedDamage);
+        Instantiate(bloodPrefab, _t.position, _t.rotation);
+    }
+
+    private void StaminaRegen()
+    {
+        if (_staminaRegenTimer > 0)
+        {
+            _staminaRegenTimer -= Time.deltaTime;
+            if (_staminaRegenTimer <= 0) _isStaminaRegenerating = true;
+        }
+
+        if (_isStaminaRegenerating && GameManager.Instance.currentStamina < GameManager.Instance.maxStamina)
+        {
+            GameManager.Instance.StaminaRegenTick(Time.deltaTime * staminaRegenPerSecond);
+        }
+
     }
 
     private void AnimationControl()
