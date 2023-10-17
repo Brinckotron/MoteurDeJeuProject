@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -36,31 +37,25 @@ public class GameManager : MonoBehaviour
 
     public float maxHealth, currentHealth, maxStamina, currentStamina;
     public int coins, level, xp, xpToNextLevel;
-    [SerializeField] private Image healthBar, staminaBar, xpBar, healthFrame, staminaFrame, xpFrame, coinsFrame;
-    [SerializeField] private Text coinsText, lvlText;
+    private Image healthBar, staminaBar, xpBar, healthFrame, staminaFrame, xpFrame, coinsFrame;
+    private Text coinsText, lvlText;
 
     public PlayerController Player;
-    [SerializeField] private GameObject goblin;
-    [SerializeField] private Transform spawner;
     private static readonly Color ColorGold = new Color(0.9803922f, 0.7960784f, 0.345098f);
 
     public void Start()
     {
-        
-    }
-
-    public void Initialize()
-    {
-        if(GameObject.FindWithTag("Player") != null) Player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         currentHealth = maxHealth;
         currentStamina = maxStamina;
-        UI.UpdateAllBars();
     }
 
-    public void Update()
+    public void Initialize(PlayerController player)
     {
-        if (Input.GetKeyDown(KeyCode.P)) Instantiate(goblin, spawner);
+        Player = player;
+        UI.LoadAssets();
     }
+
+    
 
     public void LooseHealth(int dmg)
     {
@@ -156,6 +151,53 @@ public class GameManager : MonoBehaviour
 
     public static class UI
     {
+        public static void LoadAssets()
+        {
+            var imageArray = FindObjectsOfType<Image>(true);
+            foreach (var image in imageArray)
+            {
+                switch (image.name)
+                {
+                    case "HealthFiller":
+                        Instance.healthBar = image;
+                        break;
+                    case "StaminaFiller":
+                        Instance.staminaBar = image;
+                        break;
+                    case "XPFiller":
+                        Instance.xpBar = image;
+                        break;
+                    case "HealthFrame":
+                        Instance.healthFrame = image;
+                        break;
+                    case "StaminaFrame":
+                        Instance.staminaFrame = image;
+                        break;
+                    case "XPFrame":
+                        Instance.xpFrame = image;
+                        break;
+                    case "CoinsFrame":
+                        Instance.coinsFrame = image;
+                        break;
+                }
+            }
+
+            var textArray = FindObjectsOfType<Text>(true);
+            foreach (var text in textArray)
+            {
+                switch (text.name)
+                {
+                    case "LvlText":
+                        Instance.lvlText = text;
+                        break;
+                    case "CoinsText":
+                        Instance.coinsText = text;
+                        break;
+                }
+            }
+
+            UI.UpdateAllBars();
+        }
         public static void UpdateAllBars()
         {
             Instance.healthBar.fillAmount = (Instance.currentHealth / Instance.maxHealth);

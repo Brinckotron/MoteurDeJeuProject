@@ -33,3 +33,5 @@ J
 Assets/Scripts/MainMenu.cs,0\0\00be338ff5b861e87ad4608d74b1358c856e0403
 o
 ?Assets/Audio/FC Game Audio Pack 1 [Lite]/Scripts/MusicPlayer.cs,7\d\7d978bb1e3b3fcd5ad6d4504809feee8793402f2
+^
+.Assets/Scripts/Enemies/Goblin/GoblinSpawner.cs,e\8\e8bf6de5c03ad631a3787707a7541953fa69ddd4

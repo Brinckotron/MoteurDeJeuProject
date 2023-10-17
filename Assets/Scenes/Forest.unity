@@ -175,18 +175,7 @@ MonoBehaviour:
   level: 1
   xp: 0
   xpToNextLevel: 100
-  healthBar: {fileID: 444307769}
-  staminaBar: {fileID: 1710516807}
-  xpBar: {fileID: 1056524423}
-  healthFrame: {fileID: 1360319027}
-  staminaFrame: {fileID: 877640867}
-  xpFrame: {fileID: 685402246}
-  coinsFrame: {fileID: 1261851816}
-  coinsText: {fileID: 1710159455}
-  lvlText: {fileID: 1606267426}
   Player: {fileID: 0}
-  goblin: {fileID: 9086827649745329052, guid: 7a38f022b6708134db31c1affb0f97de, type: 3}
-  spawner: {fileID: 228600097}
 --- !u!1 &179512265
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,6 +345,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: StaminaBar
       objectReference: {fileID: 0}
+    - target: {fileID: 1368898205115992, guid: 54c6f02ef9f2841c899514793267226c, type: 3}
+      propertyPath: m_Name
+      value: StaminaFrame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492144599572346, guid: 54c6f02ef9f2841c899514793267226c, type: 3}
+      propertyPath: m_Name
+      value: StaminaFiller
+      objectReference: {fileID: 0}
     - target: {fileID: 114361113730541228, guid: 54c6f02ef9f2841c899514793267226c, type: 3}
       propertyPath: m_Color.a
       value: 0.5058824
@@ -522,6 +519,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 228600097}
+  - component: {fileID: 228600098}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -544,17 +542,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &444307769 stripped
+--- !u!114 &228600098
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114406687190877408, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
-  m_PrefabInstance: {fileID: 2122516242223802329}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 228600096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 39c10e338efc48eca97ed387262b90d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goblin: {fileID: 9086827649745329052, guid: 7a38f022b6708134db31c1affb0f97de, type: 3}
+  spawner: {fileID: 228600097}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,33 +925,11 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &685402246 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114818700459936612, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
-  m_PrefabInstance: {fileID: 2122516242223802329}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &812185286 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224236308351467572, guid: 54c6f02ef9f2841c899514793267226c, type: 3}
   m_PrefabInstance: {fileID: 216290227}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &877640867 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114693433440338318, guid: 54c6f02ef9f2841c899514793267226c, type: 3}
-  m_PrefabInstance: {fileID: 216290227}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &998624194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,7 +1113,7 @@ GameObject:
   - component: {fileID: 1056524424}
   - component: {fileID: 1056524423}
   m_Layer: 5
-  m_Name: Filler
+  m_Name: XPFiller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1202,28 +1181,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224293662585446736, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
   m_PrefabInstance: {fileID: 2122516242223802329}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1261851816 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114014744880429486, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
-  m_PrefabInstance: {fileID: 2122516242223802329}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1360319027 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114373188955762032, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
-  m_PrefabInstance: {fileID: 2122516242223802329}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1436348393
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2273,28 +2230,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606267424}
   m_CullTransparentMesh: 0
---- !u!114 &1710159455 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114292150760086494, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
-  m_PrefabInstance: {fileID: 2122516242223802329}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1710516807 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114361113730541228, guid: 54c6f02ef9f2841c899514793267226c, type: 3}
-  m_PrefabInstance: {fileID: 216290227}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1722014223
 GameObject:
   m_ObjectHideFlags: 0
@@ -4672,6 +4607,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Whole
       objectReference: {fileID: 0}
+    - target: {fileID: 1275598617408868, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
+      propertyPath: m_Name
+      value: HealthFiller
+      objectReference: {fileID: 0}
     - target: {fileID: 1377622135603604, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
       propertyPath: m_Name
       value: Health
@@ -4692,9 +4631,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bars
       objectReference: {fileID: 0}
+    - target: {fileID: 1742844126672738, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
+      propertyPath: m_Name
+      value: CoinsFrame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1768468399271392, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
+      propertyPath: m_Name
+      value: XPFrame
+      objectReference: {fileID: 0}
     - target: {fileID: 1806617845019146, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
       propertyPath: m_Name
       value: Coins
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924302328140958, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
+      propertyPath: m_Name
+      value: HealthFrame
       objectReference: {fileID: 0}
     - target: {fileID: 114014744880429486, guid: 4d60074dd110e4fdda7cd238bb49b116, type: 3}
       propertyPath: m_Color.b
