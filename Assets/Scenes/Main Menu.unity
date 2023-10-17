@@ -3354,18 +3354,7 @@ MonoBehaviour:
   level: 1
   xp: 0
   xpToNextLevel: 100
-  healthBar: {fileID: 0}
-  staminaBar: {fileID: 0}
-  xpBar: {fileID: 0}
-  healthFrame: {fileID: 0}
-  staminaFrame: {fileID: 0}
-  xpFrame: {fileID: 0}
-  coinsFrame: {fileID: 0}
-  coinsText: {fileID: 0}
-  lvlText: {fileID: 0}
   Player: {fileID: 0}
-  goblin: {fileID: 9086827649745329052, guid: 7a38f022b6708134db31c1affb0f97de, type: 3}
-  spawner: {fileID: 0}
 --- !u!4 &1362222071
 Transform:
   m_ObjectHideFlags: 0
@@ -3779,7 +3768,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1d4d8bca4ee9ea14582cf7ad09abd092, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 85ed7034ecb7fdd4f831d06dfb4cb1d9, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
