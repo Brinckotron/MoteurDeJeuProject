@@ -77,11 +77,11 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-        GameManager.Instance.Initialize(this);
     }
 
     private void Start()
     {
+        //GameManager.Instance.Initialize();
         _t = transform;
         _rb2D = GetComponent<Rigidbody2D>();
         _collider = GetComponentInChildren<CapsuleCollider2D>();
