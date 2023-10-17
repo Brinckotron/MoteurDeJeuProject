@@ -49,9 +49,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void Initialize()
+    public void Initialize(PlayerController player)
     {
-        if(GameObject.FindWithTag("Player").GetComponent<PlayerController>() != null) Player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        Player = player;
         currentHealth = maxHealth;
         currentStamina = maxStamina;
         UI.UpdateAllBars();

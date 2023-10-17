@@ -31,3 +31,5 @@ X
 (Assets/UI Package/Script/Togglescript.cs,c\1\c1d42228b822ad8a037f15ff4d3a796d6de26f1d
 J
 Assets/Scripts/MainMenu.cs,0\0\00be338ff5b861e87ad4608d74b1358c856e0403
+o
+?Assets/Audio/FC Game Audio Pack 1 [Lite]/Scripts/MusicPlayer.cs,7\d\7d978bb1e3b3fcd5ad6d4504809feee8793402f2

@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+        GameManager.Instance.Initialize(this);
     }
 
     private void Start()

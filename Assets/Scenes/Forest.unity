@@ -4593,7 +4593,7 @@ MonoBehaviour:
   staminaRegenDelay: 4
   staminaRegenPerSecond: 50
   armor: 0
-  atkDamage: 100
+  atkDamage: 25
   mainCamera: {fileID: 519420031}
   crouchOverride: 0
   stateDebugText: {fileID: 998624195}
