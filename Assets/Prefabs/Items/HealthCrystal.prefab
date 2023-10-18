@@ -102,6 +102,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpEffect: {fileID: 1027789243795026112, guid: c1239f8dca4798e4097d67104e17362d, type: 3}
+  audioSource: {fileID: 4598658304644775937, guid: dbdd17523bdd6274ba8cd1043735ecff, type: 3}
+  audioClip: {fileID: 8300000, guid: 27c7ae4fc8f20cc4993b1f9010f767a3, type: 3}
 --- !u!50 &7440754687098746314
 Rigidbody2D:
   serializedVersion: 4

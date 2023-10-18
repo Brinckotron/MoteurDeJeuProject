@@ -399,6 +399,8 @@ MonoBehaviour:
   staminaCrystal: {fileID: 0}
   castPos: {fileID: 6835263757965986450}
   anim: {fileID: 5905027810104997127}
+  audioSource: {fileID: 4598658304644775937, guid: dbdd17523bdd6274ba8cd1043735ecff, type: 3}
+  audioClip: {fileID: 8300000, guid: bd45676f8e309a04ea16f9cfd947a359, type: 3}
   isSqueezed: 0
   atk1Range: 0.3
   atk2Range: 0.2

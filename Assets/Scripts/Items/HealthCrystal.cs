@@ -9,6 +9,7 @@ public class HealthCrystal : Pickable
         int healthValue = 5*Random.Range(1, 5);
         GameManager.Instance.GainHealth(healthValue);
         Instantiate(pickUpEffect, player.transform.position, player.transform.rotation);
+        PlaySound(audioSource, audioClip, (0.25f * healthValue) + 0.5f);
         Destroy(gameObject);
     }
 

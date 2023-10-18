@@ -10,7 +10,7 @@ public class GoblinController : LandEnemy
     private bool _isJumpingBack, _justGotHurt;
     [SerializeField] private float atk1Range, atk2Range;
     private readonly float _atk1Duration = 0.533f, _atk2Duration = 0.917f, _justGotHurtDuration = 1f;
-    private float _atk1DurationTimer, _atk2DurationTimer, _justGotHurtTimer;
+    private float _atk1DurationTimer, _atk2DurationTimer, _justGotHurtTimer, _voicePitch;
     private int _isAttacking1, _isAttacking2, _isRunning, _isDead, _isHit, _isJumping;
     private int[] idle;
     [SerializeField] private GameObject bloodSplatter;
@@ -25,6 +25,7 @@ public class GoblinController : LandEnemy
         _isJumping = Animator.StringToHash("isJumping");
         idle = new int[] { _isAttacking1, _isAttacking2, _isRunning, _isDead, _isHit, _isJumping };
         HurtDuration = 0.25f;
+        _voicePitch = Random.Range(1f, 1.2f);
     }
 
     void Start()
@@ -182,6 +183,7 @@ public class GoblinController : LandEnemy
     private IEnumerator Jumpback()
     {
         _isJumpingBack = true;
+        if (Random.Range(1, 4) == 1) PlaySound(audioSource, audioClip, _voicePitch);
         yield return new WaitForSeconds(0.1f);
         Rb2D.velocity = (Player.transform.position.x > transform.position.x ? Vector2.left : Vector2.right) * 0.4f;
         yield return new WaitForSeconds(0.5f);

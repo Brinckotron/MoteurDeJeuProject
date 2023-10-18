@@ -19,8 +19,10 @@ public abstract class EnemyBehaviour : MonoBehaviour
     protected Collider2D PlayerCollider, MainCollider;
     protected Vector2? MemorizedPlayerPosition;
     protected Rigidbody2D Rb2D;
-    [SerializeField]protected Transform castPos;
-    [SerializeField]protected Animator anim;
+    [SerializeField] protected Transform castPos;
+    [SerializeField] protected Animator anim;
+    [SerializeField] protected AudioSource audioSource;
+    [SerializeField] protected AudioClip audioClip;
     protected LayerMask SightLayerMask = (1 << 9 | 1 << 10);
     
 
@@ -98,5 +100,16 @@ public abstract class EnemyBehaviour : MonoBehaviour
         var hitInfo2 = Physics2D.Raycast(pos, (playerPosHigh - pos).normalized, sightRange, SightLayerMask);
         var hitInfo3 = Physics2D.Raycast(pos, (playerPosLow - pos).normalized, sightRange, SightLayerMask);
         return (hitInfo1.collider == PlayerCollider || hitInfo2.collider == PlayerCollider || hitInfo3.collider == PlayerCollider);
+    }
+    
+    public virtual void PlaySound(AudioSource source, AudioClip clip, float pitch = 1f)
+    {
+        var soundPoint = Instantiate(source, transform);
+        soundPoint.clip = clip;
+        soundPoint.volume = 0.2f;
+        soundPoint.pitch = Mathf.Clamp(pitch, 0f, 2f);
+        soundPoint.Play();
+        Destroy(soundPoint, clip.length);
+
     }
 }

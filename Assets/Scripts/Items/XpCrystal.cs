@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +10,7 @@ public class XpCrystal : Pickable
     {
         GameManager.Instance.GainXp(xpValue);
         Instantiate(pickUpEffect, player.transform.position, player.transform.rotation);
+        PlaySound(audioSource, audioClip, Random.Range(0.5f, 1.5f));
         Destroy(gameObject);
     }
 
