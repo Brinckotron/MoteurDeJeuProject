@@ -8,6 +8,7 @@ public class PlayerAnimationControl : MonoBehaviour
     public static PlayerAnimationControl instance;
     private Animator anim;
     public string currentState;
+    [SerializeField] private AudioSource audioMove, audioAction;
 
     private void Awake()
     {
@@ -23,5 +24,16 @@ public class PlayerAnimationControl : MonoBehaviour
         if (currentState == newState) return;
         anim.Play(newState);
         currentState = newState;
+    }
+
+    public void PlaySoundMove(AudioClip clip)
+    {
+        audioMove.clip = clip;
+        audioMove.Play();
+    }
+    public void PlaySoundAction(AudioClip clip)
+    {
+        audioMove.clip = clip;
+        audioMove.Play();
     }
 }

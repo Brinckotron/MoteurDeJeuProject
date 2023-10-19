@@ -35,3 +35,5 @@ o
 ?Assets/Audio/FC Game Audio Pack 1 [Lite]/Scripts/MusicPlayer.cs,7\d\7d978bb1e3b3fcd5ad6d4504809feee8793402f2
 ^
 .Assets/Scripts/Enemies/Goblin/GoblinSpawner.cs,e\8\e8bf6de5c03ad631a3787707a7541953fa69ddd4
+a
+1Assets/Scripts/Enemies/Goblin/GoblinAnimEvents.cs,1\a\1ad10c6470dc9f9c53c4a2d4dafd7197fe9f14a7

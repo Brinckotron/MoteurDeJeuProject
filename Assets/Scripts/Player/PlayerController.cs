@@ -404,6 +404,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                _isRollPressed = false;
                 if (_isAttackPressed)
                 {
                     if (_attackDelayTimer <= 0) _isAttackPressed = false;

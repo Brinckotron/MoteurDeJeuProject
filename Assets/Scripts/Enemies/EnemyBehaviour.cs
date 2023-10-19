@@ -22,7 +22,6 @@ public abstract class EnemyBehaviour : MonoBehaviour
     [SerializeField] protected Transform castPos;
     [SerializeField] protected Animator anim;
     [SerializeField] protected AudioSource audioSource;
-    [SerializeField] protected AudioClip audioClip;
     protected LayerMask SightLayerMask = (1 << 9 | 1 << 10);
     
 
@@ -102,11 +101,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
         return (hitInfo1.collider == PlayerCollider || hitInfo2.collider == PlayerCollider || hitInfo3.collider == PlayerCollider);
     }
     
-    public virtual void PlaySound(AudioSource source, AudioClip clip, float pitch = 1f)
+    public virtual void PlaySound(AudioSource source, AudioClip clip, float pitch = 1f, float volume = 0.2f)
     {
         var soundPoint = Instantiate(source, transform);
         soundPoint.clip = clip;
-        soundPoint.volume = 0.2f;
+        soundPoint.volume = Mathf.Clamp(volume, 0f, 1f);
         soundPoint.pitch = Mathf.Clamp(pitch, 0f, 2f);
         soundPoint.Play();
         Destroy(soundPoint, clip.length);

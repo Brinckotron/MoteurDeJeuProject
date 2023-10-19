@@ -14,6 +14,7 @@ public class GoblinController : LandEnemy
     private int _isAttacking1, _isAttacking2, _isRunning, _isDead, _isHit, _isJumping;
     private int[] idle;
     [SerializeField] private GameObject bloodSplatter;
+    [SerializeField] private AudioClip laugh, backflip, swing, hurt;
 
     private void Awake()
     {
@@ -183,7 +184,7 @@ public class GoblinController : LandEnemy
     private IEnumerator Jumpback()
     {
         _isJumpingBack = true;
-        if (Random.Range(1, 4) == 1) PlaySound(audioSource, audioClip, _voicePitch);
+        if (Random.Range(1, 4) == 1) PlaySound(audioSource, laugh, _voicePitch);
         yield return new WaitForSeconds(0.1f);
         Rb2D.velocity = (Player.transform.position.x > transform.position.x ? Vector2.left : Vector2.right) * 0.4f;
         yield return new WaitForSeconds(0.5f);
