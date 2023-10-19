@@ -33,7 +33,7 @@ Input Field:    Check
 
     Audio:
 Musique:        Check
-5 sons:         WIP
+5 sons:         Check
 
     Collectibles:
 XP Crystal:     Check
