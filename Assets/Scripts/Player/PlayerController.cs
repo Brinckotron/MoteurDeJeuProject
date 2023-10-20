@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed, jumpHeight, gravityScale, rollSpeed, rollStaminaCost, blockStaminaCost, coyoteTimeDelay, staminaRegenDelay, staminaRegenPerSecond;
     public int armor, atkDamage;
     public Camera mainCamera;
-    public bool crouchOverride = false, isInArena = false;
+    public bool crouchOverride = false, hasEnteredArena = false;
     public TMP_Text stateDebugText;
     [SerializeField] private GameObject bloodPrefab;
     
@@ -210,7 +211,6 @@ public class PlayerController : MonoBehaviour
 
     private void RollIgnoreEnemyCollision()
     {
-        Physics2D.IgnoreLayerCollision(9, 12, _currentPlayerState == PlayerState.Roll);
         Physics2D.IgnoreLayerCollision(9, 13, _currentPlayerState == PlayerState.Roll);
     }
 
@@ -290,7 +290,7 @@ public class PlayerController : MonoBehaviour
 
     private void CameraFollow()
     {
-        if (mainCamera && !isInArena)
+        if (mainCamera && !hasEnteredArena)
         {
             mainCamera.transform.position = new Vector3(_t.position.x, _t.position.y, _cameraPos.z);
         }

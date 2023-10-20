@@ -11,8 +11,6 @@ T
 $Assets/Scripts/Enemies/FlyerEnemy.cs,e\5\e50250857be82cc6595750673962f894751e0dd1
 S
 #Assets/Scripts/Enemies/LandEnemy.cs,e\d\ed8e160899d240da09161d0d85bfcede566ab4a6
-\
-,Assets/Scripts/Environment/SqueezeTrigger.cs,c\b\cb1a8d44e6a9a4fc0395331ac9dfc0c1ed36b452
 ]
 -Assets/Scripts/Enemies/Goblin/GoblinAttack.cs,6\3\6317b180c9f810f544bdd5ddad2c32c1d4b3ba8b
 _

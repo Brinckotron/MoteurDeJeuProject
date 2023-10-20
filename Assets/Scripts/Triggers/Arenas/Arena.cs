@@ -30,10 +30,12 @@ public abstract class Arena : MonoBehaviour
         audioSource.Play();
         GetComponent<BoxCollider2D>().enabled = false;
         EnemyBehaviour.OnDeath += UpdateArenaCount;
-        WakeEnemies();
         LockGates();
+        StartCoroutine(ShowArena());
+        WakeEnemies();
+        
         _enemyCount = enemiesToWake.Length;
-        StartCoroutine(SetCamera());
+        
     }
 
     private void OnDisable()
@@ -49,30 +51,31 @@ public abstract class Arena : MonoBehaviour
         }
     }
 
-    private IEnumerator SetCamera()
+    private IEnumerator ShowArena()
     {
-        _player.GetComponentInParent<PlayerController>().Instance.isInArena = true;
-        for (int i = 1; i < 21; i++)
+        _player.GetComponentInParent<PlayerController>().Instance.hasEnteredArena = true;
+        Time.timeScale = 0.1f;
+        for (int i = 1; i < 41; i++)
         {
-            Camera.main.orthographicSize = Mathf.SmoothStep(_baseCameraField, cameraField, ((float)i/20));
+            Camera.main.orthographicSize = Mathf.SmoothStep(_baseCameraField, cameraField, ((float)i/40));
             Camera.main.transform.position =
-                new Vector3(Mathf.SmoothStep(_player.transform.position.x, centerPoint.position.x, ((float)i/20)),
-                    Mathf.SmoothStep(_player.transform.position.y, centerPoint.position.y, ((float)i/20)), _cameraZ);
-            yield return new WaitForSeconds(0.01f);
+                new Vector3(Mathf.SmoothStep(_player.transform.position.x, centerPoint.position.x, ((float)i/40)),
+                    Mathf.SmoothStep(_player.transform.position.y, centerPoint.position.y, ((float)i/40)), _cameraZ);
+            yield return new WaitForSecondsRealtime(0.01f);
         }
-    }
 
-    private IEnumerator ResetCamera()
-    {
-        for (int i = 1; i < 21; i++)
+        yield return new WaitForSecondsRealtime(3f);
+        for (int i = 1; i < 41; i++)
         {
-            Camera.main.orthographicSize = Mathf.SmoothStep(_baseCameraField, cameraField, 1f - ((float)i/20));
+            Camera.main.orthographicSize = Mathf.SmoothStep(_baseCameraField, cameraField, 1f - ((float)i/40));
             Camera.main.transform.position =
-                new Vector3(Mathf.SmoothStep(_player.transform.position.x, centerPoint.position.x, 1f - ((float)i/20)),
-                    Mathf.SmoothStep(_player.transform.position.y, centerPoint.position.y, 1 - ((float)i/20)), _cameraZ);
-            yield return new WaitForSeconds(0.01f);
+                new Vector3(Mathf.SmoothStep(_player.transform.position.x, centerPoint.position.x, 1f - ((float)i/40)),
+                    Mathf.SmoothStep(_player.transform.position.y, centerPoint.position.y, 1 - ((float)i/40)), _cameraZ);
+            yield return new WaitForSecondsRealtime(0.01f);
         }
-        _player.GetComponentInParent<PlayerController>().Instance.isInArena = false;
+        _player.GetComponentInParent<PlayerController>().Instance.hasEnteredArena = false;
+
+        Time.timeScale = 1f;
     }
 
     private void LockGates()
@@ -93,7 +96,6 @@ public abstract class Arena : MonoBehaviour
 
     private IEnumerator DestroyArena()
     {
-        StartCoroutine(ResetCamera());
         for (int i = 0; i < 7; i++)
         {
             audioSource.volume -= 0.05f;

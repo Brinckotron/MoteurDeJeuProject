@@ -213,11 +213,9 @@ public class GoblinController : LandEnemy
         _isForwardRolling = true;
         SetAnimBool(_isJumping);
         if (Random.Range(1, 4) == 1) PlaySound(audioSource, laugh, _voicePitch);
-        Physics2D.IgnoreCollision(MainCollider, PlayerCollider, true);
         Rb2D.velocity = (Player.transform.position.x > transform.position.x ? Vector2.right : Vector2.left) * 0.8f;
         yield return new WaitForSeconds(0.8f);
         Stop();
-        if (Rb2D) Physics2D.IgnoreCollision(MainCollider, PlayerCollider, false);
         _isForwardRolling = false;
     }
 
