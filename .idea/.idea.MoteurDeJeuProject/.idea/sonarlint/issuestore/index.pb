@@ -33,7 +33,9 @@ J
 Assets/Scripts/MainMenu.cs,0\0\00be338ff5b861e87ad4608d74b1358c856e0403
 o
 ?Assets/Audio/FC Game Audio Pack 1 [Lite]/Scripts/MusicPlayer.cs,7\d\7d978bb1e3b3fcd5ad6d4504809feee8793402f2
-^
-.Assets/Scripts/Enemies/Goblin/GoblinSpawner.cs,e\8\e8bf6de5c03ad631a3787707a7541953fa69ddd4
 a
 1Assets/Scripts/Enemies/Goblin/GoblinAnimEvents.cs,1\a\1ad10c6470dc9f9c53c4a2d4dafd7197fe9f14a7
+]
+-Assets/Scripts/Triggers/Arenas/GoblinArena.cs,2\7\27c13dfe6ab507275faee0f8b2c980fa8f9626de
+W
+'Assets/Scripts/Triggers/Arenas/Arena.cs,9\f\9f372fb64ede9d2906286256951d99e15c25b377

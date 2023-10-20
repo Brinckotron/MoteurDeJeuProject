@@ -413,7 +413,7 @@ Transform:
   m_GameObject: {fileID: 6168607572509185712}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.1, y: -0.14, z: 0}
+  m_LocalPosition: {x: 0.1, y: -0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -473,6 +473,8 @@ MonoBehaviour:
   atkDelay: 0.8
   atkDamage: 10
   memorizePlayerPosDuration: 3
+  isArenaMember: 0
+  isSleeping: 0
   deathEffect: {fileID: 1027789243795026112, guid: e764d730e18540745af983ab09b9a6fe, type: 3}
   xpCrystal5: {fileID: 4038261144073435563, guid: ca901555c9248514881cc2a2697415f6, type: 3}
   xpCrystal10: {fileID: 4038261144073435563, guid: fb8fc5870c41d0443bb799f5a9d1adae, type: 3}
@@ -484,14 +486,18 @@ MonoBehaviour:
   castPos: {fileID: 6835263757965986450}
   anim: {fileID: 5905027810104997127}
   audioSource: {fileID: 4598658304644775937, guid: dbdd17523bdd6274ba8cd1043735ecff, type: 3}
+  isGroundedRayDistance: 0.17
+  jumpHeight: 3.5
   isSqueezed: 0
   atk1Range: 0.3
   atk2Range: 0.2
   bloodSplatter: {fileID: 8084446995181352428, guid: 6dc85abdd5ab53346ae4b1a6f3eca09c, type: 3}
   laugh: {fileID: 8300000, guid: bd45676f8e309a04ea16f9cfd947a359, type: 3}
-  backflip: {fileID: 8300000, guid: dd6af3276923c794dbad29715809596c, type: 3}
-  swing: {fileID: 8300000, guid: f689d24111f1ccf458bca946e0f1c97b, type: 3}
-  hurt: {fileID: 8300000, guid: dfdaeb7275524db4f82b576ffa4bdc7f, type: 3}
+  deathClips:
+  - {fileID: 8300000, guid: 4b9e0a3f4e4428144a7018efc1217fbc, type: 3}
+  - {fileID: 8300000, guid: 4e8c7b6bd81ed724aab0705fc31dda92, type: 3}
+  - {fileID: 8300000, guid: 8f7ef92b2bdba164cb83b5c3f0b938ec, type: 3}
+  - {fileID: 8300000, guid: 84ac496cfe33b8e49bfeef1a653b848e, type: 3}
 --- !u!50 &482326538155160159
 Rigidbody2D:
   serializedVersion: 4

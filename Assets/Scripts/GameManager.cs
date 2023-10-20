@@ -37,21 +37,19 @@ public class GameManager : MonoBehaviour
 
     public float maxHealth, currentHealth, maxStamina, currentStamina;
     public int coins, level, xp, xpToNextLevel;
-    private Image healthBar, staminaBar, xpBar, healthFrame, staminaFrame, xpFrame, coinsFrame;
-    private Text coinsText, lvlText;
+    private Image _healthBar, _staminaBar, _xpBar, _healthFrame, _staminaFrame, _xpFrame, _coinsFrame;
+    private Text _coinsText, _lvlText;
 
-    public PlayerController Player;
+    public PlayerController player;
     private static readonly Color ColorGold = new Color(0.9803922f, 0.7960784f, 0.345098f);
 
-    public void Start()
+   
+
+    public void Initialize(PlayerController playerController)
     {
         currentHealth = maxHealth;
         currentStamina = maxStamina;
-    }
-
-    public void Initialize(PlayerController player)
-    {
-        Player = player;
+        this.player = playerController;
         UI.LoadAssets();
     }
 
@@ -63,7 +61,7 @@ public class GameManager : MonoBehaviour
         if (currentHealth <= dmg)
         {
             Death();
-            Player.Instance.Death();
+            player.Instance.Death();
             currentHealth = 0;
         }
         else
@@ -159,25 +157,25 @@ public class GameManager : MonoBehaviour
                 switch (image.name)
                 {
                     case "HealthFiller":
-                        Instance.healthBar = image;
+                        Instance._healthBar = image;
                         break;
                     case "StaminaFiller":
-                        Instance.staminaBar = image;
+                        Instance._staminaBar = image;
                         break;
                     case "XPFiller":
-                        Instance.xpBar = image;
+                        Instance._xpBar = image;
                         break;
                     case "HealthFrame":
-                        Instance.healthFrame = image;
+                        Instance._healthFrame = image;
                         break;
                     case "StaminaFrame":
-                        Instance.staminaFrame = image;
+                        Instance._staminaFrame = image;
                         break;
                     case "XPFrame":
-                        Instance.xpFrame = image;
+                        Instance._xpFrame = image;
                         break;
                     case "CoinsFrame":
-                        Instance.coinsFrame = image;
+                        Instance._coinsFrame = image;
                         break;
                 }
             }
@@ -188,30 +186,30 @@ public class GameManager : MonoBehaviour
                 switch (text.name)
                 {
                     case "LvlText":
-                        Instance.lvlText = text;
+                        Instance._lvlText = text;
                         break;
                     case "CoinsText":
-                        Instance.coinsText = text;
+                        Instance._coinsText = text;
                         break;
                 }
             }
-
-            UI.UpdateAllBars();
+            
+            UpdateAllBars();
         }
         public static void UpdateAllBars()
         {
-            Instance.healthBar.fillAmount = (Instance.currentHealth / Instance.maxHealth);
-            Instance.staminaBar.fillAmount = (Instance.currentStamina / Instance.maxStamina);
-            Instance.xpBar.fillAmount = ((float)Instance.xp / (float)Instance.xpToNextLevel);
-            Instance.lvlText.text = Instance.level.ToString();
-            Instance.coinsText.text = Instance.coins.ToString();
+            Instance._healthBar.fillAmount = (Instance.currentHealth / Instance.maxHealth);
+            Instance._staminaBar.fillAmount = (Instance.currentStamina / Instance.maxStamina);
+            Instance._xpBar.fillAmount = ((float)Instance.xp / (float)Instance.xpToNextLevel);
+            Instance._lvlText.text = Instance.level.ToString();
+            Instance._coinsText.text = Instance.coins.ToString();
         }
 
         public static class Health
         {
             public static void Update()
             {
-                Instance.healthBar.fillAmount = (Instance.currentHealth / Instance.maxHealth);
+                Instance._healthBar.fillAmount = (Instance.currentHealth / Instance.maxHealth);
             }
 
             public static IEnumerator Flash(Color color)
@@ -219,7 +217,7 @@ public class GameManager : MonoBehaviour
                 for (var i = 0; i <= 5; i++)
                 {
                     yield return new WaitForSeconds(0.04f);
-                    Instance.healthFrame.color = Color.Lerp(color, ColorGold, (0.2f * i));
+                    Instance._healthFrame.color = Color.Lerp(color, ColorGold, (0.2f * i));
                 }
             }
         }
@@ -228,7 +226,7 @@ public class GameManager : MonoBehaviour
         {
             public static void Update()
             {
-                Instance.staminaBar.fillAmount = (Instance.currentStamina / Instance.maxStamina);
+                Instance._staminaBar.fillAmount = (Instance.currentStamina / Instance.maxStamina);
             }
             
             public static IEnumerator Flash(Color color)
@@ -236,7 +234,7 @@ public class GameManager : MonoBehaviour
                 for (var i = 0; i <= 5; i++)
                 {
                     yield return new WaitForSeconds(0.04f);
-                    Instance.staminaFrame.color = Color.Lerp(color, ColorGold, (0.2f * i));
+                    Instance._staminaFrame.color = Color.Lerp(color, ColorGold, (0.2f * i));
                 }
             }
         }
@@ -245,12 +243,12 @@ public class GameManager : MonoBehaviour
         {
             public static void UpdateXp()
             {
-                Instance.xpBar.fillAmount = ((float)Instance.xp / (float)Instance.xpToNextLevel);
+                Instance._xpBar.fillAmount = ((float)Instance.xp / (float)Instance.xpToNextLevel);
             }
 
             public static void UpdateLvl()
             {
-                Instance.lvlText.text = Instance.level.ToString();
+                Instance._lvlText.text = Instance.level.ToString();
             }
             
             public static IEnumerator Flash(Color color)
@@ -258,7 +256,7 @@ public class GameManager : MonoBehaviour
                 for (var i = 0; i <= 5; i++)
                 {
                     yield return new WaitForSeconds(0.04f);
-                    Instance.xpFrame.color = Color.Lerp(color, ColorGold, (0.2f * i));
+                    Instance._xpFrame.color = Color.Lerp(color, ColorGold, (0.2f * i));
                 }
             }
         }
@@ -267,7 +265,7 @@ public class GameManager : MonoBehaviour
         {
             public static void Update()
             {
-                Instance.coinsText.text = Instance.coins.ToString();
+                Instance._coinsText.text = Instance.coins.ToString();
             }
             
             public static IEnumerator Flash(Color color)
@@ -275,7 +273,7 @@ public class GameManager : MonoBehaviour
                 for (var i = 0; i <= 5; i++)
                 {
                     yield return new WaitForSeconds(0.04f);
-                    Instance.coinsFrame.color = Color.Lerp(color, ColorGold, (0.2f * i));
+                    Instance._coinsFrame.color = Color.Lerp(color, ColorGold, (0.2f * i));
                 }
             }
         }

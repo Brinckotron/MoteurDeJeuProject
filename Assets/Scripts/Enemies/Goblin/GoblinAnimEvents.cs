@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GoblinAnimEvents : MonoBehaviour
 {
-
-    
     [SerializeField] private AudioSource audioSource;
     public void PlaySound(AudioClip clip)
     {

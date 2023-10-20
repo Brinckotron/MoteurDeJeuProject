@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public abstract class EnemyBehaviour : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
     }
     protected float CurrentHealth, AtkDelayTimer, HurtTimer, HurtDuration, MemorizePlayerPosTimer;
     protected bool IsHurt, IsDead;
+    public bool isArenaMember;
+    public bool isSleeping;
     [SerializeField] protected GameObject deathEffect, xpCrystal5, xpCrystal10, xpCrystal20, goldCoin, goldPouch, healthCrystal, staminaCrystal;
     protected GameObject Player;
     protected Collider2D PlayerCollider, MainCollider;
@@ -23,6 +26,9 @@ public abstract class EnemyBehaviour : MonoBehaviour
     [SerializeField] protected Animator anim;
     [SerializeField] protected AudioSource audioSource;
     protected LayerMask SightLayerMask = (1 << 9 | 1 << 10);
+    public delegate void ImDead();
+
+    public static event ImDead OnDeath;
     
 
     public virtual void TakeDamage(int dmg)
@@ -38,6 +44,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         IsDead = true;
         Destroy(Rb2D);
         Destroy(MainCollider);
+        if (isArenaMember && OnDeath != null) OnDeath();
         yield return new WaitForSeconds(3f);
         Instantiate(deathEffect, transform.position, transform.rotation);
         DeathDrop();
@@ -98,7 +105,10 @@ public abstract class EnemyBehaviour : MonoBehaviour
         var hitInfo1 = Physics2D.Raycast(pos, (playerPos - pos).normalized, sightRange, SightLayerMask);
         var hitInfo2 = Physics2D.Raycast(pos, (playerPosHigh - pos).normalized, sightRange, SightLayerMask);
         var hitInfo3 = Physics2D.Raycast(pos, (playerPosLow - pos).normalized, sightRange, SightLayerMask);
-        return (hitInfo1.collider == PlayerCollider || hitInfo2.collider == PlayerCollider || hitInfo3.collider == PlayerCollider);
+        if (!isSleeping)
+            return (hitInfo1.collider == PlayerCollider || hitInfo2.collider == PlayerCollider ||
+                    hitInfo3.collider == PlayerCollider);
+        else return false;
     }
     
     public virtual void PlaySound(AudioSource source, AudioClip clip, float pitch = 1f, float volume = 0.2f)

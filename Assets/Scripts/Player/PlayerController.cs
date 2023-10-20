@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed, jumpHeight, gravityScale, rollSpeed, rollStaminaCost, blockStaminaCost, coyoteTimeDelay, staminaRegenDelay, staminaRegenPerSecond;
     public int armor, atkDamage;
     public Camera mainCamera;
-    public bool crouchOverride = false;
+    public bool crouchOverride = false, isInArena = false;
     public TMP_Text stateDebugText;
     [SerializeField] private GameObject bloodPrefab;
     
@@ -77,11 +77,6 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _instance = this;
-    }
-
-    private void Start()
-    {
-        GameManager.Instance.Initialize(this);
         _t = transform;
         _rb2D = GetComponent<Rigidbody2D>();
         _collider = GetComponentInChildren<CapsuleCollider2D>();
@@ -93,6 +88,12 @@ public class PlayerController : MonoBehaviour
         {
             _cameraPos = mainCamera.transform.position;
         }
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.Initialize(this);
+        
     }
 
     private void Update()
@@ -289,7 +290,7 @@ public class PlayerController : MonoBehaviour
 
     private void CameraFollow()
     {
-        if (mainCamera)
+        if (mainCamera && !isInArena)
         {
             mainCamera.transform.position = new Vector3(_t.position.x, _t.position.y, _cameraPos.z);
         }

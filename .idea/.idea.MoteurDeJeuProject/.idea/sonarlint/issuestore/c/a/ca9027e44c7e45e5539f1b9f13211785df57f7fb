@@ -1,7 +1,5 @@
 
-vcsharpsquid:S37762"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(ˆÛŒ8­šÒÉ²1
-|csharpsquid:S3776"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(ñ—ÁŒşÿÿÿÿ8úÆÖ·³1
+vcsharpsquid:S37763"RRefactor this method to reduce its Cognitive Complexity from 27 to the 15 allowed.(ˆÛŒ8­šÒÉ²1
+|csharpsquid:S3776—"RRefactor this method to reduce its Cognitive Complexity from 32 to the 15 allowed.(ñ—ÁŒşÿÿÿÿ8úÆÖ·³1
 Qcsharpsquid:S3903"/Move 'GoblinController' into a named namespace.(“„Ø“ÿÿÿÿÿ
 mcsharpsquid:S1104	"DMake this field 'private' and encapsulate it in a 'public' property.(à­„£ıÿÿÿÿ8•É…‚²1
-}csharpsquid:S1450"YRemove the field '_isJumping' and declare it as a local variable in the relevant methods.(ãå‹8Äé”Ê²1
-Hcsharpsquid:S125µ"Remove this commented out code.(ç›‰Öüÿÿÿÿ8ö˜¹¦´1
