@@ -112,8 +112,8 @@ public class GoblinController : LandEnemy
 
     public override void DeathDrop()
     {
-        var randoXp = Random.Range(0, 2);
-        switch (randoXp)
+        Debug.Log("DeathDrop!");
+        switch (Random.Range(0, 2))
         {
             case 0:
                 Instantiate(xpCrystal10, RandomDropPoint(), transform.rotation);
@@ -123,7 +123,7 @@ public class GoblinController : LandEnemy
                 Instantiate(xpCrystal5, RandomDropPoint(), transform.rotation);
                 break;
         }
-        if (Random.Range(1, 6) <= 1) Instantiate(healthCrystal,RandomDropPoint(), transform.rotation);
+        if (Random.Range(1, 6) == 1) Instantiate(healthCrystal,RandomDropPoint(), transform.rotation);
         
     }
 

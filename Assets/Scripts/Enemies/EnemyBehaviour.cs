@@ -42,10 +42,9 @@ public abstract class EnemyBehaviour : MonoBehaviour
     {
         speed = 0;
         IsDead = true;
-        Destroy(Rb2D);
-        Destroy(MainCollider);
         if (isArenaMember && OnDeath != null) OnDeath();
         yield return new WaitForSeconds(3f);
+        Debug.Log("yo");
         Instantiate(deathEffect, transform.position, transform.rotation);
         DeathDrop();
         Destroy(gameObject);

@@ -27,13 +27,9 @@ public abstract class Arena : MonoBehaviour
     public virtual void Activate()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.Play();
         GetComponent<BoxCollider2D>().enabled = false;
         EnemyBehaviour.OnDeath += UpdateArenaCount;
-        LockGates();
-        StartCoroutine(ShowArena());
-        WakeEnemies();
-        
+        StartCoroutine(StartArena());
         _enemyCount = enemiesToWake.Length;
         
     }
@@ -51,10 +47,10 @@ public abstract class Arena : MonoBehaviour
         }
     }
 
-    private IEnumerator ShowArena()
+    private IEnumerator StartArena()
     {
         _player.GetComponentInParent<PlayerController>().Instance.hasEnteredArena = true;
-        Time.timeScale = 0.1f;
+        Time.timeScale = 0.5f;
         for (int i = 1; i < 41; i++)
         {
             Camera.main.orthographicSize = Mathf.SmoothStep(_baseCameraField, cameraField, ((float)i/40));
@@ -64,7 +60,10 @@ public abstract class Arena : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.01f);
         }
 
-        yield return new WaitForSecondsRealtime(3f);
+        yield return new WaitForSecondsRealtime(1.5f);
+        LockGates();
+        audioSource.Play();
+        yield return new WaitForSecondsRealtime(1.5f);
         for (int i = 1; i < 41; i++)
         {
             Camera.main.orthographicSize = Mathf.SmoothStep(_baseCameraField, cameraField, 1f - ((float)i/40));
@@ -76,6 +75,7 @@ public abstract class Arena : MonoBehaviour
         _player.GetComponentInParent<PlayerController>().Instance.hasEnteredArena = false;
 
         Time.timeScale = 1f;
+        WakeEnemies();
     }
 
     private void LockGates()
@@ -101,7 +101,7 @@ public abstract class Arena : MonoBehaviour
             audioSource.volume -= 0.05f;
             yield return new WaitForSeconds(0.25f);
         }
-
+        yield return new WaitForSeconds(2f);
         Destroy(transform.parent.gameObject);
     }
 

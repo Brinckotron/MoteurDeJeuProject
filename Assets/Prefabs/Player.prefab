@@ -557,6 +557,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3320885519086497811}
+  - {fileID: 5925261815148607347}
   - {fileID: 2348881166156086864}
   - {fileID: 4423760464260963671}
   m_Father: {fileID: 0}
@@ -612,7 +613,9 @@ MonoBehaviour:
   armor: 0
   atkDamage: 25
   mainCamera: {fileID: 0}
+  GroundedCastPos: {fileID: 5925261815148607347}
   crouchOverride: 0
+  hasEnteredArena: 0
   stateDebugText: {fileID: 3832360353354140580}
   bloodPrefab: {fileID: 8084446995181352428, guid: 4ce40be4eee218b4b89a21194ec029e4, type: 3}
 --- !u!81 &3534894983288873400
@@ -649,6 +652,37 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5389015536046435397}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6632245934773939792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5925261815148607347}
+  m_Layer: 9
+  m_Name: GroundedCastPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5925261815148607347
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6632245934773939792}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.098, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
