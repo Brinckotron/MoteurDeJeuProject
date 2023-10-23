@@ -37,3 +37,9 @@ a
 -Assets/Scripts/Triggers/Arenas/GoblinArena.cs,2\7\27c13dfe6ab507275faee0f8b2c980fa8f9626de
 W
 'Assets/Scripts/Triggers/Arenas/Arena.cs,9\f\9f372fb64ede9d2906286256951d99e15c25b377
+w
+GAssets/Art/Sprites/Items/Kyrise's 16x16 RPG Icon Pack - V1.3/readme.txt,e\8\e87ea387862b1465e05e6630be99ed237e8ba4fd
+a
+1Assets/Scripts/Items/Throwables/ThrowingDagger.cs,d\c\dcb43c0512634e3a1ebc984a747087d2281fed26
+\
+,Assets/Scripts/Items/Throwables/Throwable.cs,2\1\21b0aa920ec16149cd54522978c0852c42348c1c

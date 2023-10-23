@@ -44,7 +44,6 @@ public abstract class EnemyBehaviour : MonoBehaviour
         IsDead = true;
         if (isArenaMember && OnDeath != null) OnDeath();
         yield return new WaitForSeconds(3f);
-        Debug.Log("yo");
         Instantiate(deathEffect, transform.position, transform.rotation);
         DeathDrop();
         Destroy(gameObject);

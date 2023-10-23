@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,10 +15,11 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed, jumpHeight, gravityScale, rollSpeed, rollStaminaCost, blockStaminaCost, coyoteTimeDelay, staminaRegenDelay, staminaRegenPerSecond;
     public int armor, atkDamage;
     public Camera mainCamera;
-    [SerializeField] private Transform GroundedCastPos;
+    [SerializeField] private Transform groundedCastPos, throwPos;
     public bool crouchOverride = false, hasEnteredArena = false;
     public TMP_Text stateDebugText;
     [SerializeField] private GameObject bloodPrefab;
+    [SerializeField] private GameObject activeThrowable;
     
     private bool _facingRight = true,
         _resetJumpNeeded,
@@ -246,6 +250,7 @@ public class PlayerController : MonoBehaviour
             _secondaryAttackDelayTimer <= 0f && !crouchOverride && _hurtTimer <= 0)
         {
             _secondaryAttackDelayTimer = _secondaryAttackLength;
+            Invoke("ThrowProjectile", 0.15f);
         }
     }
 
@@ -276,7 +281,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-        var hitInfo = Physics2D.Raycast(GroundedCastPos.position, Vector2.down, 0.35f, 1 << 10);
+        var hitInfo = Physics2D.Raycast(groundedCastPos.position, Vector2.down, 0.35f, 1 << 10);
         return hitInfo.collider != null && !_resetJumpNeeded;
     }
 
@@ -494,6 +499,12 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.StaminaRegenTick(Time.deltaTime * staminaRegenPerSecond);
         }
 
+    }
+
+    private void ThrowProjectile()
+    {
+        var throwable = Instantiate(activeThrowable, throwPos.position, throwPos.rotation);
+        throwable.GetComponent<Throwable>().Launch(transform.localScale.x);
     }
 
     private void AnimationControl()
