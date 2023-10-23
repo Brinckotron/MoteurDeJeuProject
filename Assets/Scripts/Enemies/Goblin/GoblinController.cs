@@ -13,7 +13,6 @@ public class GoblinController : LandEnemy
     private float _atk1DurationTimer, _atk2DurationTimer, _justGotHurtTimer, _voicePitch;
     private int _isAttacking1, _isAttacking2, _isRunning, _isDead, _isHit, _isJumping;
     private int[] _idle;
-    [SerializeField] private GameObject bloodSplatter;
     [SerializeField] private AudioClip laugh;
     [SerializeField] private AudioClip[] deathClips;
 
@@ -30,7 +29,7 @@ public class GoblinController : LandEnemy
         _voicePitch = Random.Range(1f, 1.2f);
     }
 
-    void Start()
+    private void Start()
     {
         Player = GameObject.FindWithTag("Player");
         PlayerCollider = Player.GetComponentInChildren<CapsuleCollider2D>();

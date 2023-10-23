@@ -18,12 +18,6 @@ U
 _
 /Assets/Scripts/Player/PlayerAnimationControl.cs,6\9\690e3e9e32d5b1926b7ed3c27ba3d76f3b025bc6
 Q
-!Assets/Scripts/Items/XpCrystal.cs,2\c\2cecfdc0a688cda3728ccf355f25f5e5336bcbfa
-P
- Assets/Scripts/Items/Pickable.cs,b\c\bcfd35d8b7f14e83fbdb3053e64907ae986bbc21
-U
-%Assets/Scripts/Items/HealthCrystal.cs,f\c\fc8d55050607b686591831318968da6c23ce6efc
-Q
 !Assets/UI Package/Script/Slide.cs,b\2\b2ae347603d17fa65c0b5e344c8cf642e6335768
 X
 (Assets/UI Package/Script/Togglescript.cs,c\1\c1d42228b822ad8a037f15ff4d3a796d6de26f1d
@@ -43,3 +37,5 @@ a
 1Assets/Scripts/Items/Throwables/ThrowingDagger.cs,d\c\dcb43c0512634e3a1ebc984a747087d2281fed26
 \
 ,Assets/Scripts/Items/Throwables/Throwable.cs,2\1\21b0aa920ec16149cd54522978c0852c42348c1c
+[
++Assets/Scripts/Enemies/Bat/BatController.cs,f\9\f989907484abe057d8178796519f6b7c4525a398

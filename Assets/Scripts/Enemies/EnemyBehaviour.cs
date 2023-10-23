@@ -17,7 +17,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     protected bool IsHurt, IsDead;
     public bool isArenaMember;
     public bool isSleeping;
-    [SerializeField] protected GameObject deathEffect, xpCrystal5, xpCrystal10, xpCrystal20, goldCoin, goldPouch, healthCrystal, staminaCrystal;
+    [SerializeField] protected GameObject deathEffect, xpCrystal5, xpCrystal10, xpCrystal20, goldCoin, goldPouch, healthCrystal, staminaCrystal, bloodSplatter;
     protected GameObject Player;
     protected Collider2D PlayerCollider, MainCollider;
     protected Vector2? MemorizedPlayerPosition;
@@ -42,6 +42,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     {
         speed = 0;
         IsDead = true;
+        Rb2D.velocity = new Vector2(0, Rb2D.velocity.y);
         if (isArenaMember && OnDeath != null) OnDeath();
         yield return new WaitForSeconds(3f);
         Instantiate(deathEffect, transform.position, transform.rotation);

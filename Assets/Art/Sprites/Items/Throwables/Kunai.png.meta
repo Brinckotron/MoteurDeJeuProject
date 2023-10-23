@@ -193,27 +193,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Kunai_4
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 39f6eb8141e1e824690de4a8436fdc8b
-      internalID: -629113111
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -229,7 +208,6 @@ TextureImporter:
       Kunai_1: -1194557674
       Kunai_2: 1144823148
       Kunai_3: 1910455930
-      Kunai_4: -629113111
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
