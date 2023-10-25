@@ -1,5 +1,5 @@
 
 Fcsharpsquid:S3903"$Move 'Arena' into a named namespace.(ƒ€û¥ùÿÿÿÿ
 Lcsharpsquid:S2933"#Make '_baseCameraField' 'readonly'.( ÿ…‡øÿÿÿÿ8·”ŒÛ´1
-ocsharpsquid:S3267A"FLoop should be simplified by calling Select(enemy => enemy.transform))(±°€üÿÿÿÿ8¼ŠèÅ¶1
+ocsharpsquid:S3267B"FLoop should be simplified by calling Select(enemy => enemy.transform))(±°€üÿÿÿÿ8¼ŠèÅ¶1
 ~csharpsquid:S1450"ZRemove the field '_redMarkers' and declare it as a local variable in the relevant methods.(²£Ç‹8Äæ×Å¶1

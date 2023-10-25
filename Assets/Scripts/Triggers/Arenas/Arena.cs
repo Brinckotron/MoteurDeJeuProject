@@ -51,6 +51,7 @@ public abstract class Arena : MonoBehaviour
 
     private IEnumerator StartArena()
     {
+        GameManager.Instance.GameState = GameManager.Status.ArenaLoad;
         _player.GetComponentInParent<PlayerController>().Instance.hasEnteredArena = true;
         for (int i = 1; i < 41; i++)
         {
@@ -84,6 +85,7 @@ public abstract class Arena : MonoBehaviour
             Destroy(marker);
         }
         WakeEnemies();
+        GameManager.Instance.GameState = GameManager.Status.Play;
     }
 
     private void LockGates()

@@ -49,7 +49,7 @@ public class GoblinController : LandEnemy
 
     private void FixedUpdate()
     {
-        if (!IsDead)
+        if (!IsDead && GameManager.Instance.GameState == GameManager.Status.Play)
         {
             KeepPlayerPositionMemorized();
             if (_atk1DurationTimer <= 0 && _atk2DurationTimer <= 0 && HurtTimer <= 0 && !_isForwardRolling) FacePlayer();
@@ -73,6 +73,7 @@ public class GoblinController : LandEnemy
 
             Hurt();
         }
+        if (GameManager.Instance.GameState == GameManager.Status.ArenaLoad) Stop();
 
         Death();
     }

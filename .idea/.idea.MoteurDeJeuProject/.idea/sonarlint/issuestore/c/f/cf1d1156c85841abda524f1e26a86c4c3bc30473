@@ -1,8 +1,10 @@
 
 Ncsharpsquid:S3903
 "*Move 'GameManager' into a named namespace.(¬øõ8Ãƒ©ı±1
-csharpsquid:S1186–"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(ÇÊæ8‡êüà³1
+csharpsquid:S1186¢"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(ÇÊæ8‚†ƒÇ¶1
 hcsharpsquid:S1104&"DMake this field 'private' and encapsulate it in a 'public' property.(ÕÏ8éêˆ£²1
 mcsharpsquid:S1104'"DMake this field 'private' and encapsulate it in a 'public' property.(­±õÃşÿÿÿÿ8íªÂ¢³1
 mcsharpsquid:S1104+"DMake this field 'private' and encapsulate it in a 'public' property.(¶¦®×ıÿÿÿÿ8Üİ”µ³1
+hcsharpsquid:S11044"DMake this field 'private' and encapsulate it in a 'public' property.( ¹Ì´8ëÒ‹Ç¶1
+mcsharpsquid:S22925"DMake this an auto-implemented property and remove its backing field.(õè¨Ûşÿÿÿÿ8ëÒ‹Ç¶1
 ~csharpsquid:S2696 "UMake the enclosing instance method 'static' or remove this set on the 'static' field.(ı¼ƒ¡úÿÿÿÿ8ÚŞËı±1

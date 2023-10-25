@@ -43,7 +43,18 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     private static readonly Color ColorGold = new Color(0.9803922f, 0.7960784f, 0.345098f);
 
-   
+    public enum Status
+    {
+        Play,
+        Paused,
+        ArenaLoad
+    }
+    public Status gameState;
+    public Status GameState
+    {
+        get { return gameState; }
+        set { gameState = value; }
+    }
 
     public void Initialize(PlayerController playerController)
     {
@@ -51,6 +62,7 @@ public class GameManager : MonoBehaviour
         currentStamina = maxStamina;
         this.player = playerController;
         UI.LoadAssets();
+        GameState = Status.Play;
     }
 
     public void GainGold(int amount)

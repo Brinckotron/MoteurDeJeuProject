@@ -46,7 +46,7 @@ public class BatController : FlyerEnemy
         Death();
 
         var distanceFromPlayer = Vector2.Distance(Player.transform.position, transform.position);
-        if (!IsHurt && !IsDead)
+        if (!IsHurt && !IsDead && GameManager.Instance.GameState == GameManager.Status.Play)
         {
             KeepPlayerPositionMemorized();
             if (!CanSeePlayer() && MemorizedPlayerPosition == null)
@@ -58,6 +58,7 @@ public class BatController : FlyerEnemy
                 MoveIn(distanceFromPlayer);
             }
         }
+        if (GameManager.Instance.GameState == GameManager.Status.ArenaLoad) Stop();
     }
 
     private void MoveIn(float distanceFromPlayer)

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2241879416140289861}
   - component: {fileID: 5132981275270104084}
   - component: {fileID: 6258472793419226425}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ArenaGate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
