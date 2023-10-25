@@ -155,6 +155,7 @@ public class BatController : FlyerEnemy
     public override void TakeDamage(int dmg)
     {
         if (IsHurt) return;
+        if (IsDead) return;
         CurrentHealth -= dmg;
         Instantiate(bloodSplatter, transform.position, transform.rotation);
         if (CurrentHealth <= 0) StartCoroutine(Die());
@@ -187,14 +188,14 @@ public class BatController : FlyerEnemy
     {
         if (IsDead)
         {
-            ChangeAnimationState("Die");
+           ChangeAnimationState("Die");
 
             if (!_isDeathSoundPlayed)
             {
                 _isDeathSoundPlayed = true;
                 PlaySound(audioSource, deathSound);
                 Stop();
-                Rb2D.gravityScale = 10;
+                Rb2D.gravityScale = 2;
             }
         }
     }

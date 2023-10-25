@@ -122,6 +122,17 @@ public class GoblinController : LandEnemy
                 break;
         }
         if (Random.Range(1, 6) == 1) Instantiate(healthCrystal,RandomDropPoint(), transform.rotation);
+        switch (Random.Range(0, 6))
+        {
+            case <= 3:
+                break;
+            case 4:
+                Instantiate(goldCoin, RandomDropPoint(), transform.rotation);
+                break;
+            case 5:
+                Instantiate(goldCoins, RandomDropPoint(), transform.rotation);
+                break;
+        }
         
     }
 
@@ -226,6 +237,7 @@ public class GoblinController : LandEnemy
         if (_isJumpingBack) return;
         if (_isForwardRolling) return;
         if (IsHurt) return;
+        if (IsDead) return;
         CurrentHealth -= dmg;
         Instantiate(bloodSplatter, transform.position, transform.rotation);
         if (CurrentHealth <= 0) StartCoroutine(Die());

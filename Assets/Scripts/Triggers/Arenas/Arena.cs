@@ -8,8 +8,10 @@ using UnityEngine.Serialization;
 public abstract class Arena : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemiesToWake, gates;
+    [SerializeField] private GameObject redMarker;
     [SerializeField] private Transform centerPoint;
     [SerializeField] private float cameraField = 3;
+    private List<GameObject> _redMarkers;
     private AudioSource audioSource;
     private GameObject _player;
     private float _enemyCount, _baseCameraField = 3f, _cameraZ;
@@ -50,7 +52,6 @@ public abstract class Arena : MonoBehaviour
     private IEnumerator StartArena()
     {
         _player.GetComponentInParent<PlayerController>().Instance.hasEnteredArena = true;
-        Time.timeScale = 0.5f;
         for (int i = 1; i < 41; i++)
         {
             Camera.main.orthographicSize = Mathf.SmoothStep(_baseCameraField, cameraField, ((float)i/40));
@@ -60,6 +61,11 @@ public abstract class Arena : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.01f);
         }
 
+        _redMarkers = new List<GameObject>();
+        foreach (var enemy in enemiesToWake)
+        {
+            _redMarkers.Add(Instantiate(redMarker, enemy.transform.position + new Vector3(0, 0.2f, 0), Quaternion.Euler(0, 0, 180), enemy.transform));
+        }
         yield return new WaitForSecondsRealtime(1.5f);
         LockGates();
         audioSource.Play();
@@ -73,8 +79,10 @@ public abstract class Arena : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.01f);
         }
         _player.GetComponentInParent<PlayerController>().Instance.hasEnteredArena = false;
-
-        Time.timeScale = 1f;
+        foreach (var marker in _redMarkers)
+        {
+            Destroy(marker);
+        }
         WakeEnemies();
     }
 

@@ -18,7 +18,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     protected bool IsHurt, IsDead;
     public bool isArenaMember;
     public bool isSleeping;
-    [SerializeField] protected GameObject deathEffect, xpCrystal5, xpCrystal10, xpCrystal20, goldCoin, goldStack, healthCrystal, staminaCrystal, bloodSplatter;
+    [SerializeField] protected GameObject deathEffect, xpCrystal5, xpCrystal10, xpCrystal20, goldCoin, goldCoins, goldStackSmall, goldStackMedium, goldStackLarge, healthCrystal, staminaCrystal, bloodSplatter;
     protected GameObject Player;
     protected Collider2D PlayerCollider, MainCollider;
     protected Vector2? MemorizedPlayerPosition;
@@ -35,7 +35,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
     public virtual void TakeDamage(int dmg)
     {
         CurrentHealth -= dmg;
-        if (CurrentHealth <= 0) Die();
+        if (CurrentHealth <= 0) StartCoroutine(Die());
         else IsHurt = true;
     }
 

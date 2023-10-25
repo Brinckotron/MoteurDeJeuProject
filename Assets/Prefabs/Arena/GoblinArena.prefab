@@ -262,6 +262,7 @@ MonoBehaviour:
   enemiesToWake: []
   gates:
   - {fileID: 2782278488644627757}
+  redMarker: {fileID: 8758987607302090349, guid: ebda6f7a1576dc440b8c88fdde0e945e, type: 3}
   centerPoint: {fileID: 4419298675299859674}
   cameraField: 0
   hasAmbush: 0

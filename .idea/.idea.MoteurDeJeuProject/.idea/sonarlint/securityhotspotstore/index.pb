@@ -41,3 +41,9 @@ a
 +Assets/Scripts/Enemies/Bat/BatController.cs,f\9\f989907484abe057d8178796519f6b7c4525a398
 W
 'Assets/Scripts/Enemies/Bat/BatAttack.cs,b\4\b43ab11c805787e15eecd5327de1efdf936cb1d2
+_
+/Assets/Scripts/Items/Pickables/HealthCrystal.cs,9\9\9944012c6e69bd004bb8436c98778982e264bf43
+Z
+*Assets/Scripts/Items/Pickables/GoldCoin.cs,8\5\85d79c493d794d43e0f0ba2da002ddb442d9e859
+Z
+*Assets/Scripts/Items/Pickables/Pickable.cs,a\1\a1939213d648cbe161dd44d57d482786c7186ae8

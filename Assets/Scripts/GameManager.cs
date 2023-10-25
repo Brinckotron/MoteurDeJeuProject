@@ -53,7 +53,12 @@ public class GameManager : MonoBehaviour
         UI.LoadAssets();
     }
 
-    
+    public void GainGold(int amount)
+    {
+        coins += amount;
+        UI.Coins.Update();
+        StartCoroutine(UI.Coins.Flash(Color.green));
+    }
 
     public void LooseHealth(int dmg)
     {
