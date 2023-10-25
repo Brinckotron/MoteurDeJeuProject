@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public abstract class EnemyBehaviour : MonoBehaviour
 {
@@ -55,6 +56,13 @@ public abstract class EnemyBehaviour : MonoBehaviour
         
     }
 
+    public virtual Vector3 RandomDropPoint()
+    {
+        var point = transform.position + (Vector3)(Random.insideUnitCircle * 0.2f);
+        if (point.y < transform.position.y) point.y = transform.position.y;
+        return point;
+    }
+    
     public virtual void FacePlayer()
     {
         Vector3 scale = transform.localScale;

@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2510768370615554326}
-  - component: {fileID: 6445334459422695879}
-  m_Layer: 0
+  - component: {fileID: 6616190201344209199}
+  - component: {fileID: 1352638050700207194}
+  m_Layer: 13
   m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,13 +33,15 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1569066669985011304}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6445334459422695879
-BoxCollider:
+--- !u!61 &6616190201344209199
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2595998290130056550}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -47,12 +50,46 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.05924225, y: 0.01}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.0993042, y: 0.10610503}
+  m_EdgeRadius: 0
+--- !u!114 &1352638050700207194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2595998290130056550}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.11094475, y: 0.127213, z: 1}
-  m_Center: {x: 0.03, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5749a114abae974e9ee5003b0ed0b5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5898085737457682303
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,7 +105,7 @@ GameObject:
   - component: {fileID: 595446799513976058}
   - component: {fileID: 6603744627806426407}
   - component: {fileID: 7001287052093468477}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,11 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02de60ce3a4d7c94396cbce7b24e6ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2
   maxHealth: 50
   xpValue: 5
   sightRange: 3
-  atkDelay: 1
+  atkDelay: 2
   atkDamage: 5
   memorizePlayerPosDuration: 3
   isArenaMember: 0
@@ -124,7 +161,14 @@ MonoBehaviour:
   castPos: {fileID: 0}
   anim: {fileID: 6603744627806426407}
   audioSource: {fileID: 7001287052093468477}
-  isNearCeilingRayDistance: 0.105
+  isNearCeilingRayDistance: 0.11
+  bloodLustSpeed: 0
+  bloodLustAtkDelay: 0
+  bloodLustDuration: 0
+  bloodLustSightRange: 0
+  nagDistance: 0.5
+  atkRange: 0.2
+  deathSound: {fileID: 8300000, guid: e2ccb3969e229134fbb60e9ad8c456a0, type: 3}
 --- !u!212 &3831176371695105593
 SpriteRenderer:
   m_ObjectHideFlags: 0

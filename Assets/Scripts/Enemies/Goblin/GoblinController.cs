@@ -111,7 +111,6 @@ public class GoblinController : LandEnemy
 
     public override void DeathDrop()
     {
-        Debug.Log("DeathDrop!");
         switch (Random.Range(0, 2))
         {
             case 0:
@@ -124,13 +123,6 @@ public class GoblinController : LandEnemy
         }
         if (Random.Range(1, 6) == 1) Instantiate(healthCrystal,RandomDropPoint(), transform.rotation);
         
-    }
-
-    private Vector3 RandomDropPoint()
-    {
-        var point = transform.position + (Vector3)(Random.insideUnitCircle * 0.2f);
-        if (point.y < transform.position.y) point.y = transform.position.y;
-        return point;
     }
 
     private bool IsInRangeForAttack1()

@@ -5,20 +5,20 @@ using UnityEngine;
 
 public class GoblinAttack : MonoBehaviour
 {
-    private GoblinController Goblin;
-    private int damage;
+    private GoblinController _goblin;
+    private int _damage;
 
     private void Awake()
     {
-        Goblin = gameObject.GetComponentInParent<GoblinController>();
-        damage = (int)Goblin.AtkDamage;
+        _goblin = gameObject.GetComponentInParent<GoblinController>();
+        _damage = (int)_goblin.AtkDamage;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == 9)
         {
-            other.gameObject.GetComponentInParent<PlayerController>().Instance.TakeDamage(damage, Goblin.gameObject);
+            other.gameObject.GetComponentInParent<PlayerController>().TakeDamage(_damage, _goblin.gameObject);
         }
     }
 }

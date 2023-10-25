@@ -39,3 +39,5 @@ a
 ,Assets/Scripts/Items/Throwables/Throwable.cs,2\1\21b0aa920ec16149cd54522978c0852c42348c1c
 [
 +Assets/Scripts/Enemies/Bat/BatController.cs,f\9\f989907484abe057d8178796519f6b7c4525a398
+W
+'Assets/Scripts/Enemies/Bat/BatAttack.cs,b\4\b43ab11c805787e15eecd5327de1efdf936cb1d2
