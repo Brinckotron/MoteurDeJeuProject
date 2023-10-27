@@ -29,8 +29,10 @@ public abstract class Arena : MonoBehaviour
     public virtual void Activate()
     {
         audioSource = GetComponent<AudioSource>();
+        ChangeVolume();
         GetComponent<BoxCollider2D>().enabled = false;
         EnemyBehaviour.OnDeath += UpdateArenaCount;
+        InGameMenu.OnChange += ChangeVolume;
         StartCoroutine(StartArena());
         _enemyCount = enemiesToWake.Length;
         
@@ -39,6 +41,7 @@ public abstract class Arena : MonoBehaviour
     private void OnDisable()
     {
         EnemyBehaviour.OnDeath -= UpdateArenaCount;
+        InGameMenu.OnChange -= ChangeVolume;
     }
 
     private void WakeEnemies()
@@ -123,5 +126,10 @@ public abstract class Arena : MonoBehaviour
             UnlockGates();
             StartCoroutine(DestroyArena());
         }
+    }
+
+    private void ChangeVolume()
+    {
+        audioSource.volume = GameManager.Instance.gameMusicVolume * 0.9f;
     }
 }

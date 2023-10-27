@@ -24,7 +24,7 @@ TagManager:
   - Drops
   - ParticleEffects
   - PlayerAttacks
-  - 
+  - Breakables
   - 
   - 
   - 
@@ -40,14 +40,20 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: Tilemap
     uniqueID: 1375291907
     locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Breakables
+    uniqueID: 563243991
+    locked: 0
   - name: Markers
     uniqueID: 1756805749
+    locked: 0
+  - name: Enemies
+    uniqueID: 1042583919
     locked: 0
   - name: Player
     uniqueID: 2195017611

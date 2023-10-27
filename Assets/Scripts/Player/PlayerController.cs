@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
         _rb2D.gravityScale = gravityScale;
         _facingRight = _t.localScale.x > 0;
         _currentPlayerState = PlayerState.Idle;
+        _knightSkin = GameManager.Instance.knight.ToString();
 
         if (mainCamera)
         {

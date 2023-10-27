@@ -28,12 +28,14 @@ public class PlayerAnimationControl : MonoBehaviour
 
     public void PlaySoundMove(AudioClip clip)
     {
+        audioMove.volume = GameManager.Instance.gameSoundVolume;
         audioMove.clip = clip;
         audioMove.Play();
     }
     public void PlaySoundAction(AudioClip clip)
     {
-        audioMove.clip = clip;
-        audioMove.Play();
+        audioAction.volume = GameManager.Instance.gameSoundVolume;
+        audioAction.clip = clip;
+        audioAction.Play();
     }
 }

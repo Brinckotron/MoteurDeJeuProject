@@ -416,8 +416,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sound Volume
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
-  m_sharedMaterial: {fileID: 2138970936329796545, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
+  m_sharedMaterial: {fileID: 7959724816552043724, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -744,8 +744,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -250}
-  m_SizeDelta: {x: 324.4484, y: 71.8228}
+  m_AnchoredPosition: {x: -8, y: -256}
+  m_SizeDelta: {x: 262.39, y: 58.086}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &256649336
 MonoBehaviour:
@@ -769,8 +769,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Starting a new game will erase current save file
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
-  m_sharedMaterial: {fileID: 2138970936329796545, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
+  m_sharedMaterial: {fileID: 7959724816552043724, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3179,7 +3179,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 1.4}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1201144142
@@ -3204,8 +3204,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
-  m_sharedMaterial: {fileID: 2138970936329796545, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
+  m_sharedMaterial: {fileID: 7959724816552043724, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3229,13 +3229,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -3832,11 +3832,14 @@ MonoBehaviour:
   currentHealth: 0
   maxStamina: 100
   currentStamina: 0
+  gameMusicVolume: 0.5
+  gameSoundVolume: 0.5
   coins: 0
   level: 1
   xp: 0
   xpToNextLevel: 100
-  Player: {fileID: 0}
+  player: {fileID: 0}
+  gameState: 0
 --- !u!4 &1362222071
 Transform:
   m_ObjectHideFlags: 0
@@ -3911,8 +3914,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Choose your Knight
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
-  m_sharedMaterial: {fileID: 2138970936329796545, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
+  m_sharedMaterial: {fileID: 7959724816552043724, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4045,8 +4048,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Music Volume
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
-  m_sharedMaterial: {fileID: 2138970936329796545, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
+  m_sharedMaterial: {fileID: 7959724816552043724, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4076,7 +4079,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4370,7 +4373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.7}
+  m_AnchoredPosition: {x: 0, y: 1.2}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1508711882
@@ -4395,8 +4398,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
-  m_sharedMaterial: {fileID: 2138970936329796545, guid: 7ffd09879faa90241b5d586883cc623e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
+  m_sharedMaterial: {fileID: 7959724816552043724, guid: 0d3d9878043e2f646a2b8ebc8ba58964, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4420,13 +4423,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

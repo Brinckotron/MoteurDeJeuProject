@@ -15,8 +15,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject newGameWindow;
     [SerializeField] private AudioSource music;
     [SerializeField] private Slider musicVolume, soundVolume;
-    [SerializeField] private Scene firstScene;
-    private int _chosenKnight = 0;
     private string[] _knightNames = new string[] { "Edrik", "Lance", "Korbin" };
 
     private void Start()
@@ -41,36 +39,39 @@ public class MainMenu : MonoBehaviour
 
     public void SoundVolume()
     {
+        GameManager.Instance.gameSoundVolume = soundVolume.value;
     }
 
     public void MusicVolume()
     {
+        GameManager.Instance.gameMusicVolume = musicVolume.value;
         music.volume = musicVolume.value;
     }
 
     public void StartButton()
     {
-        SceneManager.LoadScene("Forest");
+        GameManager.Instance.playerName = knightName.text;
+        SceneManager.LoadScene("Haven");
     }
 
     public void NextCharacter()
     {
-        if (_chosenKnight == 2) _chosenKnight = 0;
-        else _chosenKnight++;
+        if (GameManager.Instance.knight == 2) GameManager.Instance.knight = 0;
+        else GameManager.Instance.knight++;
         UpdateCharacter();
     }
 
     public void PreviousCharacter()
     {
-        if (_chosenKnight == 0) _chosenKnight = 2;
-        else _chosenKnight--;
+        if (GameManager.Instance.knight == 0) GameManager.Instance.knight = 2;
+        else GameManager.Instance.knight--;
         UpdateCharacter();
     }
 
     public void UpdateCharacter()
     {
-        character.Play(_knightNames[_chosenKnight]);
-        knightName.text = _knightNames[_chosenKnight];
+        character.Play(_knightNames[GameManager.Instance.knight]);
+        knightName.text = _knightNames[GameManager.Instance.knight];
     }
 
 

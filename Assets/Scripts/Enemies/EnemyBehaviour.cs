@@ -118,11 +118,11 @@ public abstract class EnemyBehaviour : MonoBehaviour
         else return false;
     }
     
-    public virtual void PlaySound(AudioSource source, AudioClip clip, float pitch = 1f, float volume = 0.2f)
+    public virtual void PlaySound(AudioSource source, AudioClip clip, float pitch = 1f, float volume = 0.5f)
     {
         var soundPoint = Instantiate(source, transform);
         soundPoint.clip = clip;
-        soundPoint.volume = Mathf.Clamp(volume, 0f, 1f);
+        soundPoint.volume = Mathf.Clamp(volume, 0f, 1f) * GameManager.Instance.gameSoundVolume;
         soundPoint.pitch = Mathf.Clamp(pitch, 0f, 2f);
         soundPoint.Play();
         Destroy(soundPoint, clip.length);

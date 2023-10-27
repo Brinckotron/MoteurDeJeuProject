@@ -36,6 +36,10 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public float maxHealth, currentHealth, maxStamina, currentStamina;
+    public float gameMusicVolume = 0.5f;
+    public float gameSoundVolume = 0.5f;
+    public string playerName;
+    public int knight = 0;
     public int coins, level, xp, xpToNextLevel;
     private Image _healthBar, _staminaBar, _xpBar, _healthFrame, _staminaFrame, _xpFrame, _coinsFrame;
     private Text _coinsText, _lvlText;
@@ -65,11 +69,23 @@ public class GameManager : MonoBehaviour
         GameState = Status.Play;
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        gameState = Status.Paused;
+    }
+    
+    public void ResumeGame()
+    {
+        Time.timeScale = 1f;
+        gameState = Status.Play;
+    }
+
     public void GainGold(int amount)
     {
         coins += amount;
         UI.Coins.Update();
-        StartCoroutine(UI.Coins.Flash(Color.green));
+        StartCoroutine(UI.Coins.Flash(amount > 0 ? Color.green: Color.red));
     }
 
     public void LooseHealth(int dmg)
@@ -152,17 +168,14 @@ public class GameManager : MonoBehaviour
         UI.Xp.UpdateLvl();
     }
 
-    public void GainCoins(int amount)
-    {
-        coins += amount;
-        UI.Coins.Update();
-        StartCoroutine(UI.Coins.Flash(Color.white));
-    }
-
     public void Death()
     {
     }
 
+    public static class SoundManager
+    {
+        
+    }
 
     public static class UI
     {
