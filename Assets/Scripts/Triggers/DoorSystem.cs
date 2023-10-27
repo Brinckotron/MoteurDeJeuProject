@@ -29,24 +29,29 @@ public class DoorSystem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.gameObject.layer == 9)
+        {
             doorClosed.SetActive(false);
             doorOpen.SetActive(true);
             doorText.enabled = true;
             _canTravel = true;
             PlaySound(doorSounds[0]);
-        
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (!_isTravelling)
+        if (other.gameObject.layer == 9)
         {
-            doorClosed.SetActive(true);
-            doorOpen.SetActive(false);
-            doorText.enabled = false;
-            _canTravel = false;
-            PlaySound(doorSounds[1]);
+            if (!_isTravelling)
+            {
+                doorClosed.SetActive(true);
+                doorOpen.SetActive(false);
+                doorText.enabled = false;
+                _canTravel = false;
+                PlaySound(doorSounds[1]);
+            }
         }
     }
 

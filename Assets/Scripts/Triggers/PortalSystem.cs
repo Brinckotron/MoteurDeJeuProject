@@ -24,14 +24,20 @@ public class PortalSystem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        portalText.enabled = true;
-        _canTravel = true;
+        if (other.gameObject.layer == 9)
+        {
+            portalText.enabled = true;
+            _canTravel = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        portalText.enabled = false;
-        _canTravel = false;
+        if (other.gameObject.layer == 9)
+        {
+            portalText.enabled = false;
+            _canTravel = false;
+        }
     }
     private void Travel()
     {
