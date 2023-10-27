@@ -47,3 +47,15 @@ Z
 *Assets/Scripts/Items/Pickables/Pickable.cs,a\1\a1939213d648cbe161dd44d57d482786c7186ae8
 _
 /Assets/Scripts/Items/Pickables/HealthCrystal.cs,9\9\9944012c6e69bd004bb8436c98778982e264bf43
+\
+,Assets/Scripts/Items/Breakables/Breakable.cs,e\2\e2d82fccfe9f15a1df0d4a4013846b45a51d0d58
+L
+Assets/Scripts/InGameMenu.cs,e\8\e8728f3becc3175d7348719a3b2612ada724ac26
+U
+%Assets/Scripts/Triggers/DoorSystem.cs,6\0\604c989ace4249dbc35420bb061713c41b182e81
+W
+'Assets/Scripts/Triggers/PortalSystem.cs,5\7\57bc1a83b9b3ed97a07864d6884bb8610823298f
+[
++Assets/Scripts/Items/Pickables/XpCrystal.cs,4\6\462902f5980178bee4f526bd14444b28dcdf7e27
+P
+ Assets/Scripts/CharacterSheet.cs,c\d\cdb30cabaeef70c2599ef97d0bc1f3b0fab29a77

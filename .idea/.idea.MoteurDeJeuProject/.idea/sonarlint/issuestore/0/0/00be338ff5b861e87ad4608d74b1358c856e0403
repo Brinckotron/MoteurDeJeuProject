@@ -1,6 +1,5 @@
 
 Dcsharpsquid:S3903
 "'Move 'MainMenu' into a named namespace.(ÓÏü
-csharpsquid:S1186&"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(¼øĞ´8ÒÛÖÊ³1
-¢csharpsquid:S1186*"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(»ÃÄùÿÿÿÿ8ŞŒØÊ³1
-Ccsharpsquid:S2933"Make '_knightNames' 'readonly'.(·Æ•š8ú½ûÚ³1
+csharpsquid:S1186$"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(¼øĞ´8ÒÛÖÊ³1
+Ccsharpsquid:S2933"Make '_knightNames' 'readonly'.(·Æ•š8ú½ûÚ³1
