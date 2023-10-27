@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         _hurtTimer,
         _staminaRegenTimer;
 
-    private string _knightSkin = "0", _debugState = " ", _newDebugState = " ";
+    private string _debugState = " ", _newDebugState = " ";
     private Vector3 _cameraPos;
     private Rigidbody2D _rb2D;
     private CapsuleCollider2D _collider;
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         _rb2D.gravityScale = gravityScale;
         _facingRight = _t.localScale.x > 0;
         _currentPlayerState = PlayerState.Idle;
-        _knightSkin = GameManager.Instance.knight.ToString();
+        
 
         if (mainCamera)
         {
@@ -100,7 +100,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.Initialize(this);
-        
     }
 
     private void Update()
@@ -534,7 +533,7 @@ public class PlayerController : MonoBehaviour
             PlayerState.Dead => "Death",
             _ => "Idle"
         };
-        var animState = $"Knight_{_knightSkin}_{anim}";
+        var animState = $"Knight_{GameManager.Instance.knight.ToString()}_{anim}";
         PlayerAnimationControl.instance.ChangeAnimationState(animState);
     }
 
