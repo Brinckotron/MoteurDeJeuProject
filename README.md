@@ -2,6 +2,8 @@
 
 François Brinck-Boucher
 
+LIRE LE README EN FORMAT CODE
+
 légende: Check - terminé ; WIP - en cours d'implémentation ; N-I - pas implémenté
 
     CONTROLS: 
