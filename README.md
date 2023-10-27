@@ -2,13 +2,15 @@
 
 François Brinck-Boucher
 
+légende: Check - terminé ; WIP - en cours d'implémentation ; N-I - pas implémenté
+
     CONTROLS: 
 Move            A-D
 Jump            W
 Roll            S
 Attack          Left Mouse
 Throwables(WIP) Shift + Left Mouse
-Block(WIP)      Right Mouse
+Block(N-I)      Right Mouse
 Roll Cancel     Tap S while Rolling
 Spawn Goblins   P
 State Debug     Toggle left Ctrl
@@ -19,10 +21,10 @@ HP System:      Check
 
     Scenes:
 Main Menu:      Check
-Haven:          WIP
+Haven:          Check
 Forest:         WIP++
-Cave:           WIP
-Dungeon:        WIP
+Cave:           N-I
+Dungeon:        N-I
 
     UI: 
 Image:          Check          
@@ -38,8 +40,8 @@ Musique:        Check
     Collectibles:
 XP Crystal:     Check
 HP Crystal:     Check
-Stam Crystal:   WIP
-Coins:          WIP
+Stam Crystal:   N-I
+Coins:          Check
 Throwables:     WIP
 
 Animations:     Check
@@ -50,8 +52,9 @@ Lvl Up System:  WIP
 
     Permanency:
 Coins:          WIP
-Upgrades:       WIP
+Upgrades:       N-I
 
+Save System     WIP
    
 
  
