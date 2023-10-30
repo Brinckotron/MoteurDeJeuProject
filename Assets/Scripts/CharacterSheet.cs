@@ -26,18 +26,18 @@ public class CharacterSheet : MonoBehaviour
       if (GameManager.Instance.GameState is not (GameManager.Status.Paused or GameManager.Status.ArenaLoad) &&
           Input.GetKeyDown(KeyCode.C))
       {
-         OpenClose();
+         OpenClose(false);
       }
       
-      if (_isCharSheetOpen && Input.GetKeyDown(KeyCode.Escape)) OpenClose(); 
+      if (_isCharSheetOpen && Input.GetKeyDown(KeyCode.Escape)) OpenClose(true); 
    }
 
-   public void OpenClose()
+   public void OpenClose(bool isEscapePressed)
    {
       charSheet.SetActive(!_isCharSheetOpen);
       _isCharSheetOpen = !_isCharSheetOpen;
       if (_isCharSheetOpen) GameManager.Instance.PauseGame();
-      else GameManager.Instance.ResumeGame();
+      else if (!isEscapePressed) GameManager.Instance.ResumeGame();
    }
 
    private void LoadAssets()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public abstract class Pickable : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public abstract class Pickable : MonoBehaviour
     [SerializeField] public AudioSource audioSource;
     [SerializeField] public AudioClip audioClip;
     public abstract void OnPickup(GameObject player);
-
+    
     public virtual void PlaySound(AudioSource source, AudioClip clip, float pitch = 1f, float volume = 0.3f)
     {
         var soundPoint = Instantiate(source, transform.position, transform.rotation);

@@ -58,3 +58,6 @@ TagManager:
   - name: Player
     uniqueID: 2195017611
     locked: 0
+  - name: PIckables
+    uniqueID: 1080032279
+    locked: 0

@@ -6,6 +6,7 @@ public class XpCrystal : Pickable
 {
 
     [SerializeField] private int xpValue;
+    
     public override void OnPickup(GameObject player)
     {
         GameManager.Instance.GainXp(xpValue);

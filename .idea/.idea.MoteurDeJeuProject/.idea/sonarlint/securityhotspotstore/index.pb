@@ -59,3 +59,7 @@ W
 +Assets/Scripts/Items/Pickables/XpCrystal.cs,4\6\462902f5980178bee4f526bd14444b28dcdf7e27
 P
  Assets/Scripts/CharacterSheet.cs,c\d\cdb30cabaeef70c2599ef97d0bc1f3b0fab29a77
+J
+Assets/Scripts/NPC/Shop.cs,4\2\428293675aaf6b294540d3754c0f11060161cb34
+T
+$Assets/Scripts/Triggers/LootChest.cs,b\a\ba95cfca4802b5a276476624f64e03a2ad0c566d

@@ -17,7 +17,6 @@ public class GoldCoin : Pickable
 
     public override void OnPickup(GameObject player)
     {
-        
         GameManager.Instance.GainGold(_goldValue);
         Instantiate(pickUpEffect, player.transform.position, player.transform.rotation);
         PlaySound(audioSource, audioClip);

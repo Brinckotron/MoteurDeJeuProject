@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,6 +51,7 @@ MonoBehaviour:
   pickUpEffect: {fileID: 1027789243795026112, guid: 287050446de1ebf43a7e20dca787b6b8, type: 3}
   audioSource: {fileID: 4598658304644775937, guid: dbdd17523bdd6274ba8cd1043735ecff, type: 3}
   audioClip: {fileID: 8300000, guid: 9be7297377ef1db4298de8d47bcd8ada, type: 3}
+  canBePickedUp: 0
   minGoldValue: 2
   maxGoldValue: 4
 --- !u!212 &2786504060174179570
@@ -91,8 +92,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1080032279
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 729871402, guid: ec9da9dc29f32ad4c9d1b93d76154913, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

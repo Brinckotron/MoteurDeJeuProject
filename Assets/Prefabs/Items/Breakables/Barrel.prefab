@@ -52,11 +52,15 @@ MonoBehaviour:
   smokeEffect: {fileID: 1027789243795026112, guid: e764d730e18540745af983ab09b9a6fe, type: 3}
   loot:
   - {fileID: 4038261144073435563, guid: f49225caecb141d4fbedeeaa4a2ced67, type: 3}
+  - {fileID: 4038261144073435563, guid: f49225caecb141d4fbedeeaa4a2ced67, type: 3}
+  - {fileID: 4038261144073435563, guid: f49225caecb141d4fbedeeaa4a2ced67, type: 3}
+  - {fileID: 4038261144073435563, guid: f49225caecb141d4fbedeeaa4a2ced67, type: 3}
+  - {fileID: 4038261144073435563, guid: 5d4eed1e246c1764985d9c5b5d959669, type: 3}
   - {fileID: 4038261144073435563, guid: 5d4eed1e246c1764985d9c5b5d959669, type: 3}
   - {fileID: 4038261144073435563, guid: f00728dc4e272b341b980e64f2c5797f, type: 3}
   - {fileID: 4038261144073435563, guid: ca901555c9248514881cc2a2697415f6, type: 3}
   volume: 1
-  lootChance: 25
+  lootChance: 20
   potentialLootAmount: 1
 --- !u!212 &8334020676708407333
 SpriteRenderer:
@@ -97,7 +101,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 563243991
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -20389216, guid: 17c8f0dc24bc70b48ad196314bf57da6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
