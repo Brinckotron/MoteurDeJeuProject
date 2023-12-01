@@ -73,7 +73,12 @@ public class GoblinController : LandEnemy
 
             Hurt();
         }
-        if (GameManager.Instance.GameState == GameManager.Status.ArenaLoad) Stop();
+
+        if (GameManager.Instance.GameState == GameManager.Status.ArenaLoad)
+        {
+            Stop();
+            SetAnimIdle();
+        }
 
         Death();
     }

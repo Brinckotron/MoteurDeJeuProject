@@ -223,7 +223,7 @@ MonoBehaviour:
   openedSprite: {fileID: 292206730, guid: 17c8f0dc24bc70b48ad196314bf57da6, type: 3}
   fixedInventory: []
   randomInventory: []
-  volume: 0.6
+  volume: 1
   isRandom: 0
   randomItemCount: 1
   chestText: {fileID: 8474451518024735793}

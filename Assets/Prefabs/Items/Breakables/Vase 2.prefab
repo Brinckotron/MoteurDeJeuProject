@@ -53,7 +53,7 @@ MonoBehaviour:
   loot:
   - {fileID: 4038261144073435563, guid: f49225caecb141d4fbedeeaa4a2ced67, type: 3}
   - {fileID: 4038261144073435563, guid: f49225caecb141d4fbedeeaa4a2ced67, type: 3}
-  volume: 0.5
+  volume: 0.2
   lootChance: 50
   potentialLootAmount: 1
 --- !u!212 &8334020676708407333

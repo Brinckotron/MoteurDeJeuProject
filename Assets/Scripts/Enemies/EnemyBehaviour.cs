@@ -45,7 +45,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         IsDead = true;
         Rb2D.velocity = new Vector2(0, Rb2D.velocity.y);
         if (isArenaMember && OnDeath != null) OnDeath();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         Instantiate(deathEffect, transform.position, transform.rotation);
         DeathDrop();
         Destroy(gameObject);
@@ -60,6 +60,8 @@ public abstract class EnemyBehaviour : MonoBehaviour
     {
         var point = transform.position + (Vector3)(Random.insideUnitCircle * 0.2f);
         if (point.y < transform.position.y) point.y = transform.position.y;
+        if (Physics2D.Raycast(transform.position, Vector2.left, 0.2f, 10).collider != null) point.x = Mathf.Clamp(point.x, 0f, 0.2f);
+        if (Physics2D.Raycast(transform.position, Vector2.right, 0.2f, 10).collider != null) point.x = Mathf.Clamp(point.x, -0.2f, 0f);
         return point;
     }
     

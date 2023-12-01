@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Vector2 = UnityEngine.Vector2;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rb2D;
     private CapsuleCollider2D _collider;
     private Transform _t;
+    [SerializeField] private RuntimeAnimatorController[] animArray;
 
     public enum PlayerState
     {
@@ -88,7 +90,9 @@ public class PlayerController : MonoBehaviour
         _collider = GetComponentInChildren<CapsuleCollider2D>();
         _rb2D.gravityScale = gravityScale;
         _facingRight = _t.localScale.x > 0;
+        GetComponentInChildren<Animator>().runtimeAnimatorController = animArray[GameManager.Instance.knight];
         _currentPlayerState = PlayerState.Idle;
+        
         
 
         if (mainCamera)

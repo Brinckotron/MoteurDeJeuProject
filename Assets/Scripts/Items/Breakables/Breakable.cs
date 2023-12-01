@@ -36,6 +36,11 @@ public class Breakable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Break();
+    }
+
+    public void Break()
+    {
         Instantiate(breakEffect, transform.position, transform.rotation);
         Instantiate(smokeEffect, transform.position, transform.rotation);
         BreakSound();

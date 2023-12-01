@@ -63,3 +63,11 @@ J
 Assets/Scripts/NPC/Shop.cs,4\2\428293675aaf6b294540d3754c0f11060161cb34
 T
 $Assets/Scripts/Triggers/LootChest.cs,b\a\ba95cfca4802b5a276476624f64e03a2ad0c566d
+_
+/Assets/Scripts/Items/Pickables/PickUpCounter.cs,3\7\37aad6755fc48ed0801fc6df5f6b0a81ae290ced
+^
+.Assets/Scripts/Items/Pickables/DaggerPickUp.cs,1\0\10f9f496ff2d9396ec7c7e4714a8ab737b3f12a3
+\
+,Assets/Scripts/Items/Throwables/FireFlask.cs,2\c\2cbd501ca94f36f3c877aa9322b7b155da3ec45a
+W
+'Assets/Scripts/Effects/Splash/Splash.cs,5\b\5b39ec524e65e3a85ce1176ad84e5a03137a373b

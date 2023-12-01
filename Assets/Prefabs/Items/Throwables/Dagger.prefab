@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7098205179031259621}
+  - component: {fileID: 3518728993487652468}
   - component: {fileID: 2940713816792152144}
   - component: {fileID: 9065756994312356452}
   - component: {fileID: 8187298081824983733}
-  - component: {fileID: 3518728993487652468}
   - component: {fileID: 1122031520465449862}
   - component: {fileID: -8799844466772743219}
   m_Layer: 16
@@ -37,6 +37,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3518728993487652468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199347575837765452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5aa269309c7a74183dc015dbcb91d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: 0.5
+  speed: 5
+  impactDamage: 50
+  hasAoE: 0
+  rb2d: {fileID: 9065756994312356452}
+  audioSource: {fileID: 4598658304644775937, guid: dbdd17523bdd6274ba8cd1043735ecff, type: 3}
+  impactSound: {fileID: 0}
 --- !u!212 &2940713816792152144
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -151,23 +170,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.06989216
---- !u!114 &3518728993487652468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199347575837765452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b5aa269309c7a74183dc015dbcb91d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravity: 0.5
-  speed: 5
-  impactDamage: 50
-  hasAoE: 0
-  rb2d: {fileID: 9065756994312356452}
 --- !u!95 &1122031520465449862
 Animator:
   serializedVersion: 5
