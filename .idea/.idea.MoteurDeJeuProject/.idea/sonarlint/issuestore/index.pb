@@ -71,3 +71,5 @@ _
 ,Assets/Scripts/Items/Throwables/FireFlask.cs,2\c\2cbd501ca94f36f3c877aa9322b7b155da3ec45a
 W
 'Assets/Scripts/Effects/Splash/Splash.cs,5\b\5b39ec524e65e3a85ce1176ad84e5a03137a373b
+a
+1Assets/Scripts/Items/Pickables/FireflaskPickup.cs,f\5\f5980f94d904b6203edcd45e55f8d4bb90656452

@@ -62,6 +62,21 @@ public class GameManager : MonoBehaviour
 
     public void Initialize(PlayerController playerController)
     {
+        switch (knight)
+        {
+            case 0:
+                maxHealth = 100;
+                maxStamina = 100;
+                break;
+            case 1:
+                maxHealth = 120;
+                maxStamina = 80;
+                break;
+            case 2:
+                maxHealth = 80;
+                maxStamina = 120;
+                break;
+        }
         currentHealth = maxHealth;
         currentStamina = maxStamina;
         this.player = playerController;

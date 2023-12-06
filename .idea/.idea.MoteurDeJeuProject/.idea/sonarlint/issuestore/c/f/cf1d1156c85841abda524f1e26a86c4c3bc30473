@@ -1,8 +1,8 @@
 
-gcsharpsquid:S2094¯"BRemove this empty class, write its code or make it an "interface".(ğå¾ú8±şƒı¶1
+gcsharpsquid:S2094¾"BRemove this empty class, write its code or make it an "interface".(ğå¾ú8±şƒı¶1
 Ncsharpsquid:S3903
 "*Move 'GameManager' into a named namespace.(¬øõ8Ãƒ©ı±1
-csharpsquid:S1186«"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(ÇÊæ8‚†ƒÇ¶1
+csharpsquid:S1186º"yAdd a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.(ÇÊæ8‚†ƒÇ¶1
 hcsharpsquid:S1104&"DMake this field 'private' and encapsulate it in a 'public' property.(ÕÏ8éêˆ£²1
 mcsharpsquid:S1104'"DMake this field 'private' and encapsulate it in a 'public' property.(§üééÿÿÿÿÿ8˜ƒÕ¶1
 mcsharpsquid:S1104("DMake this field 'private' and encapsulate it in a 'public' property.(Íšëøúÿÿÿÿ8àğ‚Õ¶1

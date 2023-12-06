@@ -211,6 +211,7 @@ Transform:
   m_Children:
   - {fileID: 1320977915443112456}
   - {fileID: 6415856718579859322}
+  - {fileID: 5600950773881633310}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6943607835538242228
@@ -264,7 +265,7 @@ MonoBehaviour:
   - {fileID: 2782278488644627757}
   redMarker: {fileID: 8758987607302090349, guid: ebda6f7a1576dc440b8c88fdde0e945e, type: 3}
   centerPoint: {fileID: 4419298675299859674}
-  cameraField: 0
+  cameraField: 3
   hasAmbush: 0
 --- !u!61 &5472689025890800636
 BoxCollider2D:
@@ -407,3 +408,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &8870934666813271853
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5600950773881633310}
+  m_Layer: 0
+  m_Name: EntryPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5600950773881633310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870934666813271853}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4419298675299859674}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

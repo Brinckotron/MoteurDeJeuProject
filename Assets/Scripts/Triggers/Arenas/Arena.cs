@@ -10,6 +10,7 @@ public abstract class Arena : MonoBehaviour
     [SerializeField] private GameObject[] enemiesToWake, gates;
     [SerializeField] private GameObject redMarker;
     [SerializeField] private Transform centerPoint;
+    [SerializeField] private Transform entryPoint;
     [SerializeField] private float cameraField = 3;
     private List<GameObject> _redMarkers;
     private AudioSource audioSource;
@@ -56,6 +57,7 @@ public abstract class Arena : MonoBehaviour
     {
         GameManager.Instance.GameState = GameManager.Status.ArenaLoad;
         _player.GetComponentInParent<PlayerController>().Instance.hasEnteredArena = true;
+        _player.GetComponentInParent<Rigidbody2D>().position = entryPoint.position;
         for (int i = 1; i < 41; i++)
         {
             Camera.main.orthographicSize = Mathf.SmoothStep(_baseCameraField, cameraField, ((float)i/40));

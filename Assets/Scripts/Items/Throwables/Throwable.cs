@@ -36,13 +36,13 @@ public class Throwable : MonoBehaviour
         }
         else if(other.gameObject.layer == 12)
             other.gameObject.GetComponentInParent<EnemyBehaviour>().TakeDamage(impactDamage);
-        //PlaySound(audioSource, impactSound);
+        PlaySound(audioSource, impactSound);
         Destroy(gameObject);
     }
     
-    public virtual void PlaySound(AudioSource source, AudioClip clip, float pitch = 1f, float volume = 0.5f)
+    public virtual void PlaySound(AudioSource source, AudioClip clip, float pitch = 1f, float volume = 0.3f)
     {
-        var soundPoint = Instantiate(source, transform);
+        var soundPoint = Instantiate(source, transform.position, transform.rotation);
         soundPoint.clip = clip;
         soundPoint.volume = Mathf.Clamp(volume, 0f, 1f) * GameManager.Instance.gameSoundVolume;
         soundPoint.pitch = Mathf.Clamp(pitch, 0f, 2f);

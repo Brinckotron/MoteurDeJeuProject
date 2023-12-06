@@ -55,7 +55,8 @@ MonoBehaviour:
   hasAoE: 0
   rb2d: {fileID: 9065756994312356452}
   audioSource: {fileID: 4598658304644775937, guid: dbdd17523bdd6274ba8cd1043735ecff, type: 3}
-  impactSound: {fileID: 0}
+  impactSound: {fileID: 8300000, guid: 6f601053e1711d14699f577c8f858925, type: 3}
+  splashPrefab: {fileID: 0}
 --- !u!212 &2940713816792152144
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -55,6 +55,7 @@ MonoBehaviour:
   hasAoE: 1
   rb2d: {fileID: 9065756994312356452}
   audioSource: {fileID: 4598658304644775937, guid: dbdd17523bdd6274ba8cd1043735ecff, type: 3}
+  impactSound: {fileID: 8300000, guid: 1e160ece51d3af54fa678920484b162d, type: 3}
   splashPrefab: {fileID: 8762188363870021524, guid: fff6ebf947be31d47a29ba04139f5fab, type: 3}
 --- !u!212 &2940713816792152144
 SpriteRenderer:
@@ -169,7 +170,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.13
+  m_Radius: 0.06781898
 --- !u!95 &1122031520465449862
 Animator:
   serializedVersion: 5

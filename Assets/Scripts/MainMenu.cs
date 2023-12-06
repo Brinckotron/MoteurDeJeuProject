@@ -12,11 +12,18 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Animator character;
     [SerializeField] private TMP_Text warning;
     [SerializeField] private TMP_InputField knightName;
+    [SerializeField] private TMP_Text descriptiveText;
     [SerializeField] private GameObject newGameWindow;
     [SerializeField] private AudioSource music;
     [SerializeField] private Slider musicVolume, soundVolume;
-    private string[] _knightNames = new string[] { "Edrik", "Lance", "Korbin" };
-
+    private readonly string[] _knightNames = new[] { "Edrik", "Lance", "Korbin" };
+    private readonly string[] _knightDesc = new[]
+    {
+        "Edrik is a well rounded warrior, as agile and resilient as any knight.",
+        "Lance is a more robust, stiffer kind of knight, tougher but quickly fatigued.",
+        "Korbin lacks the physical endurance of his peers, but he makes up for it with his impressive stamina."
+    };
+        
     private void Start()
     {
         MusicVolume();
@@ -72,6 +79,7 @@ public class MainMenu : MonoBehaviour
     {
         character.Play(_knightNames[GameManager.Instance.knight]);
         knightName.text = _knightNames[GameManager.Instance.knight];
+        descriptiveText.text = _knightDesc[GameManager.Instance.knight];
     }
 
 

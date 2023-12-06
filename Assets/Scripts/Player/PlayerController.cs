@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public TMP_Text stateDebugText;
     [SerializeField] private GameObject bloodPrefab;
     [SerializeField] private GameObject activeThrowable;
-    
+
     private bool _facingRight = true,
         _resetJumpNeeded,
         _isJumpPressed = false,
@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
         _collider = GetComponentInChildren<CapsuleCollider2D>();
         _rb2D.gravityScale = gravityScale;
         _facingRight = _t.localScale.x > 0;
-        GetComponentInChildren<Animator>().runtimeAnimatorController = animArray[GameManager.Instance.knight];
+        
         _currentPlayerState = PlayerState.Idle;
         
         
@@ -104,6 +104,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.Initialize(this);
+        GetComponentInChildren<Animator>().runtimeAnimatorController = animArray[GameManager.Instance.knight];
     }
 
     private void Update()
