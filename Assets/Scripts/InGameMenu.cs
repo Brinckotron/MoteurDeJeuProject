@@ -45,6 +45,8 @@ public class InGameMenu : MonoBehaviour
         if (OnChange != null) OnChange();
         Camera.main.gameObject.GetComponent<AudioSource>().volume = GameManager.Instance.gameMusicVolume;
     }
+    
+    
 
     public void LoadVolumes()
     {

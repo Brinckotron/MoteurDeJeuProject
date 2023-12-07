@@ -250,6 +250,13 @@ public class GameManager : MonoBehaviour
             Instance._coinsText.text = Instance.coins.ToString();
         }
 
+        public static class PostProcessing
+        {
+            public static bool isPostProcessingActive = true;
+
+            
+        }
+
         public static class Health
         {
             public static void Update()

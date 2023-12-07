@@ -7,10 +7,17 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private GameObject shopWindow;
+    [SerializeField] private GameObject shopPrefab;
     [SerializeField] private TMP_Text shopText;
     private bool _isInRange;
     private bool _isShopOpen;
+    private GameObject _shopWindow;
+
+    private void Start()
+    {
+        _shopWindow = Instantiate(shopPrefab, GameObject.FindWithTag("UICanvas").transform);
+        _shopWindow.SetActive(false);
+    }
 
     private void Update()
     {
@@ -19,12 +26,12 @@ public class Shop : MonoBehaviour
             if (_isShopOpen)
             {
                 _isShopOpen = false;
-                shopWindow.gameObject.SetActive(false);
+                _shopWindow.gameObject.SetActive(false);
             }
             else
             {
                 _isShopOpen = true;
-                shopWindow.gameObject.SetActive(true);
+                _shopWindow.gameObject.SetActive(true);
             }
         }
     }
@@ -48,7 +55,7 @@ public class Shop : MonoBehaviour
             if (_isShopOpen)
             {
                 _isShopOpen = false;
-                shopWindow.gameObject.SetActive(false);
+                _shopWindow.gameObject.SetActive(false);
             }
         }
     }

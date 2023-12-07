@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Goblin
   - XpCrystal
+  - UICanvas
   layers:
   - Default
   - TransparentFX

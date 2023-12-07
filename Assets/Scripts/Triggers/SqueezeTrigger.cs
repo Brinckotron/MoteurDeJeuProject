@@ -10,7 +10,7 @@ public class SqueezeTrigger : MonoBehaviour
     private PlayerController _playerScript;
     private Collider2D _playerCollider;
 
-    private void Awake()
+    private void Start()
     {
         instance = this;
         _player = GameObject.FindWithTag("Player");
