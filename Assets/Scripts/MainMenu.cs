@@ -58,7 +58,8 @@ public class MainMenu : MonoBehaviour
     public void StartButton()
     {
         GameManager.Instance.playerName = knightName.text;
-        SceneManager.LoadScene("Haven");
+        SceneManager.LoadScene("Prime", LoadSceneMode.Single);
+        SceneManager.LoadScene("Haven", LoadSceneMode.Additive);
     }
 
     public void NextCharacter()

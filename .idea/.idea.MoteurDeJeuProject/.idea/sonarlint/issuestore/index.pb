@@ -73,3 +73,7 @@ W
 'Assets/Scripts/Effects/Splash/Splash.cs,5\b\5b39ec524e65e3a85ce1176ad84e5a03137a373b
 a
 1Assets/Scripts/Items/Pickables/FireflaskPickup.cs,f\5\f5980f94d904b6203edcd45e55f8d4bb90656452
+Y
+)Assets/Scripts/Triggers/SqueezeTrigger.cs,2\c\2c7805a8c45686c4d95461fb213b04bf36d80c37
+M
+Assets/Scripts/PlayerSpawn.cs,7\f\7f338629a77478bcbfe769398742b84498fed5f7

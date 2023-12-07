@@ -57,7 +57,8 @@ public class DoorSystem : MonoBehaviour
 
     private void Travel()
     {
-        SceneManager.LoadScene(destination);
+        SceneManager.UnloadSceneAsync(SceneManager.GetSceneAt(1));
+        SceneManager.LoadScene(destination, LoadSceneMode.Additive);
     }
     
     public virtual void PlaySound(AudioClip clip)
