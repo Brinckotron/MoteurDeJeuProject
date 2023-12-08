@@ -43,10 +43,10 @@ public class GameManager : MonoBehaviour
     public int coins, level, xp, xpToNextLevel;
     private Image _healthBar, _staminaBar, _xpBar, _healthFrame, _staminaFrame, _xpFrame, _coinsFrame;
     private Text _coinsText, _lvlText;
-
+    public bool isPostProcessingActive = true;
     public PlayerController player;
     private static readonly Color ColorGold = new Color(0.9803922f, 0.7960784f, 0.345098f);
-
+    private Camera mainCam;
     public enum Status
     {
         Play,
@@ -82,18 +82,21 @@ public class GameManager : MonoBehaviour
         this.player = playerController;
         UI.LoadAssets();
         GameState = Status.Play;
+        mainCam = Camera.main;
     }
 
     public void PauseGame()
     {
         Time.timeScale = 0f;
         gameState = Status.Paused;
+        if (isPostProcessingActive) mainCam.GetComponent<PostProcessing>().ChromaticEffectOn();
     }
     
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         gameState = Status.Play;
+        if (isPostProcessingActive) mainCam.GetComponent<PostProcessing>().ChromaticEffectOff();
     }
 
     public void GainGold(int amount)
@@ -118,6 +121,7 @@ public class GameManager : MonoBehaviour
         }
 
         UI.Health.Update();
+        if (isPostProcessingActive) mainCam.GetComponent<PostProcessing>().BloodEffect();
         StartCoroutine(UI.Health.Flash(Color.red));
     }
     
@@ -250,12 +254,11 @@ public class GameManager : MonoBehaviour
             Instance._coinsText.text = Instance.coins.ToString();
         }
 
-        public static class PostProcessing
-        {
-            public static bool isPostProcessingActive = true;
+        
+        
 
             
-        }
+        
 
         public static class Health
         {

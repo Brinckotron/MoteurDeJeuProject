@@ -9,13 +9,16 @@ public class InGameMenu : MonoBehaviour
     [SerializeField] private GameObject inGameMenu;
     [SerializeField] private Slider musicVolume;
     [SerializeField] private Slider soundVolume;
+    [SerializeField] private Toggle postProcToggle;
     private bool _isMenuOpen;
+    private Camera mainCam;
     public delegate void Volume();
     public static event Volume OnChange;
 
     private void Start()
     {
         LoadVolumes();
+        mainCam = Camera.main;
     }
 
     private void Update()
@@ -32,6 +35,13 @@ public class InGameMenu : MonoBehaviour
         _isMenuOpen = !_isMenuOpen;
         if (_isMenuOpen) GameManager.Instance.PauseGame();
         else GameManager.Instance.ResumeGame();
+    }
+
+    public void TogglePostProcessing()
+    {
+        GameManager.Instance.isPostProcessingActive = postProcToggle.isOn;
+        if (postProcToggle.isOn) mainCam.GetComponent<PostProcessing>().ChromaticEffectOn();
+        else mainCam.GetComponent<PostProcessing>().ChromaticEffectOff();
     }
 
     public void SoundVolume()
