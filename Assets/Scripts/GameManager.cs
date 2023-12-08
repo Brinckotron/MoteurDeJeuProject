@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
     public float maxHealth, currentHealth, maxStamina, currentStamina;
     public float gameMusicVolume = 0.5f;
     public float gameSoundVolume = 0.5f;
-    public string playerName;
+    public string playerName = "Edrik";
     public int knight = 0;
     public int coins, level, xp, xpToNextLevel;
     private Image _healthBar, _staminaBar, _xpBar, _healthFrame, _staminaFrame, _xpFrame, _coinsFrame;
@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
     public PlayerController player;
     private static readonly Color ColorGold = new Color(0.9803922f, 0.7960784f, 0.345098f);
     private Camera mainCam;
+    private GameObject deathScreen;
     public enum Status
     {
         Play,
@@ -80,6 +81,8 @@ public class GameManager : MonoBehaviour
         currentHealth = maxHealth;
         currentStamina = maxStamina;
         this.player = playerController;
+        deathScreen = GameObject.Find("DeathScreen");
+        deathScreen.SetActive(false);
         UI.LoadAssets();
         GameState = Status.Play;
         mainCam = Camera.main;
@@ -189,13 +192,9 @@ public class GameManager : MonoBehaviour
 
     public void Death()
     {
+        deathScreen.SetActive(true);
+        deathScreen.GetComponent<DeathScreen>().Initialize();
     }
-
-    public static class SoundManager
-    {
-        
-    }
-
     public static class UI
     {
         public static void LoadAssets()
