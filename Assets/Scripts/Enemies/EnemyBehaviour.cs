@@ -41,6 +41,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
 
     public virtual IEnumerator Die()
     {
+        GameManager.Instance.kills++;
         speed = 0;
         IsDead = true;
         Rb2D.velocity = new Vector2(0, Rb2D.velocity.y);

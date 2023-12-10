@@ -26,6 +26,7 @@ public class LootChest : MonoBehaviour
         {
             OpenSound();
             SpawnLoot();
+            GameManager.Instance.chestsOpened++;
             gameObject.GetComponent<SpriteRenderer>().sprite = openedSprite;
             isChestOpened = true;
             isPlayerInRange = false;

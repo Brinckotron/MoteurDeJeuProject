@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     public float gameSoundVolume = 0.5f;
     public string playerName = "Edrik";
     public int knight = 0;
-    public int coins, level, xp, xpToNextLevel;
+    public int coins, level, xp, xpToNextLevel, accumulatedXP, kills, chestsOpened;
     private Image _healthBar, _staminaBar, _xpBar, _healthFrame, _staminaFrame, _xpFrame, _coinsFrame;
     private Text _coinsText, _lvlText;
     public bool isPostProcessingActive = true;
@@ -173,6 +173,7 @@ public class GameManager : MonoBehaviour
     public void GainXp(int amount)
     {
         xp += amount;
+        accumulatedXP += amount;
         if (xp >= xpToNextLevel)
         {
             LvlUp();
@@ -194,6 +195,7 @@ public class GameManager : MonoBehaviour
     {
         deathScreen.SetActive(true);
         deathScreen.GetComponent<DeathScreen>().Initialize();
+        mainCam.GetComponent<AudioSource>().mute = true;
     }
     public static class UI
     {

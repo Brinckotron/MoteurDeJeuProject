@@ -27,6 +27,11 @@ public class DeathScreen : MonoBehaviour
     {
         textList = new List<TMP_Text>();
         nameText.text = GameManager.Instance.playerName;
+        gold.text = GameManager.Instance.coins.ToString();
+        chests.text = GameManager.Instance.chestsOpened.ToString();
+        level.text = GameManager.Instance.level.ToString();
+        xp.text = GameManager.Instance.accumulatedXP.ToString();
+        kills.text = GameManager.Instance.kills.ToString();
         GetComponent<Image>().color = Color.clear;
         deadText.color = Color.clear;
         nameText.color = Color.clear;
