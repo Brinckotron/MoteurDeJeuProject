@@ -1546,7 +1546,7 @@ MonoBehaviour:
   currentStamina: 0
   gameMusicVolume: 0
   gameSoundVolume: 0
-  playerName: 
+  playerName: Edrik
   knight: 0
   coins: 0
   level: 1
@@ -4218,7 +4218,7 @@ PrefabInstance:
     - target: {fileID: 6822206830209461923, guid: db1727e8a82f535418ee7bf5eefb0f08, type: 3}
       propertyPath: activeThrowable
       value: 
-      objectReference: {fileID: 1199347575837765452, guid: ee8742f4eb9a0bc49ac88044fbe705a1, type: 3}
+      objectReference: {fileID: 1199347575837765452, guid: 1bdbd694ab7299448917854b60e1b33c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

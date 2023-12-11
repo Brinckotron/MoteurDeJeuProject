@@ -34,6 +34,7 @@ public class GoblinController : LandEnemy
         Player = GameObject.FindWithTag("Player");
         PlayerCollider = Player.GetComponentInChildren<CapsuleCollider2D>();
         Rb2D = GetComponent<Rigidbody2D>();
+        sR = GetComponentInChildren<SpriteRenderer>();
         MainCollider = GetComponentInChildren<CapsuleCollider2D>();
         CurrentHealth = maxHealth;
     }

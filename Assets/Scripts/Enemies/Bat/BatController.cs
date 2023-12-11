@@ -34,6 +34,7 @@ public class BatController : FlyerEnemy
         Player = GameObject.FindWithTag("Player");
         PlayerCollider = Player.GetComponentInChildren<CapsuleCollider2D>();
         Rb2D = GetComponent<Rigidbody2D>();
+        sR = GetComponent<SpriteRenderer>();
         MainCollider = GetComponent<CircleCollider2D>();
         CurrentHealth = maxHealth;
     }

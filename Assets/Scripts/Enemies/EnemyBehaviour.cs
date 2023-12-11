@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 public abstract class EnemyBehaviour : MonoBehaviour
 {
 
-    [SerializeField]protected float speed, maxHealth, xpValue, sightRange, atkDelay, atkDamage, memorizePlayerPosDuration = 3f;
+    [SerializeField]protected float speed, maxHealth, sightRange, atkDelay, atkDamage, memorizePlayerPosDuration = 3f;
     public float AtkDamage
     {
         get { return atkDamage; }
@@ -18,11 +18,14 @@ public abstract class EnemyBehaviour : MonoBehaviour
     protected bool IsHurt, IsDead;
     public bool isArenaMember;
     public bool isSleeping;
+    public bool isFrozen;
     [SerializeField] protected GameObject deathEffect, xpCrystal5, xpCrystal10, xpCrystal20, goldCoin, goldCoins, goldStackSmall, goldStackMedium, goldStackLarge, healthCrystal, staminaCrystal, bloodSplatter;
     protected GameObject Player;
+    [SerializeField] protected Material freezeMat;
     protected Collider2D PlayerCollider, MainCollider;
     protected Vector2? MemorizedPlayerPosition;
     protected Rigidbody2D Rb2D;
+    protected SpriteRenderer sR;
     [SerializeField] protected Transform castPos;
     [SerializeField] protected Animator anim;
     [SerializeField] protected AudioSource audioSource;
@@ -37,6 +40,28 @@ public abstract class EnemyBehaviour : MonoBehaviour
         CurrentHealth -= dmg;
         if (CurrentHealth <= 0) StartCoroutine(Die());
         else IsHurt = true;
+    }
+
+    public void GetFrosted(float duration)
+    {
+        StartCoroutine(Freeze(duration));
+    }
+
+    public IEnumerator Freeze(float duration)
+    {
+        var originMaterial = sR.material;
+        sR.material = freezeMat;
+        sR.material.SetFloat("_FreezeValue", 0.4f);
+        isFrozen = true;
+        var originalSpeed = speed;
+        speed = speed / 3;
+        var originalAtkDelay = atkDelay;
+        atkDelay = atkDelay * 2;
+        yield return new WaitForSeconds(duration);
+        sR.material = originMaterial;
+        speed = originalSpeed;
+        atkDelay = originalAtkDelay;
+        isFrozen = false;
     }
 
     public virtual IEnumerator Die()

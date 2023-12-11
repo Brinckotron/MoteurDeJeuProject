@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Splash : MonoBehaviour
 {
-    [SerializeField] private int damage;
-    [SerializeField] private float destroyTime = 0.5f;
+    [SerializeField] protected int damage;
+    [SerializeField] protected float destroyTime = 0.5f;
 
     private void Start()
     {
@@ -17,7 +17,7 @@ public class Splash : MonoBehaviour
     {
         if (other.gameObject.layer == 12)
         {
-            other.gameObject.GetComponentInParent<EnemyBehaviour>().TakeDamage(damage);
+            DamageEffect(other.gameObject.GetComponentInParent<EnemyBehaviour>());
         }
         else if (other.gameObject.layer == 9)
         {
@@ -27,5 +27,10 @@ public class Splash : MonoBehaviour
         {
             other.gameObject.GetComponent<Breakable>().Break();
         }
+    }
+
+    public virtual void DamageEffect(EnemyBehaviour target)
+    {
+        target.TakeDamage(damage);
     }
 }
