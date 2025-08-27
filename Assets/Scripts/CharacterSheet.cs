@@ -7,13 +7,21 @@ using UnityEngine.UI;
 
 public class CharacterSheet : MonoBehaviour
 {
+   private GameManager _gm;
    [SerializeField] private GameObject charSheet;
    [SerializeField] private Image character;
    [SerializeField] private Sprite[] knightImages;
    [SerializeField] private TMP_Text knightName;
+   [SerializeField] private TMP_Text knightLevel;
+   [SerializeField] private TMP_Text knightXP;
+   [SerializeField] private TMP_Text unspentPoints;
+   [SerializeField] private TMP_Text hp;
+   [SerializeField] private TMP_Text stamina;
+   [SerializeField] private TMP_Text daggerAmount;
+   [SerializeField] private TMP_Text fireFlaskAmount;
+   [SerializeField] private TMP_Text iceFlaskAmount;
 
    private bool _isCharSheetOpen;
-   private string[] _knightNames = new string[] { "Edrik", "Lance", "Korbin" };
 
 
    private void Start()
@@ -23,7 +31,7 @@ public class CharacterSheet : MonoBehaviour
 
    private void Update()
    {
-      if (GameManager.Instance.GameState is not (GameManager.Status.Paused or GameManager.Status.ArenaLoad) &&
+      if (_gm.GameState is not (GameManager.Status.Paused or GameManager.Status.ArenaLoad) &&
           Input.GetKeyDown(KeyCode.C))
       {
          OpenClose(false);
@@ -35,14 +43,25 @@ public class CharacterSheet : MonoBehaviour
    public void OpenClose(bool isEscapePressed)
    {
       charSheet.SetActive(!_isCharSheetOpen);
+      LoadAssets();
       _isCharSheetOpen = !_isCharSheetOpen;
-      if (_isCharSheetOpen) GameManager.Instance.PauseGame();
-      else if (!isEscapePressed) GameManager.Instance.ResumeGame();
+      if (_isCharSheetOpen) _gm.PauseGame();
+      else if (!isEscapePressed) _gm.ResumeGame();
    }
 
    private void LoadAssets()
    {
-      character.sprite = knightImages[GameManager.Instance.knight];
-      knightName.text = GameManager.Instance.playerName;
+      _gm = GameManager.Instance;
+      character.sprite = knightImages[_gm.knight];
+      knightName.text = _gm.playerName;
+      knightLevel.text = _gm.level.ToString();
+      knightXP.text = ($"XP : {_gm.xp.ToString()} / {_gm.xpToNextLevel.ToString()}");
+      unspentPoints.text = _gm.unspentLevels.ToString();
+      hp.text = _gm.maxHealth.ToString();
+      stamina.text = _gm.maxStamina.ToString();
+      daggerAmount.text = _gm.daggerAmount.ToString();
+      fireFlaskAmount.text = _gm.fireFlaskAmount.ToString();
+      iceFlaskAmount.text = _gm.iceFlaskAmount.ToString();
    }
+   
 }

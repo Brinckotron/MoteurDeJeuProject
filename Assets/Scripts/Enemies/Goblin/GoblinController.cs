@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -59,9 +60,9 @@ public class GoblinController : LandEnemy
                 if (!IsInRangeForAttack1() && _atk1DurationTimer <= 0 && _atk2DurationTimer <= 0 && !IsHurt)
                 {
                     MoveTowardsPlayer();
-                    if (Rb2D.velocity.x != 0) SetAnimBool(_isRunning);
-                    if (!CanSeePlayer() && MemorizedPlayerPosition == null && Rb2D.velocity.x == 0) SetAnimIdle();
-                    if (!IsGrounded() && Rb2D.velocity.y > 0) SetAnimBool(_isJumping);
+                    if (Rb2D.linearVelocity.x != 0) SetAnimBool(_isRunning);
+                    if (!CanSeePlayer() && MemorizedPlayerPosition == null && Rb2D.linearVelocity.x == 0) SetAnimIdle();
+                    if (!IsGrounded() && Rb2D.linearVelocity.y > 0) SetAnimBool(_isJumping);
                 }
                 else if (_atk1DurationTimer <= 0 && _atk2DurationTimer <= 0)
                 {
@@ -84,6 +85,7 @@ public class GoblinController : LandEnemy
         Death();
     }
 
+    
     private void Hurt()
     {
         if (!IsHurt) return;
@@ -142,6 +144,7 @@ public class GoblinController : LandEnemy
         }
         
     }
+    
 
     private bool IsInRangeForAttack1()
     {
@@ -222,7 +225,7 @@ public class GoblinController : LandEnemy
         _isForwardRolling = true;
         SetAnimBool(_isJumping);
         if (Random.Range(1, 4) == 1) PlaySound(audioSource, laugh, _voicePitch);
-        Rb2D.velocity = (Player.transform.position.x > transform.position.x ? Vector2.right : Vector2.left) * 0.8f;
+        Rb2D.linearVelocity = (Player.transform.position.x > transform.position.x ? Vector2.right : Vector2.left) * 0.8f;
         yield return new WaitForSeconds(0.8f);
         Stop();
         _isForwardRolling = false;
@@ -233,7 +236,7 @@ public class GoblinController : LandEnemy
         _isJumpingBack = true;
         if (Random.Range(1, 4) == 1) PlaySound(audioSource, laugh, _voicePitch);
         yield return new WaitForSeconds(0.1f);
-        Rb2D.velocity = (Player.transform.position.x > transform.position.x ? Vector2.left : Vector2.right) * 0.4f;
+        Rb2D.linearVelocity = (Player.transform.position.x > transform.position.x ? Vector2.left : Vector2.right) * 0.4f;
         yield return new WaitForSeconds(0.5f);
         Stop();
         _isJumpingBack = false;

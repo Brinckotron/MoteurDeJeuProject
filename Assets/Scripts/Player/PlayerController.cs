@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using TMPro;
+using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -20,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public bool crouchOverride = false, hasEnteredArena = false;
     public TMP_Text stateDebugText;
     [SerializeField] private GameObject bloodPrefab;
-    [SerializeField] private GameObject activeThrowable;
+    public GameObject activeThrowable;
 
     private bool _facingRight = true,
         _resetJumpNeeded,
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour
         Dead
     }
 
+    private GameManager _gm;
     private PlayerState _currentPlayerState;
     public PlayerState CurrentPlayerState => _currentPlayerState;
 
@@ -103,8 +105,9 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.Initialize(this);
-        GetComponentInChildren<Animator>().runtimeAnimatorController = animArray[GameManager.Instance.knight];
+        _gm = GameManager.Instance;
+        _gm.Initialize(this);
+        GetComponentInChildren<Animator>().runtimeAnimatorController = animArray[_gm.knight];
     }
 
     private void Update()
@@ -126,6 +129,8 @@ public class PlayerController : MonoBehaviour
             Rolling();
 
             CancelRoll();
+            
+            ChangeActiveThrowable();
         }
         else _moveDirection = 0;
         
@@ -150,15 +155,15 @@ public class PlayerController : MonoBehaviour
     private void ApplyMovement()
     {
         if (_currentPlayerState is PlayerState.Idle or PlayerState.Run or PlayerState.Jump or PlayerState.Falling)
-            _rb2D.velocity = new Vector2((_moveDirection) * maxSpeed, _rb2D.velocity.y);
+            _rb2D.linearVelocity = new Vector2((_moveDirection) * maxSpeed, _rb2D.linearVelocity.y);
         else if (_currentPlayerState is PlayerState.Attack or PlayerState.CrouchAttack or PlayerState.Attack2
                  or PlayerState.Dead or PlayerState.Block or PlayerState.CrouchBlock
                  or PlayerState.Crouch or PlayerState.Crouched or PlayerState.Hurt
-                 or PlayerState.CrouchHurt) _rb2D.velocity = new Vector2(0, _rb2D.velocity.y);
+                 or PlayerState.CrouchHurt) _rb2D.linearVelocity = new Vector2(0, _rb2D.linearVelocity.y);
         else if (_currentPlayerState == PlayerState.Roll)
         {
-            if (_facingRight) _rb2D.velocity = new Vector2(rollSpeed, _rb2D.velocity.y);
-            else _rb2D.velocity = new Vector2(-rollSpeed, _rb2D.velocity.y);
+            if (_facingRight) _rb2D.linearVelocity = new Vector2(rollSpeed, _rb2D.linearVelocity.y);
+            else _rb2D.linearVelocity = new Vector2(-rollSpeed, _rb2D.linearVelocity.y);
         }
     }
 
@@ -185,7 +190,7 @@ public class PlayerController : MonoBehaviour
         if (_isJumpPressed && !IsGrounded() && _coyoteTime <= 0) _isJumpPressed = false;
         if (Input.GetKeyDown(KeyCode.W) && CanJump())
         {
-            _rb2D.velocity = new Vector2(_rb2D.velocity.x, jumpHeight);
+            _rb2D.linearVelocity = new Vector2(_rb2D.linearVelocity.x, jumpHeight);
             _isJumpPressed = true;
         }
     }
@@ -201,13 +206,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _rollDelayTimer <= 0f && IsGrounded() &&
             _currentPlayerState is not (PlayerState.Attack or PlayerState.Attack2 or PlayerState.CrouchAttack or PlayerState.Hurt))
         {
-            if (GameManager.Instance.currentStamina >= rollStaminaCost)
+            if (_gm.currentStamina >= rollStaminaCost)
             {
                 _rollDelayTimer = _rollLength;
                 _staminaRegenTimer = staminaRegenDelay;
                 _isStaminaRegenerating = false;
             }
-            GameManager.Instance.UseStamina((int)rollStaminaCost);
+            _gm.UseStamina((int)rollStaminaCost);
         }
     }
 
@@ -251,12 +256,25 @@ public class PlayerController : MonoBehaviour
             _isSecondaryAttackPressed = true;
         }
 
-        if (IsGrounded() && Input.GetKey(KeyCode.LeftShift) && Input.GetButtonDown("Fire1") &&
-            _secondaryAttackDelayTimer <= 0f && !crouchOverride && _hurtTimer <= 0)
+        if (activeThrowable == _gm.throwablePrefabs[0] && _gm.daggerAmount > 0 || activeThrowable == _gm.throwablePrefabs[1] && _gm.fireFlaskAmount > 0 || activeThrowable == _gm.throwablePrefabs[2] && _gm.iceFlaskAmount > 0)
         {
-            _secondaryAttackDelayTimer = _secondaryAttackLength;
-            Invoke("ThrowProjectile", 0.15f);
+            if (IsGrounded() && Input.GetKey(KeyCode.LeftShift) && Input.GetButtonDown("Fire1") &&
+                _secondaryAttackDelayTimer <= 0f && !crouchOverride && _hurtTimer <= 0)
+            {
+                _secondaryAttackDelayTimer = _secondaryAttackLength;
+                Invoke("ThrowProjectile", 0.15f);
+                if (activeThrowable == _gm.throwablePrefabs[0]) _gm.daggerAmount--;
+                if (activeThrowable == _gm.throwablePrefabs[1]) _gm.fireFlaskAmount--;
+                if (activeThrowable == _gm.throwablePrefabs[2]) _gm.iceFlaskAmount--;
+            }
         }
+    }
+
+    private void ChangeActiveThrowable()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) activeThrowable = _gm.throwablePrefabs[0];
+        if (Input.GetKeyDown(KeyCode.Alpha2)) activeThrowable = _gm.throwablePrefabs[1];
+        if (Input.GetKeyDown(KeyCode.Alpha3)) activeThrowable = _gm.throwablePrefabs[2];
     }
 
     private void Blocking()
@@ -429,7 +447,7 @@ public class PlayerController : MonoBehaviour
 
                 if (_currentPlayerState == PlayerState.JumpAttack && _attackDelayTimer <= 0)
                     ChangePlayerState(PlayerState.Falling);
-                if (_rb2D.velocity.y < 0 && _currentPlayerState != PlayerState.JumpAttack && _rollDelayTimer <= 0)
+                if (_rb2D.linearVelocity.y < 0 && _currentPlayerState != PlayerState.JumpAttack && _rollDelayTimer <= 0)
                     ChangePlayerState(PlayerState.Falling);
             }
         }
@@ -487,7 +505,7 @@ public class PlayerController : MonoBehaviour
         var knockBackDirection = new Vector2(source.transform.position.x - _rb2D.transform.position.x,
             source.transform.position.y - _rb2D.transform.position.y).normalized;
         _isHurt = true;
-        GameManager.Instance.LooseHealth(modifiedDamage);
+        _gm.LooseHealth(modifiedDamage);
         Instantiate(bloodPrefab, _t.position, _t.rotation);
     }
 
@@ -499,9 +517,9 @@ public class PlayerController : MonoBehaviour
             if (_staminaRegenTimer <= 0) _isStaminaRegenerating = true;
         }
 
-        if (_isStaminaRegenerating && GameManager.Instance.currentStamina < GameManager.Instance.maxStamina)
+        if (_isStaminaRegenerating && _gm.currentStamina < _gm.maxStamina)
         {
-            GameManager.Instance.StaminaRegenTick(Time.deltaTime * staminaRegenPerSecond);
+            _gm.StaminaRegenTick(Time.deltaTime * staminaRegenPerSecond);
         }
 
     }
@@ -538,7 +556,7 @@ public class PlayerController : MonoBehaviour
             PlayerState.Dead => "Death",
             _ => "Idle"
         };
-        var animState = $"Knight_{GameManager.Instance.knight.ToString()}_{anim}";
+        var animState = $"Knight_{_gm.knight.ToString()}_{anim}";
         PlayerAnimationControl.instance.ChangeAnimationState(animState);
     }
 

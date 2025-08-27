@@ -107,12 +107,12 @@ public class BatController : FlyerEnemy
     {
         if (IsNearCeiling())
         {
-            Rb2D.velocity = Vector2.zero;
+            Rb2D.linearVelocity = Vector2.zero;
             ChangeAnimationState("Perched");
         }
         else
         {
-            Rb2D.velocity = Vector2.up * (speed / 2);
+            Rb2D.linearVelocity = Vector2.up * (speed / 2);
             ChangeAnimationState("Fly");
         }
     }
@@ -122,7 +122,7 @@ public class BatController : FlyerEnemy
         if (Vector2.Distance(_nagPoint, transform.position) < 0.2f)
         {
             _isNagging = false;
-            Rb2D.velocity = Vector2.zero;
+            Rb2D.linearVelocity = Vector2.zero;
         }
 
         if (!_isNagging)
@@ -130,12 +130,12 @@ public class BatController : FlyerEnemy
             _nagPoint = new Vector2(Player.transform.position.x + Random.Range(-0.6f, 0.6f),
                 Player.transform.position.y + Random.Range(-0f, 1.1f));
             _isNagging = true;
-            Rb2D.velocity = (_nagPoint - (Vector2)transform.position).normalized * speed;
+            Rb2D.linearVelocity = (_nagPoint - (Vector2)transform.position).normalized * speed;
             FaceNagPoint();
         }
         else
         {
-            Rb2D.velocity = (_nagPoint - (Vector2)transform.position).normalized * speed;
+            Rb2D.linearVelocity = (_nagPoint - (Vector2)transform.position).normalized * speed;
             FaceNagPoint();
         }
     }

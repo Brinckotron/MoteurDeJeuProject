@@ -69,7 +69,7 @@ public abstract class EnemyBehaviour : MonoBehaviour
         GameManager.Instance.kills++;
         speed = 0;
         IsDead = true;
-        Rb2D.velocity = new Vector2(0, Rb2D.velocity.y);
+        Rb2D.linearVelocity = new Vector2(0, Rb2D.linearVelocity.y);
         if (isArenaMember && OnDeath != null) OnDeath();
         yield return new WaitForSeconds(2f);
         Instantiate(deathEffect, transform.position, transform.rotation);

@@ -15,14 +15,14 @@ public class LandEnemy : EnemyBehaviour
         if (CanSeePlayer())
         {
             Vector2 direction = (Player.transform.position - transform.position).normalized;
-            Rb2D.velocity = new Vector2(direction.x * speed, Rb2D.velocity.y);
+            Rb2D.linearVelocity = new Vector2(direction.x * speed, Rb2D.linearVelocity.y);
             if (IsGrounded() && IsBumpingWall()) HighJump();
             if (IsGrounded() && IsNearLedge() && (Player.transform.position.y + 0.1f) >= transform.position.y) LongJump();
         }
         else if (MemorizedPlayerPosition != null)
         {
             Vector2 direction = ((Vector2)MemorizedPlayerPosition - (Vector2)transform.position).normalized;
-            Rb2D.velocity = new Vector2(direction.x * speed, Rb2D.velocity.y);
+            Rb2D.linearVelocity = new Vector2(direction.x * speed, Rb2D.linearVelocity.y);
             if (IsGrounded() && IsBumpingWall()) HighJump();
             if (IsGrounded() && IsNearLedge() && (((Vector2)MemorizedPlayerPosition).y + 0.1f) >= transform.position.y) LongJump();
         }
@@ -31,7 +31,7 @@ public class LandEnemy : EnemyBehaviour
 
     public override void Stop()
     {
-        if (Rb2D) Rb2D.velocity = new Vector2(0, Rb2D.velocity.y);
+        if (Rb2D) Rb2D.linearVelocity = new Vector2(0, Rb2D.linearVelocity.y);
     }
 
     public virtual bool IsGrounded()
@@ -61,12 +61,12 @@ public class LandEnemy : EnemyBehaviour
 
     public virtual void HighJump()
     {
-        Rb2D.velocity = new Vector2(Rb2D.velocity.x, jumpHeight);
+        Rb2D.linearVelocity = new Vector2(Rb2D.linearVelocity.x, jumpHeight);
     }
 
     public virtual void LongJump()
     {
-        Rb2D.velocity = new Vector2(Rb2D.velocity.x+1, jumpHeight);
+        Rb2D.linearVelocity = new Vector2(Rb2D.linearVelocity.x+1, jumpHeight);
     }
 
     public virtual void Patrol()
@@ -103,7 +103,7 @@ public class LandEnemy : EnemyBehaviour
             _patrolTimer = Random.Range(2, 6);
         }
 
-        if (_isPatrolMoving) Rb2D.velocity = new Vector2(_patrolDirection * (speed / 2), Rb2D.velocity.y);
-        else Rb2D.velocity = new Vector2(0, Rb2D.velocity.y);
+        if (_isPatrolMoving) Rb2D.linearVelocity = new Vector2(_patrolDirection * (speed / 2), Rb2D.linearVelocity.y);
+        else Rb2D.linearVelocity = new Vector2(0, Rb2D.linearVelocity.y);
     }
 }

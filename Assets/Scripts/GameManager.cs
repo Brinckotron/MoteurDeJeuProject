@@ -40,6 +40,11 @@ public class GameManager : MonoBehaviour
     public float gameSoundVolume = 0.5f;
     public string playerName = "Edrik";
     public int knight = 0;
+    public int unspentLevels = 0;
+    private float _lvlUpFlashTimer;
+    public int daggerAmount = 0;
+    public int fireFlaskAmount = 0;
+    public int iceFlaskAmount = 0;
     public int coins, level, xp, xpToNextLevel, accumulatedXP, kills, chestsOpened;
     private Image _healthBar, _staminaBar, _xpBar, _healthFrame, _staminaFrame, _xpFrame, _coinsFrame;
     private Text _coinsText, _lvlText;
@@ -48,6 +53,7 @@ public class GameManager : MonoBehaviour
     private static readonly Color ColorGold = new Color(0.9803922f, 0.7960784f, 0.345098f);
     private Camera mainCam;
     private GameObject deathScreen;
+    public GameObject[] throwablePrefabs;
     public enum Status
     {
         Play,
@@ -59,6 +65,21 @@ public class GameManager : MonoBehaviour
     {
         get { return gameState; }
         set { gameState = value; }
+    }
+
+    private void Update()
+    {
+        if (unspentLevels > 0)
+        {
+            if(_lvlUpFlashTimer <= 0) UI.Xp.Flash(Color.yellow);
+            _lvlUpFlashTimer = 1f;
+        }
+        if (_lvlUpFlashTimer > 0)
+        {
+            _lvlUpFlashTimer -= Time.deltaTime;
+            
+        }
+
     }
 
     public void Initialize(PlayerController playerController)
@@ -187,7 +208,7 @@ public class GameManager : MonoBehaviour
     public void LvlUp()
     {
         level++;
-        
+        unspentLevels++;
         UI.Xp.UpdateLvl();
     }
 

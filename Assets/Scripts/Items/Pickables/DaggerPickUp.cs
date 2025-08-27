@@ -7,6 +7,7 @@ public class DaggerPickUp : Pickable
     public override void OnPickup(GameObject player)
     {
         var pickUp = Instantiate(pickUpEffect, transform.position + (Vector3.up * 0.5f), transform.rotation);
+        GameManager.Instance.daggerAmount++;
         pickUp.gameObject.GetComponent<PickUpCounter>().sR.sprite =
             this.gameObject.GetComponent<SpriteRenderer>().sprite;
         PlaySound(audioSource, audioClip);

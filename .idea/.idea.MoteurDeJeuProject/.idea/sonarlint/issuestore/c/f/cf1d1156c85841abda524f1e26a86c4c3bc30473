@@ -6,9 +6,14 @@ mcsharpsquid:S1104'"DMake this field 'private' and encapsulate it in a 'publi
 mcsharpsquid:S1104("DMake this field 'private' and encapsulate it in a 'public' property.(Íšëøúÿÿÿÿ8àğ‚Õ¶1
 hcsharpsquid:S1104)"DMake this field 'private' and encapsulate it in a 'public' property.(ÅàØ8¶û‚ÿ¶1
 mcsharpsquid:S1104*"DMake this field 'private' and encapsulate it in a 'public' property.(Ñ£Ôºúÿÿÿÿ8¾Úƒÿ¶1
-mcsharpsquid:S1104+"DMake this field 'private' and encapsulate it in a 'public' property.(Ú÷ÉÈøÿÿÿÿ8íªÂ¢³1
-mcsharpsquid:S1104."DMake this field 'private' and encapsulate it in a 'public' property.(åøÙúÿÿÿÿÿ8ÏŠÊ¹Ä1
-mcsharpsquid:S1104/"DMake this field 'private' and encapsulate it in a 'public' property.(¶¦®×ıÿÿÿÿ8Üİ”µ³1
-hcsharpsquid:S11049"DMake this field 'private' and encapsulate it in a 'public' property.( ¹Ì´8ëÒ‹Ç¶1
-mcsharpsquid:S2292:"DMake this an auto-implemented property and remove its backing field.(õè¨Ûşÿÿÿÿ8ëÒ‹Ç¶1
+mcsharpsquid:S1104+"DMake this field 'private' and encapsulate it in a 'public' property.(õ ¶Àùÿÿÿÿ8œÑ†Æ1
+hcsharpsquid:S1104-"DMake this field 'private' and encapsulate it in a 'public' property.(Û‘š8á¦Ç‹Æ1
+mcsharpsquid:S1104."DMake this field 'private' and encapsulate it in a 'public' property.(×İ¼·ÿÿÿÿÿ8ôÊÈ‹Æ1
+mcsharpsquid:S1104/"DMake this field 'private' and encapsulate it in a 'public' property.(ËÌ–Çúÿÿÿÿ8ôÊÈ‹Æ1
+mcsharpsquid:S11040"DMake this field 'private' and encapsulate it in a 'public' property.(Ú÷ÉÈøÿÿÿÿ8íªÂ¢³1
+mcsharpsquid:S11043"DMake this field 'private' and encapsulate it in a 'public' property.(åøÙúÿÿÿÿÿ8ÏŠÊ¹Ä1
+mcsharpsquid:S11044"DMake this field 'private' and encapsulate it in a 'public' property.(¶¦®×ıÿÿÿÿ8Üİ”µ³1
+mcsharpsquid:S11048"DMake this field 'private' and encapsulate it in a 'public' property.(¦º¸ˆøÿÿÿÿ8¼ıí§Æ1
+hcsharpsquid:S1104?"DMake this field 'private' and encapsulate it in a 'public' property.( ¹Ì´8ëÒ‹Ç¶1
+mcsharpsquid:S2292@"DMake this an auto-implemented property and remove its backing field.(õè¨Ûşÿÿÿÿ8ëÒ‹Ç¶1
 ~csharpsquid:S2696 "UMake the enclosing instance method 'static' or remove this set on the 'static' field.(ı¼ƒ¡úÿÿÿÿ8ÚŞËı±1

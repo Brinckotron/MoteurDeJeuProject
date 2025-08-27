@@ -13,7 +13,6 @@ public abstract class Arena : MonoBehaviour
     [SerializeField] private Transform entryPoint;
     [SerializeField] private float cameraField = 3;
     private List<GameObject> _redMarkers;
-    private List<LineRenderer> _lineRenderers;
     private AudioSource audioSource;
     private GameObject _player;
     private float _enemyCount, _baseCameraField = 3f, _cameraZ;
@@ -67,13 +66,11 @@ public abstract class Arena : MonoBehaviour
                     Mathf.SmoothStep(_player.transform.position.y, centerPoint.position.y, ((float)i/40)), _cameraZ);
             yield return new WaitForSecondsRealtime(0.01f);
         }
-
-        _lineRenderers = new List<LineRenderer>();
+        
         _redMarkers = new List<GameObject>();
         foreach (var enemy in enemiesToWake)
         {
             _redMarkers.Add(Instantiate(redMarker, enemy.transform.position + new Vector3(0, 0.2f, 0), Quaternion.Euler(0, 0, 180), enemy.transform));
-            Bezier(enemy);
         }
         yield return new WaitForSecondsRealtime(1.5f);
         LockGates();
@@ -92,36 +89,8 @@ public abstract class Arena : MonoBehaviour
         {
             Destroy(marker);
         }
-        foreach (var lineRenderer in _lineRenderers)
-        {
-            Destroy(lineRenderer);
-        }
         WakeEnemies();
         GameManager.Instance.GameState = GameManager.Status.Play;
-    }
-
-    private void Bezier(GameObject enemy)
-    {
-        var lR = enemy.AddComponent<LineRenderer>();
-        lR.widthMultiplier = 0.02f;
-        lR.material = new Material(Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default"));
-        var gradient = new Gradient();
-        gradient.SetKeys(
-            new GradientColorKey[] { new(Color.yellow, 0.0f), new(Color.red, 1.0f) },
-            new[] { new GradientAlphaKey(0.2f, 0.0f), new GradientAlphaKey(1f, 1.0f) }
-        );
-        lR.colorGradient = gradient;
-        _lineRenderers.Add(lR);
-        var linePoints = new Vector3[30];
-        lR.positionCount = 30;
-        float t = 0;
-        var middlePoint = Vector3.Lerp(_player.transform.position, enemy.transform.position, 0.5f) + (Vector3)(Vector2.up * 1.5f);
-        for (int i = 0; i < 30; i++)
-        {
-            linePoints[i] = (1 - t) * (1 - t) * _player.transform.position + 2 * (1 - t) * t * middlePoint + t * t * enemy.transform.position;
-            t += (float)1 / (30-1);
-            lR.SetPosition(i,linePoints[i]);
-        }
     }
 
     private void LockGates()
