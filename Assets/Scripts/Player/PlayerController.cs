@@ -331,6 +331,12 @@ public class PlayerController : MonoBehaviour
 
     private void StateControl()
     {
+        if (hasEnteredArena)
+        {
+            ChangePlayerState(PlayerState.Idle);
+            return;
+        }
+        
         if (_isDead)
         {
             ChangePlayerState(PlayerState.Dead);
